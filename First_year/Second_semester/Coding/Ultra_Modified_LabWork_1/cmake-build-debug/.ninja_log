@@ -1,0 +1,7 @@
+# ninja log v5
+1	226	6681206245978712	CMakeFiles/Ultra_Modified_LabWork_1.dir/alexk_hlp/lab1/code/dict.c.obj	9ec0fd14ce59afa1
+15	244	6681206246068758	CMakeFiles/Ultra_Modified_LabWork_1.dir/alexk_hlp/lab1/code/main.c.obj	214f54c7011c72da
+17	253	6681206246312772	CMakeFiles/Ultra_Modified_LabWork_1.dir/alexk_hlp/lab1/lab1_no_CLI/main.c.obj	3e9d8c0c3b8304bc
+19	377	6681206247569406	CMakeFiles/Ultra_Modified_LabWork_1.dir/alexk_hlp/lab1/lab1_no_CLI/dict.c.obj	a57fb3708ce72430
+23	432	6681206248098004	CMakeFiles/Ultra_Modified_LabWork_1.dir/alexk_hlp/lab1/res/core.c.obj	df7f90993df77dbf
+21	537	6681206249165144	CMakeFiles/Ultra_Modified_LabWork_1.dir/alexk_hlp/lab1/res/dict.c.obj	df453afd395c1a41

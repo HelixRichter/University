@@ -1,0 +1,3 @@
+D:/CLionProjectFolder/1st_Y_2nd_S/Coding/Modified_LabWork_1/cmake-build-debug/CMakeFiles/Modified_LabWork_1.dir
+D:/CLionProjectFolder/1st_Y_2nd_S/Coding/Modified_LabWork_1/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/CLionProjectFolder/1st_Y_2nd_S/Coding/Modified_LabWork_1/cmake-build-debug/CMakeFiles/rebuild_cache.dir

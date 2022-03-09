@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "d:/CLionProjectFolder/1st_Y_2nd_S/Coding/Modified_LabWork_1/cmake-build-debug"
+			"value" : "d:/CLionProjectFolder/University/First_year/Second_semester/Coding/Ultra_Modified_LabWork_1/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -479,7 +479,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "D:/CLionProjectFolder/1st_Y_2nd_S/Coding/Modified_LabWork_1"
+			"value" : "D:/CLionProjectFolder/University/First_year/Second_semester/Coding/Ultra_Modified_LabWork_1"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -491,7 +491,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "C:/Program Files (x86)/Modified_LabWork_1"
+			"value" : "C:/Program Files (x86)/Ultra_Modified_LabWork_1"
 		},
 		{
 			"name" : "CMAKE_LINKER",
@@ -707,7 +707,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "Modified_LabWork_1"
+			"value" : "Ultra_Modified_LabWork_1"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1086,7 +1086,7 @@
 			"value" : "FALSE"
 		},
 		{
-			"name" : "Modified_LabWork_1_BINARY_DIR",
+			"name" : "Ultra_Modified_LabWork_1_BINARY_DIR",
 			"properties" : 
 			[
 				{
@@ -1095,10 +1095,10 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/CLionProjectFolder/1st_Y_2nd_S/Coding/Modified_LabWork_1/cmake-build-debug"
+			"value" : "D:/CLionProjectFolder/University/First_year/Second_semester/Coding/Ultra_Modified_LabWork_1/cmake-build-debug"
 		},
 		{
-			"name" : "Modified_LabWork_1_IS_TOP_LEVEL",
+			"name" : "Ultra_Modified_LabWork_1_IS_TOP_LEVEL",
 			"properties" : 
 			[
 				{
@@ -1110,7 +1110,7 @@
 			"value" : "ON"
 		},
 		{
-			"name" : "Modified_LabWork_1_SOURCE_DIR",
+			"name" : "Ultra_Modified_LabWork_1_SOURCE_DIR",
 			"properties" : 
 			[
 				{
@@ -1119,7 +1119,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/CLionProjectFolder/1st_Y_2nd_S/Coding/Modified_LabWork_1"
+			"value" : "D:/CLionProjectFolder/University/First_year/Second_semester/Coding/Ultra_Modified_LabWork_1"
 		}
 	],
 	"kind" : "cache",

@@ -27,7 +27,7 @@
 					[
 						0
 					],
-					"name" : "LabWork_1",
+					"name" : "Ultra_Modified_LabWork_1",
 					"targetIndexes" : 
 					[
 						0
@@ -38,9 +38,9 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "LabWork_1::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-LabWork_1-Debug-65b52bb82872cf41cc27.json",
-					"name" : "LabWork_1",
+					"id" : "Ultra_Modified_LabWork_1::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Ultra_Modified_LabWork_1-Debug-cf2d0dc1a9fa4466ebe8.json",
+					"name" : "Ultra_Modified_LabWork_1",
 					"projectIndex" : 0
 				}
 			]
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "D:/CLionProjectFolder/1st_Y_2nd_S/LabWork_1/cmake-build-debug",
-		"source" : "D:/CLionProjectFolder/1st_Y_2nd_S/LabWork_1"
+		"build" : "D:/CLionProjectFolder/University/First_year/Second_semester/Coding/Ultra_Modified_LabWork_1/cmake-build-debug",
+		"source" : "D:/CLionProjectFolder/University/First_year/Second_semester/Coding/Ultra_Modified_LabWork_1"
 	},
 	"version" : 
 	{

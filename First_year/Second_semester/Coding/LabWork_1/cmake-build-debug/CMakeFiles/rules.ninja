@@ -6,7 +6,7 @@
 # It is included in the main 'build.ninja'.
 
 # =============================================================================
-# Project: LabWork_1
+# Project: Ultra_Modified_LabWork_1
 # Configurations: Debug
 # =============================================================================
 # =============================================================================
@@ -14,7 +14,7 @@
 #############################################
 # Rule for compiling C files.
 
-rule C_COMPILER__LabWork_1_Debug
+rule C_COMPILER__Ultra_Modified_LabWork_1_Debug
   depfile = $DEP_FILE
   deps = gcc
   command = D:\MinGW\bin\gcc.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
@@ -24,7 +24,7 @@ rule C_COMPILER__LabWork_1_Debug
 #############################################
 # Rule for linking C executable.
 
-rule C_EXECUTABLE_LINKER__LabWork_1_Debug
+rule C_EXECUTABLE_LINKER__Ultra_Modified_LabWork_1_Debug
   command = cmd.exe /C "$PRE_LINK && D:\MinGW\bin\gcc.exe $FLAGS $LINK_FLAGS $in -o $TARGET_FILE -Wl,--out-implib,$TARGET_IMPLIB -Wl,--major-image-version,0,--minor-image-version,0 $LINK_PATH $LINK_LIBRARIES && $POST_BUILD"
   description = Linking C executable $TARGET_FILE
   restat = $RESTAT
@@ -42,7 +42,7 @@ rule CUSTOM_COMMAND
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = C:\Users\AlexK-PC\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\213.6777.58\bin\cmake\win\bin\cmake.exe --regenerate-during-build -SD:\CLionProjectFolder\1st_Y_2nd_S\LabWork_1 -BD:\CLionProjectFolder\1st_Y_2nd_S\LabWork_1\cmake-build-debug
+  command = C:\Users\AlexK-PC\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\213.6777.58\bin\cmake\win\bin\cmake.exe --regenerate-during-build -SD:\CLionProjectFolder\University\First_year\Second_semester\Coding\Ultra_Modified_LabWork_1 -BD:\CLionProjectFolder\University\First_year\Second_semester\Coding\Ultra_Modified_LabWork_1\cmake-build-debug
   description = Re-running CMake...
   generator = 1
 

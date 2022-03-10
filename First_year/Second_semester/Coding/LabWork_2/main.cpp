@@ -8,11 +8,11 @@ public:
 };
 
 int main() {
-    SuperClass test {};
-    test.a = 1;
-    test.b = 2;
+    SuperClass test;
+    test.a = 2;
+    test.b = 3;
 
-    cout << "A = " << test.a << ", B = " << test.b;
+    cout << test.a << " " << test.b;
 
     return 0;
 }

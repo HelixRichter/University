@@ -1,3 +1,0 @@
-D:/CLionProjectFolder/1st_Y_2nd_S/Algorithms/LabWork_4/cmake-build-debug/CMakeFiles/LabWork_4.dir
-D:/CLionProjectFolder/1st_Y_2nd_S/Algorithms/LabWork_4/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/CLionProjectFolder/1st_Y_2nd_S/Algorithms/LabWork_4/cmake-build-debug/CMakeFiles/rebuild_cache.dir

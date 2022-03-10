@@ -3,16 +3,22 @@ using namespace std;
 
 class SuperClass {
 public:
+    SuperClass() = default;
+
     int a;
     int b;
+
+    void print() const {
+        cout << "A = " << a << ", " << "B = " << b << endl;
+    }
 };
 
 int main() {
-    SuperClass test;
+    SuperClass test {};
     test.a = 2;
     test.b = 3;
 
-    cout << test.a << " " << test.b;
+    test.print();
 
     return 0;
 }

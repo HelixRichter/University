@@ -52,7 +52,7 @@ public:
 
     [[maybe_unused]] void dismemberment() {
         short dots = 0;
-        short parameter = 0; // 0 - sec/day, 1 - min/month, 2 - hour/year
+        short parameter = 0; // 0 - hour/day, 1 - min/month, 2 - sec/year
 
         string tmp;
         tmp.clear();
@@ -72,10 +72,12 @@ public:
                         tmp.clear();
 
                         parameter++;
-                    } else if (parameter == 2) {
+                    } else {
                         duration.seconds = stoi(tmp);
                         tmp.clear();
                     }
+
+                    dots++;
                 }
             } else {
                 cout << "Error: invalid time or date format.";
@@ -84,11 +86,13 @@ public:
                 return;
             }
         }
+
+        cout << tmp << endl;
     }
 
     [[maybe_unused]] void print(bool is_time) const {
         if (is_time) {
-            cout << duration.seconds << '.' << duration.minutes << '.' << duration.hours << endl;
+            cout << duration.hours << '.' << duration.minutes << '.' << duration.seconds << endl;
         } else {
             cout << period.days << '.' << period.months << '.' << period.years << endl;
         }
@@ -97,14 +101,9 @@ public:
 };
 
 int main() {
-    string rmp;
-    rmp.clear();
-
-    rmp += '1';
-    rmp += '2';
-
-    int val = stoi(rmp);
-    cout << val;
+    TimeDate obj {"12.65.23"};
+    obj.dismemberment();
+    obj.print(true);
 
     return 0;
 }

@@ -1,3 +1,6 @@
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "bugprone-branch-clone"
+
 #include <iostream>
 #include <cstring>
 #include <string>
@@ -52,42 +55,68 @@ public:
 
     [[maybe_unused]] void dismemberment() {
         short dots = 0;
+        short colons = 0;
         short parameter = 0; // 0 - hour/day, 1 - min/month, 2 - sec/year
 
         string tmp;
         tmp.clear();
 
         for (size_t i = 0; i <= str_len(); i++) {
-            if (dots < 3) {
-                if (value[i] != '.') {
+            if (dots < 3 > colons) {
+                if (value[i] != '.' and value[i] != ':' and value[i] != '\0') {
                     tmp += value[i];
                 } else {
-                    if (!parameter) {
-                        duration.hours = stoi(tmp);
-                        tmp.clear();
+                    if (value[i] == '.') {
+                        if (parameter == 0) {
+                            duration.hours = stoi(tmp);
+                            tmp.clear();
 
-                        parameter++;
-                    } else if (parameter == 1) {
-                        duration.minutes = stoi(tmp);
-                        tmp.clear();
+                            parameter++;
+                        } else if (parameter == 1) {
+                            duration.minutes = stoi(tmp);
+                            tmp.clear();
 
-                        parameter++;
-                    } else {
-                        duration.seconds = stoi(tmp);
-                        tmp.clear();
+                            parameter++;
+                        } else if (parameter == 2) {
+                            duration.seconds = stoi(tmp);
+                            tmp.clear();
+                        }
+
+                        dots++;
+                    } else if (value[i] == ':') {
+                        if (parameter == 0) {
+                            period.days = stoi(tmp);
+                            tmp.clear();
+
+                            parameter++;
+                        } else if (parameter == 1) {
+                            period.months = stoi(tmp);
+                            tmp.clear();
+
+                            parameter++;
+                        } else if (parameter == 2) {
+                            period.years = stoi(tmp);
+                            tmp.clear();
+                        }
+
+                        colons++;
                     }
-
-                    dots++;
                 }
             } else {
-                cout << "Error: invalid time or date format.";
+                cout << "Error: invalid time or date format." << endl;
+
+                duration.seconds = 0;
+                duration.minutes = 0;
+                duration.hours = 0;
+
+                period.days = 0;
+                period.months = 0;
+                period.years = 0;
                 tmp.clear();
 
                 return;
             }
         }
-
-        cout << tmp << endl;
     }
 
     [[maybe_unused]] void print(bool is_time) const {

@@ -63,43 +63,39 @@ public:
 
         for (size_t i = 0; i <= str_len(); i++) {
             if (dots < 3 > colons) {
-                if (value[i] != '.' and value[i] != ':' and value[i] != '\0') {
+                if (value[i] != '.' and value[i] != '\0') {
                     tmp += value[i];
                 } else {
-                    if (value[i] == '.') {
-                        if (parameter == 0) {
+                    if (parameter == 0) {
+                        if (value[i] == '.') {
                             duration.hours = stoi(tmp);
-                            tmp.clear();
-
-                            parameter++;
-                        } else if (parameter == 1) {
-                            duration.minutes = stoi(tmp);
-                            tmp.clear();
-
-                            parameter++;
-                        } else if (parameter == 2) {
-                            duration.seconds = stoi(tmp);
-                            tmp.clear();
-                        }
-
-                        dots++;
-                    } else if (value[i] == ':') {
-                        if (parameter == 0) {
+                            dots++;
+                        } else if (value[i] == ':') {
                             period.days = stoi(tmp);
-                            tmp.clear();
-
-                            parameter++;
-                        } else if (parameter == 1) {
-                            period.months = stoi(tmp);
-                            tmp.clear();
-
-                            parameter++;
-                        } else if (parameter == 2) {
-                            period.years = stoi(tmp);
-                            tmp.clear();
+                            colons++;
                         }
 
-                        colons++;
+                        tmp.clear();
+                        parameter++;
+                    } else if (parameter == 1) {
+                        if (value[i] == '.') {
+                            duration.minutes = stoi(tmp);
+                            dots++;
+                        } else if (value[i] == ':') {
+                            period.months = stoi(tmp);
+                            colons++;
+                        }
+
+                        tmp.clear();
+                        parameter++;
+                    } else {
+                        if (dots != 0) {
+                            duration.seconds = stoi(tmp);
+                        } else if (colons != 0) {
+                            period.years = stoi(tmp);
+                        }
+
+                        tmp.clear();
                     }
                 }
             } else {

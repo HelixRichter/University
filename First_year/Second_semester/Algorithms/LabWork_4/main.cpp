@@ -2,6 +2,7 @@
 #pragma ide diagnostic ignored "cppcoreguidelines-pro-type-member-init"
 
 #include <iostream>
+#include <cstring>
 using namespace std;
 
 class String {
@@ -15,15 +16,15 @@ public:
         str[0] = 0;
     }
 
-    explicit String (char s[]) {                            // string?
+    explicit String (char s[]) {
         str[0] = 0;
 
-        int i = 0;
-        for (i; s[i] != '\0'; i++) {
+        int i;
+        for (i = 0; s[i] != '\0'; i++) {
             add(s[i]);
         }
 
-        str[i] = '\0';
+        str[i + 1] = '\0';
     }
 
     void add (char x) {
@@ -32,52 +33,59 @@ public:
     }
 
     void display () {
-        for (int i = 1; i < int(str[0]); i++) {
+        for (int i = 1; i <= strlen(str); i++) {
             cout << str[i] << " ";
         }
 
         cout << endl;
     }
 
-    int strlen() {
+    int Strlen() {
         return int(str[0]);
     }
 
     String separate (int k) {
         String s;
-        bool status = false;
-        int j = 1;
+        s.str[1] = '\0';
 
+        int j = 1;
         if (k < n) {
-            for (int i = k; i < this -> strlen(); i++) {    // this?
-                s.str[j] = this -> str[i];                  // this?
+            for (int i = k; i <= Strlen(); i++) {
+                s.str[j + 1] = '\0';
+                s.str[j] = str[i];
+
                 s.str[0]++;
                 j++;
-
-                if (!status) {                              // need test for IF
-                    this -> str[i] = '\0';                  // this?
-                    status = true;
-                }
             }
 
-            s.str[j] = '\0';
+            s.str[j + 1] = '\0';
+            str[k] = '\0';
+
             return s;
         } else {
             cout << "ERROR: separate went wrong!" << endl;
+
             return s;                                       // s[0] = 0!
         }
     }
 
     string concat (String s) {
-        if (this -> strlen() + s.strlen() <= n) {
+
+        if (Strlen() + s.Strlen() <= n) {
             int j = 1;
+
             for (int i = 1; i <= n; i++) {
                 if (str[i] == '\0') {
-                    str[i] = s.str[j];
+
+                    str[strlen(str) + 1] = '\0';
+                    str[strlen(str)] = s.str[j];
+
                     j++;
+                    str[0]++;
                 }
             }
 
+            str[strlen(str) -1 ] = '\0';
             return str;
         } else {
             string err = "-1";
@@ -91,7 +99,7 @@ public:
         bool status = false;
 
         for (int i = 1; (i < n) && (str[i] != '\0'); i++) {
-            if (this -> str[i] == s.str[1]) {               // this?
+            if (str[i] == s.str[1]) {
                 int z = i, j = 1;
 
                 while (j <= s.str[0]) {
@@ -114,38 +122,121 @@ public:
     }
 
     string context_replace (String s1, String s2) {
-        int k = this -> context_search(s1);              // this?
+        int k = context_search(s1);
 
-        if (k == 0) {                                      // !k?
+        if (!k) {
             cout << "String not found!" << endl;
         }
 
         int j = 1;
         for (int i = k; i < (k + s2.str[0]); i++) {
-            this -> str[i] = s2.str[j];                   // this?
+            str[i] = s2.str[j];
             j++;
         }
 
-        return this -> str;                               // this?
+        return str;
     }
 
 };
 
 int main() {
-    char s[8], s1, s2;                                  // string?
+    string s;
+    cout << "Enter the string: " << endl;
+    getline(cin, s);
 
-    cout << "Enter the string" << endl;
-    for (auto & i : s) {
-        cin >> i;
+    const char *cs = s.c_str();
+    if (strlen(cs) > 10) {
+        cout << "Too long string";
+
+        return 1;
     }
 
-//    for (auto i : s) {
-//        cout << i << " ";
-//    }
+    char *normal_s = (char *)cs;
+    String str(normal_s); // Inputted string
 
-    String str(s), str1, str2;
-//    str.display();
-    str.strlen();
+    cout << "Your string: " << " ";
+    str.display();
+
+    cout << "---------------------------------------------" << endl;
+
+    cout << "Enter string for concatenation: " << endl;
+    getline(cin, s);
+
+    cs = s.c_str();
+    if (strlen(cs) > 10) {
+        cout << "Too long string";
+
+        return 1;
+    }
+    normal_s = (char *)cs;
+    String conc_s(normal_s); // String for concatenating
+
+    cout << "Your string: " << " ";
+    conc_s.display();
+
+    str.concat(conc_s);
+    cout << "I just added this string to your str! Here it is:" << endl;
+    str.display();
+
+    cout << "---------------------------------------------" << endl;
+
+    String sepr_s; // String for separating
+    int symbol;
+
+    cout << "Enter the symbol, from what position you want to separate:" << endl;
+    cin >> symbol;
+
+    sepr_s = str.separate(symbol);
+
+    cout << "Here is the separated string:" << endl;
+    sepr_s.display();
+
+    cout << "And here is edited main string:" << endl;
+    str.display();
+
+    getchar();
+
+    cout << "---------------------------------------------" << endl;
+
+    cout << "Enter string for search in main string: " << endl;
+    getline(cin, s);
+
+    cs = s.c_str();
+    if (strlen(cs) > 10) {
+        cout << "Too long string";
+
+        return 1;
+    }
+    normal_s = (char *)cs;
+    String srch_s(normal_s); // String for concatenating
+
+    cout << "Your string: " << endl;
+    srch_s.display();
+
+    int start_of_searchable_string = str.context_search(srch_s);
+    cout << "Start of this searchable string in main string is: " << start_of_searchable_string << endl;
+
+    cout << "---------------------------------------------" << endl;
+
+    cout << "Enter string to move to main string instead of searchable: " << endl;
+    getline(cin, s);
+
+    cs = s.c_str();
+    if (strlen(cs) > 10) {
+        cout << "Too long string";
+
+        return 1;
+    }
+    normal_s = (char *)cs;
+    String repl_s(normal_s); // String for concatenating
+
+    cout << "Your string: " << endl;
+    repl_s.display();
+
+    string replaced_main_string = str.context_replace(srch_s, repl_s);
+
+    cout << "Here is your edited main string:" << endl;
+    str.display();
 
     return 0;
 }

@@ -1,4 +1,4 @@
-# Install script for directory: D:/CLionProjectFolder/1st_Y_2nd_S/Algorithms/LabWork_4
+# Install script for directory: D:/CLionProjectFolder/University/First_year/Second_semester/Algorithms/LabWork_4
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "D:/CLionProjectFolder/1st_Y_2nd_S/Algorithms/LabWork_4/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/CLionProjectFolder/University/First_year/Second_semester/Algorithms/LabWork_4/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

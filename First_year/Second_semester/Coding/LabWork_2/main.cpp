@@ -89,10 +89,23 @@ public:
                         tmp.clear();
                         parameter++;
                     } else {
-                        if (dots != 0) {
+                        if (dots != 0 and colons == 0) {
                             duration.seconds = stoi(tmp);
-                        } else if (colons != 0) {
+                        } else if (colons != 0 and dots == 0) {
                             period.years = stoi(tmp);
+                        } else {
+                            cout << "Error: invalid time or date format." << endl;
+
+                            duration.seconds = 0;
+                            duration.minutes = 0;
+                            duration.hours = 0;
+
+                            period.days = 0;
+                            period.months = 0;
+                            period.years = 0;
+                            tmp.clear();
+
+                            return;
                         }
 
                         tmp.clear();
@@ -126,9 +139,9 @@ public:
 };
 
 int main() {
-    TimeDate obj {"12.65.23"};
+    TimeDate obj {"12:65:23"};
     obj.dismemberment();
-    obj.print(true);
+    obj.print(false);
 
     return 0;
 }

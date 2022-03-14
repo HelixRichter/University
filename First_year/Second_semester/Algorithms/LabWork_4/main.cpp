@@ -58,23 +58,22 @@ class Stack {
 	}
 };
 
-int main()
-{
+int main() {
 	Stack st;
 	cout << "Is stack empty now? " << st.isEmpty() << endl;
 
-	cout << "I will add " << 17 << " element." << endl;
-	st.add(17);
+	cout << "I will add " << 12 << " element." << endl;
+	st.add(12);
 	cout << "Here is your stack now:" << endl;
 	st.print();
 
-	cout << "I will add " << 34 << " element." << endl;
-	st.add(34);
+	cout << "I will add " << 26 << " element." << endl;
+	st.add(26);
 	cout << "Here is your stack now:" << endl;
 	st.print();
 
-	cout << "I will add " << 29 << " element." << endl;
-	st.add(29);
+	cout << "I will add " << 30 << " element." << endl;
+	st.add(30);
 	cout << "Here is your stack now:" << endl;
 	st.print();
 
@@ -83,8 +82,8 @@ int main()
 	cout << "Here is your stack now:" << endl;
 	st.print();
 
-	cout << "I will add " << 13 << " element." << endl;
-	st.add(13);
+	cout << "I will add " << 56 << " element." << endl;
+	st.add(56);
 	cout << "Here is your stack now:" << endl;
 	st.print();
 

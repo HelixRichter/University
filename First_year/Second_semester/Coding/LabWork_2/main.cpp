@@ -43,8 +43,8 @@ public:
         value.assign(str_value);
     };
 
-    [[maybe_unused]] TimeDate(const TimeDate & copied_value) {
-
+    [[maybe_unused]] TimeDate(const TimeDate & object) {
+        // Реализование конструктор копирования
     };
 
 

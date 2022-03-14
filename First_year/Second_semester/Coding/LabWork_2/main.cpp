@@ -62,15 +62,15 @@ public:
         tmp.clear();
 
         for (size_t i = 0; i <= str_len(); i++) {
-            if (dots < 3 > colons) {
-                if (value[i] != '.' and value[i] != '\0') {
+            if (dots < 3 and colons < 3) {
+                if (value[i] != '.' and value[i] != ':' and value[i] != '\0') {
                     tmp += value[i];
                 } else {
                     if (parameter == 0) {
                         if (value[i] == '.') {
                             duration.hours = stoi(tmp);
                             dots++;
-                        } else if (value[i] == ':') {
+                        } else {
                             period.days = stoi(tmp);
                             colons++;
                         }
@@ -132,7 +132,7 @@ public:
         if (is_time) {
             cout << duration.hours << '.' << duration.minutes << '.' << duration.seconds << endl;
         } else {
-            cout << period.days << '.' << period.months << '.' << period.years << endl;
+            cout << period.days << ':' << period.months << ':' << period.years << endl;
         }
     }
 

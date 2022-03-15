@@ -44,13 +44,13 @@ public:
     };
 
     [[maybe_unused]] TimeDate(const TimeDate & object) {
-      duration.seconds = object.duration.seconds;
-      duration.minutes = object.duration.minutes;
-      duration.hours = object.duration.hours;
+        duration.seconds = object.duration.seconds;
+        duration.minutes = object.duration.minutes;
+        duration.hours = object.duration.hours;
 
-      period.days = object.period.days;
-      period.months = object.period.months;
-      period.years = object.period.years;
+        period.days = object.period.days;
+        period.months = object.period.months;
+        period.years = object.period.years;
     };
 
 
@@ -136,9 +136,9 @@ public:
 
     [[maybe_unused]] void print(bool is_time) const {
         if (is_time) {
-            cout << duration.hours << '.' << duration.minutes << '.' << duration.seconds << endl;
+            cout << duration.hours << ':' << duration.minutes << ':' << duration.seconds << endl;
         } else {
-            cout << period.days << ':' << period.months << ':' << period.years << endl;
+            cout << period.days << '.' << period.months << '.' << period.years << endl;
         }
     }
 
@@ -146,13 +146,10 @@ public:
 
 int main() {
     TimeDate obj {"12.65.23"};
-
     obj.dismemberment();
-    obj.print(true);
 
     TimeDate obj_copy = obj;
-    obj.dismemberment();
-    obj.print(true);
+    obj_copy.print(false);
 
     return 0;
 }

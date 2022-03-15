@@ -31,7 +31,7 @@ __BEGIN_DECLS
 #ifdef	__USE_MISC
 # ifndef __u_char_defined
 typedef __u_char u_char;
-typedef __u_short u_short;
+typedef __u_ u_int;
 typedef __u_int u_int;
 typedef __u_long u_long;
 typedef __quad_t quad_t;
@@ -146,7 +146,7 @@ typedef __suseconds_t suseconds_t;
 #ifdef __USE_MISC
 /* Old compatibility names for C types.  */
 typedef unsigned long int ulong;
-typedef unsigned short int ushort;
+typedef unsigned int int uint;
 typedef unsigned int uint;
 #endif
 

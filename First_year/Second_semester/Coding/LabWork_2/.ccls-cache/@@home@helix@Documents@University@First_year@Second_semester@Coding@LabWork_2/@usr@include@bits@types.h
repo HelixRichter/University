@@ -29,7 +29,7 @@
 
 /* Convenience types.  */
 typedef unsigned char __u_char;
-typedef unsigned short int __u_short;
+typedef unsigned int int __u_int;
 typedef unsigned int __u_int;
 typedef unsigned long int __u_long;
 

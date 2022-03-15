@@ -1,6 +1,3 @@
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "bugprone-branch-clone"
-
 #include <iostream>
 #include <cstring>
 #include <string>
@@ -43,7 +40,7 @@ public:
         value.assign(str_value);
     };
 
-    [[maybe_unused]] TimeDate(const TimeDate & object) {
+    [[maybe_unused]] TimeDate(const TimeDate & object) { // Doesn't work as it should.
         duration.seconds = object.duration.seconds;
         duration.minutes = object.duration.minutes;
         duration.hours = object.duration.hours;
@@ -51,10 +48,10 @@ public:
         period.days = object.period.days;
         period.months = object.period.months;
         period.years = object.period.years;
-    };
+    };                                                   //
 
 
-    [[maybe_unused]] size_t str_len() {
+    [[maybe_unused]] inline size_t str_len() {
         const char *c_value = value.c_str();
         return strlen(c_value);
     }
@@ -73,7 +70,7 @@ public:
                     tmp += value[i];
                 } else {
                     if (parameter == 0) {
-                        if (value[i] == '.') {
+                        if (value[i] == ':') {
                             duration.hours = stoi(tmp);
                             dots++;
                         } else {
@@ -84,10 +81,10 @@ public:
                         tmp.clear();
                         parameter++;
                     } else if (parameter == 1) {
-                        if (value[i] == '.') {
+                        if (value[i] == ':') {
                             duration.minutes = stoi(tmp);
                             dots++;
-                        } else if (value[i] == ':') {
+                        } else {
                             period.months = stoi(tmp);
                             colons++;
                         }
@@ -134,7 +131,11 @@ public:
         }
     }
 
-    [[maybe_unused]] void print(bool is_time) const {
+    [[maybe_unused]] static void date_check() {
+
+    }
+
+    [[maybe_unused]] inline void print(bool is_time) const {
         if (is_time) {
             cout << duration.hours << ':' << duration.minutes << ':' << duration.seconds << endl;
         } else {
@@ -142,14 +143,68 @@ public:
         }
     }
 
+    [[maybe_unused]] inline void set_time_sec(short seconds) {
+        duration.seconds = seconds;
+    }
+
+    [[maybe_unused]] inline void set_time_min(short minutes) {
+        duration.minutes = minutes;
+    }
+
+    [[maybe_unused]] inline void set_time_hour(short hours) {
+        duration.hours = hours;
+    }
+
+    [[maybe_unused]] inline void set_time_day(short days) {
+        period.days = days;
+    }
+
+    [[maybe_unused]] inline void set_time_month(short months) {
+        period.months = months;
+    }
+
+    [[maybe_unused]] inline void set_time_year(int years) {
+        period.years = years;
+    }
+
+    [[maybe_unused]] [[nodiscard]] inline int get_time_sec() const {
+        return duration.seconds;
+    }
+
+    [[maybe_unused]] [[nodiscard]] inline int get_time_min() const {
+        return duration.minutes;
+    }
+
+    [[maybe_unused]] [[nodiscard]] inline int get_time_hour() const {
+        return duration.hours;
+    }
+
+    [[maybe_unused]] [[nodiscard]] inline int get_time_day() const {
+        return period.days;
+    }
+
+    [[maybe_unused]] [[nodiscard]] inline int get_time_month() const {
+        return period.months;
+    }
+
+    [[maybe_unused]] [[nodiscard]] inline int get_time_year() const {
+        return period.years;
+    }
+
+    [[maybe_unused]] inline time get_time() {
+        return duration;
+    }
+
+    [[maybe_unused]] inline date get_date() {
+        return period;
+    }
+
 };
 
 int main() {
     TimeDate obj {"12.65.23"};
     obj.dismemberment();
-
-    TimeDate obj_copy = obj;
-    obj_copy.print(false);
+    obj.print(false);
 
     return 0;
 }

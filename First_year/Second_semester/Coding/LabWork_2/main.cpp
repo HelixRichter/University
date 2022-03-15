@@ -96,37 +96,11 @@ public:
                             duration.seconds = stoi(tmp);
                         } else if (colons != 0 and dots == 0) {
                             period.years = stoi(tmp);
-                        } else {
-                            cout << "Error: invalid time or date format." << endl;
-
-                            duration.seconds = 0;
-                            duration.minutes = 0;
-                            duration.hours = 0;
-
-                            period.days = 0;
-                            period.months = 0;
-                            period.years = 0;
-                            tmp.clear();
-
-                            return;
                         }
 
                         tmp.clear();
                     }
                 }
-            } else {
-                cout << "Error: invalid time or date format." << endl;
-
-                duration.seconds = 0;
-                duration.minutes = 0;
-                duration.hours = 0;
-
-                period.days = 0;
-                period.months = 0;
-                period.years = 0;
-                tmp.clear();
-
-                return;
             }
         }
     }
@@ -143,6 +117,7 @@ public:
         }
     }
 
+
     [[maybe_unused]] inline void set_time_sec(short seconds) {
         duration.seconds = seconds;
     }
@@ -154,6 +129,7 @@ public:
     [[maybe_unused]] inline void set_time_hour(short hours) {
         duration.hours = hours;
     }
+
 
     [[maybe_unused]] inline void set_time_day(short days) {
         period.days = days;
@@ -167,6 +143,7 @@ public:
         period.years = years;
     }
 
+
     [[maybe_unused]] [[nodiscard]] inline int get_time_sec() const {
         return duration.seconds;
     }
@@ -179,6 +156,7 @@ public:
         return duration.hours;
     }
 
+
     [[maybe_unused]] [[nodiscard]] inline int get_time_day() const {
         return period.days;
     }
@@ -190,6 +168,7 @@ public:
     [[maybe_unused]] [[nodiscard]] inline int get_time_year() const {
         return period.years;
     }
+
 
     [[maybe_unused]] inline time get_time() {
         return duration;

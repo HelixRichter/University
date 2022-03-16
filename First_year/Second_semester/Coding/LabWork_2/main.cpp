@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include <cstring>
 #include <string>
 
@@ -57,56 +58,71 @@ public:
     }
 
     [[maybe_unused]] void dismemberment() {
-        short dots = 0;
-        short colons = 0;
         short parameter = 0; // 0 - hour/day, 1 - min/month, 2 - sec/year
 
         string tmp;
         tmp.clear();
 
         for (size_t i = 0; i <= str_len(); i++) {
-            if (dots < 3 and colons < 3) {
-                if (value[i] != '.' and value[i] != ':' and value[i] != '\0') {
-                    tmp += value[i];
-                } else {
-                    if (parameter == 0) {
-                        if (value[i] == ':') {
-                            duration.hours = stoi(tmp);
-                            dots++;
-                        } else {
-                            period.days = stoi(tmp);
-                            colons++;
-                        }
-
-                        tmp.clear();
-                        parameter++;
-                    } else if (parameter == 1) {
-                        if (value[i] == ':') {
-                            duration.minutes = stoi(tmp);
-                            dots++;
-                        } else {
-                            period.months = stoi(tmp);
-                            colons++;
-                        }
-
-                        tmp.clear();
-                        parameter++;
+            if (value[i] != '.' and value[i] != ':' and value[i] != '\0') {
+                tmp += value[i];
+            } else {
+                if (parameter == 0) {
+                    if (value[i] == ':') {
+                        duration.hours = stoi(tmp);
                     } else {
-                        if (dots != 0 and colons == 0) {
-                            duration.seconds = stoi(tmp);
-                        } else if (colons != 0 and dots == 0) {
-                            period.years = stoi(tmp);
-                        }
-
-                        tmp.clear();
+                        period.days = stoi(tmp);
                     }
+
+                    tmp.clear();
+                    parameter++;
+                } else if (parameter == 1) {
+                    if (value[i] == ':') {
+                        duration.minutes = stoi(tmp);
+                    } else {
+                        period.months = stoi(tmp);
+                    }
+
+                    tmp.clear();
+                    parameter++;
+                } else {
+                    if (value[i] == ':') {
+                        duration.seconds = stoi(tmp);
+                    } else {
+                        period.years = stoi(tmp);
+                    }
+
+                    tmp.clear();
                 }
             }
         }
     }
 
-    [[maybe_unused]] static void date_check() {
+    [[maybe_unused]] static short str_check(string inputed_string) {
+        short err = 0;
 
+
+    }
+
+    [[maybe_unused]] static short date_check(date inputed_date) {
+        short err = 0;
+
+        if (inputed_date.days <= 0 or inputed_date.days > 31) {
+            cout << "Incorrect day input!" << endl;
+            err++;
+        }
+
+        if (inputed_date.months <= 0 or inputed_date.days > 12) {
+            cout << "Incorrect month input!" << endl;
+            err++;
+        }
+
+        if (inputed_date.years <= 0) {
+            cout << "Incorrect year input!" << endl;
+            err++;
+        }
+
+        return err;
     }
 
     [[maybe_unused]] inline void print(bool is_time) const {
@@ -155,7 +171,7 @@ public:
     [[maybe_unused]] [[nodiscard]] inline int get_time_hour() const {
         return duration.hours;
     }
-
+    
 
     [[maybe_unused]] [[nodiscard]] inline int get_time_day() const {
         return period.days;

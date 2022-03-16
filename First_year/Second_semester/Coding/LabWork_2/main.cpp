@@ -1,5 +1,4 @@
 #include <iostream>
-#include <algorithm>
 #include <cstring>
 #include <string>
 
@@ -98,11 +97,10 @@ public:
         }
     }
 
-    [[maybe_unused]] static short str_check(string inputed_string) {
-        short err = 0;
-
-
-    }
+//    [[maybe_unused]] static short str_check(string inputed_string) {
+//        short err = 0;
+//
+//    }
 
     [[maybe_unused]] static short date_check(date inputed_date) {
         short err = 0;

@@ -497,7 +497,7 @@ public:
 };
 
 int main() {
-    string input_value = "20:58:16";
+    string input_value = "20:58:16,";
     TimeDate obj1 {input_value};
 
     obj1.dismemberment();

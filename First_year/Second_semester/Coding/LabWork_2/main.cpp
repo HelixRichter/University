@@ -4,6 +4,9 @@
 #include <string>
 #include <ctime>
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCDFAInspection"
+
 using namespace std;
 
 class TimeDate {
@@ -81,53 +84,106 @@ public:
         return strlen(c_value);
     }
 
-    [[maybe_unused]] void dismemberment(bool time_status) {
-        if (time_status) {
+    [[maybe_unused]] void dismemberment() {
+        bool string_status = str_check(value);
+
+        if (string_status) {
             cout << "ERR: I will not handle incorrect input!" << endl;
             return;
         }
 
         short parameter = 0; // 0 - hour/day, 1 - min/month, 2 - sec/year
+        short dots = 0;
+        short colons = 0;
+        char firstly = 0; // -1 - time, 1 - date
 
         string tmp;
         tmp.clear();
 
         for (size_t i = 0; i <= type_string_len(value); i++) {
-            if (value[i] != '.' and value[i] != ':' and value[i] != '\0') {
+            if (value[i] != '.' and value[i] != ':' and value[i] != '\0' and value[i] != ' ') {
                 tmp += value[i];
             } else {
                 if (parameter == 0) {
                     if (value[i] == ':') {
-                        cout << "IT GET HERE: " << tmp << endl;
                         duration.hours = stoi(tmp);
+                        colons++;
+
+                        if (firstly == 0) {
+                            firstly = -1;
+                        }
+//                        cout << "WE GOT PARAMETER 0, VALUE ':' FIRSTLY IS " << short(firstly) << endl;
                     } else {
                         period.days = stoi(tmp);
+                        dots++;
+
+                        if (firstly == 0) {
+                            firstly = 1;
+                        }
+//                        cout << "WE GOT PARAMETER 0, VALUE '.' FIRSTLY IS " << short(firstly) << endl;
                     }
 
                     tmp.clear();
                     parameter++;
                 } else if (parameter == 1) {
                     if (value[i] == ':') {
-                        cout << "IT GET HERE: " << tmp << endl;
                         duration.minutes = stoi(tmp);
+
+                        colons++;
+//                        cout << "WE GOT PARAMETER 1, VALUE ':' FIRSTLY IS " << short(firstly) << endl;
                     } else {
                         period.months = stoi(tmp);
+
+                        dots++;
+//                        cout << "WE GOT PARAMETER 1, VALUE '.' FIRSTLY IS " << short(firstly) << endl;
                     }
 
                     tmp.clear();
                     parameter++;
                 } else {
-                    if (count(value.begin(), value.end(), ':') != 0) {
-                        cout << "IT GET HERE: " << tmp << endl;
-                        duration.seconds = stoi(tmp);
-                    } else {
-                        cout << "IT GET THERE: " << tmp << endl;
-                        period.years = stoi(tmp);
-                    }
+                    if (value[i] == ' ') {
+                        if (colons != 0 and dots == 0) {
+                            duration.seconds = stoi(tmp);
 
-                    tmp.clear();
+//                            cout << "WE GOT PARAMETER 2 WITH ' ', VALUE ' ' FIRSTLY IS " << short(firstly) << endl;
+                        } else if (colons == 0 and dots != 0) {
+                            period.years = stoi(tmp);
+
+//                            cout << "WE GOT PARAMETER 2 WITH ':', VALUE ' ' FIRSTLY IS " << short(firstly) << endl;
+                        }
+
+                        parameter = 0;
+                        tmp.clear();
+                    } else if (value[i] == '\0') {
+//                        cout << "WE GOT PARAMETER 2 WITH TERMINATOR, FIRSTLY IS " << short(firstly) << endl;
+                        if (firstly == -1) {
+                            period.years = stoi(tmp);
+                        } else if (firstly == 1) {
+                            duration.seconds = stoi(tmp);
+                        }
+
+                        parameter = 0;
+                        tmp.clear();
+                    }
                 }
             }
+        }
+
+        bool date_status = date_check(string_status, period);
+        bool time_status = time_check(string_status, duration);
+
+        if (time_status) {
+            cout << "The time statements have been reset." << endl;
+            duration.seconds = 0;
+            duration.minutes = 0;
+            duration.hours = 0;
+        }
+
+        if (date_status) {
+            cout << "The date statements have been reset." << endl;
+            period.days = 0;
+            period.months = 0;
+            period.years = 0;
         }
     }
 
@@ -135,22 +191,59 @@ public:
        bool err = false;
 
        if (count(inputed_string.begin(), inputed_string.end(), ':') != 0
-           and count(inputed_string.begin(), inputed_string.end(), '.') != 0) {
+           and count(inputed_string.begin(), inputed_string.end(), '.') != 0
+           and count(inputed_string.begin(), inputed_string.end(), ' ') == 0) {
            cout << "ERR: dots and colons can't be together!" << endl;
            err = true;
-       } else if (count(inputed_string.begin(), inputed_string.end(), '.') != 2
-                  and count(inputed_string.begin(), inputed_string.end(), ':') == 0) {
-           cout << "ERR: Incorrect dot number!" << endl;
+       } else if (count(inputed_string.begin(), inputed_string.end(), ':') != 0
+                  and count(inputed_string.begin(), inputed_string.end(), '.') != 0
+                  and count(inputed_string.begin(), inputed_string.end(), ' ') != 0) {
+           if (count(inputed_string.begin(), inputed_string.end(), '.') != 2) {
+               cout << "ERR: Incorrect dot number! It should be 2, but I see " <<
+                    count(inputed_string.begin(), inputed_string.end(), '.') << "." << endl;
+               err = true;
+           }
+
+           if (count(inputed_string.begin(), inputed_string.end(), ':') != 2) {
+               cout << "ERR: Incorrect colon number! It should be 2, but I see " <<
+                    count(inputed_string.begin(), inputed_string.end(), ':') << "." << endl;
+               err = true;
+           }
+
+           if (count(inputed_string.begin(), inputed_string.end(), ' ') != 1) {
+               cout << "ERR: Incorrect space number! It should be 1." << endl;
+           }
+       } else if (count(inputed_string.begin(), inputed_string.end(), ':') != 0
+                  and count(inputed_string.begin(), inputed_string.end(), '.') == 0
+                  and count(inputed_string.begin(), inputed_string.end(), ' ') == 0) {
+           if (count(inputed_string.begin(), inputed_string.end(), ':') != 2) {
+               cout << "ERR: Incorrect colon number! It should be 2, but I see " <<
+                    count(inputed_string.begin(), inputed_string.end(), ':') << "." << endl;
+               err = true;
+           }
+       } else if (count(inputed_string.begin(), inputed_string.end(), ':') == 0
+                  and count(inputed_string.begin(), inputed_string.end(), '.') != 0
+                  and count(inputed_string.begin(), inputed_string.end(), ' ') == 0) {
+           if (count(inputed_string.begin(), inputed_string.end(), '.') != 2) {
+               cout << "ERR: Incorrect colon number! It should be 2, but I see " <<
+                    count(inputed_string.begin(), inputed_string.end(), '.') << "." << endl;
+               err = true;
+           }
+       } else if (count(inputed_string.begin(), inputed_string.end(), ':') == 0
+                  and count(inputed_string.begin(), inputed_string.end(), '.') == 0
+                  and count(inputed_string.begin(), inputed_string.end(), ' ') != 0) {
+           cout << "ERR: I don't see any symbols, except spaces!" << endl;
            err = true;
-       } else if (count(inputed_string.begin(), inputed_string.end(), '.') == 0
-                  and count(inputed_string.begin(), inputed_string.end(), ':') != 2) {
-           cout << "ERR: Incorrect colon number!" << endl;
+       } else if (count(inputed_string.begin(), inputed_string.end(), ':') == 0
+                  and count(inputed_string.begin(), inputed_string.end(), '.') == 0
+                  and count(inputed_string.begin(), inputed_string.end(), ' ') == 0) {
+           cout << "ERR: I don't see any symbols!" << endl;
            err = true;
        }
 
        for (size_t i = 0; i < type_string_len(inputed_string); i++) {
            if (inputed_string[i] < '0' or inputed_string[i] > '9') {
-               if (inputed_string[i] == '.' or inputed_string[i] == ':') {
+               if (inputed_string[i] == '.' or inputed_string[i] == ':' or inputed_string[i] == ' ') {
                    continue;
                } else {
                    cout << "ERR: incorrect number/symbol input: " << inputed_string[i] << endl;
@@ -172,7 +265,7 @@ public:
 
         bool err = false;
 
-        if (inputed_date.months <= 0 or inputed_date.days > 12) {
+        if (inputed_date.months <= 0 or inputed_date.months > 12) {
             cout << "ERR: Incorrect month input!" << endl;
             err = true;
         } else {
@@ -210,7 +303,7 @@ public:
             err = true;
         }
 
-        if (inputed_time.hours <= 0 or inputed_time.hours > 23) {
+        if (inputed_time.hours < 0 or inputed_time.hours > 23) {
             cout << "ERR: Incorrect years input!" << endl;
             err = true;
         }
@@ -393,8 +486,14 @@ public:
 };
 
 int main() {
-    string input_value = "12:65:23";
+    string input_value = "24.6.16 12:55:25";
     TimeDate obj1 {input_value};
+
+    obj1.dismemberment();
+
+    cout << obj1.get_time_hour() << " " << obj1.get_time_min() << " " << obj1.get_time_sec() << endl;
+    cout << obj1.get_time_day() << " " << obj1.get_time_month() << " " << obj1.get_time_year() << endl;
 
     return 0;
 }
+

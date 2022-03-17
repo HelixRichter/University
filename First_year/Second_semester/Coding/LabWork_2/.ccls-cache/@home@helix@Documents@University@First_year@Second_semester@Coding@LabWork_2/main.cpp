@@ -52,8 +52,8 @@ public:
     };                                                   //
 
 
-    [[maybe_unused]] inline size_t str_len() {
-        const char *c_value = value.c_str();
+    [[maybe_unused]] inline static size_t type_string_len(string inputed_string) {
+        const char *c_value = inputed_string.c_str();
         return strlen(c_value);
     }
 
@@ -63,7 +63,7 @@ public:
         string tmp;
         tmp.clear();
 
-        for (size_t i = 0; i <= str_len(); i++) {
+        for (size_t i = 0; i <= type_string_len(value); i++) {
             if (value[i] != '.' and value[i] != ':' and value[i] != '\0') {
                 tmp += value[i];
             } else {
@@ -98,28 +98,68 @@ public:
         }
     }
 
-    [[maybe_unused]] static short str_check(string inputed_string) {
-        short err = 0;
+   [[maybe_unused]] static bool str_check(string inputed_string) {
+       bool err = false;
 
+       if (count(inputed_string.begin(), inputed_string.end(), ':') != 0
+           and count(inputed_string.begin(), inputed_string.end(), '.') != 0) {
+               cout << "Incorrect dot/colon input!" << endl;
+               err = true;
+           }
 
-    }
+       for (size_t i = 0; i < type_string_len(inputed_string); i++) {
+           if (inputed_string[i] < 48 or inputed_string[i] > 57) {
+               cout << "Incorrect numbers input!" << endl;
+               err = true;
+           }
+       }
 
-    [[maybe_unused]] static short date_check(date inputed_date) {
-        short err = 0;
+       if (count(inputed_string.begin(), inputed_string.end(), '.') != 2
+           or count(inputed_string.begin(), inputed_string.end(), ':') != 2) {
+               cout << "Incorrect dot/colon number!" << endl;
+               err = true;
+           }
 
-        if (inputed_date.days <= 0 or inputed_date.days > 31) {
-            cout << "Incorrect day input!" << endl;
-            err++;
-        }
+       return err;
+   }
+
+    [[maybe_unused]] static bool date_check(date inputed_date) {
+        bool err = false;
+        char month[12] = {0};
+
+        month[0] = 31;
+        month[1] = 28;
+        month[2] = 31;
+        month[3] = 30;
+        month[4] = 31;
+        month[5] = 30;
+        month[6] = 31;
+        month[7] = 31;
+        month[8] = 30;
+        month[9] = 31;
+        month[10] = 30;
+        month[11] = 31;
 
         if (inputed_date.months <= 0 or inputed_date.days > 12) {
             cout << "Incorrect month input!" << endl;
-            err++;
+            err = true;
+        } else {
+            if (short(month[inputed_date.months - 1]) < inputed_date.days) {
+                cout << "Incorrect maximum days in inputed month!" << endl;
+                err = true;
+            }
         }
+
+        if (inputed_date.days <= 0 or inputed_date.days > 31) {
+            cout << "Incorrect day input!" << endl;
+            err = true;
+        }
+
+
 
         if (inputed_date.years <= 0) {
             cout << "Incorrect year input!" << endl;
-            err++;
+            err = true;
         }
 
         return err;
@@ -171,7 +211,7 @@ public:
     [[maybe_unused]] [[nodiscard]] inline int get_time_hour() const {
         return duration.hours;
     }
-    
+
 
     [[maybe_unused]] [[nodiscard]] inline int get_time_day() const {
         return period.days;

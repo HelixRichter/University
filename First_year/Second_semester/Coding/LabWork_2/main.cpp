@@ -138,7 +138,12 @@ public:
        return err;
    }
 
-    [[maybe_unused]] static bool date_check(date inputed_date) {
+    [[maybe_unused]] static bool date_check(bool str_status, date inputed_date) {
+        if (str_status) {
+            cout << "ERR: I can't handle incorrect string!" << endl;
+            return -1;
+        }
+
         bool err = false;
 
         if (inputed_date.months <= 0 or inputed_date.days > 12) {
@@ -159,6 +164,38 @@ public:
         }
 
         return err;
+    }
+
+    [[maybe_unused]] static bool time_check(time inputed_time) {
+        bool err = false;
+
+        if (inputed_time.seconds <= 0 or inputed_time.seconds > 59) {
+            cout << "ERR: Incorrect seconds input!" << endl;
+            err = true;
+        }
+
+        if (inputed_time.minutes <= 0 or inputed_time.minutes > 59) {
+            cout << "ERR: Incorrect minutes input!" << endl;
+            err = true;
+        }
+
+        if (inputed_time.hours <= 0 or inputed_time.hours > 23) {
+            cout << "ERR: Incorrect years input!" << endl;
+            err = true;
+        }
+
+        return err;
+    }
+
+    [[maybe_unused]] inline bool input_type() {
+        if (count(value.begin(), value.end(), '.')) {
+            return false;
+        } else if (count(value.begin(), value.end(), ':')) {
+            return true;
+        } else {
+            cout << "ERR: Unreadable input!" << endl;
+            return -1;
+        }
     }
 
     [[maybe_unused]] inline void print(bool is_time) const {
@@ -235,10 +272,6 @@ public:
 int main() {
     string input_value = "12.65.23";
     TimeDate obj1 {input_value};
-    obj1.dismemberment(false);
-    TimeDate obj2 = obj1;
-
-    cout << obj2.get_time_day() << endl;
 
     return 0;
 }

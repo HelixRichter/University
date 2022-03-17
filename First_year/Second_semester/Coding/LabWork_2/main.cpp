@@ -113,7 +113,7 @@ public:
                         if (firstly == 0) {
                             firstly = -1;
                         }
-//                        cout << "WE GOT PARAMETER 0, VALUE ':' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
+                        cout << "WE GOT PARAMETER 0, VALUE ':' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
                     } else {
                         period.days = stoi(tmp);
                         dots++;
@@ -121,7 +121,7 @@ public:
                         if (firstly == 0) {
                             firstly = 1;
                         }
-//                        cout << "WE GOT PARAMETER 0, VALUE '.' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
+                        cout << "WE GOT PARAMETER 0, VALUE '.' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
                     }
 
                     tmp.clear();
@@ -131,12 +131,12 @@ public:
                         duration.minutes = stoi(tmp);
 
                         colons++;
-//                        cout << "WE GOT PARAMETER 1, VALUE ':' FIRSTLY IS " << short(firstly) << short(firstly) << ", AND TMP IS " << tmp << endl;
+                        cout << "WE GOT PARAMETER 1, VALUE ':' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
                     } else {
                         period.months = stoi(tmp);
 
                         dots++;
-//                        cout << "WE GOT PARAMETER 1, VALUE '.' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
+                        cout << "WE GOT PARAMETER 1, VALUE '.' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
                     }
 
                     tmp.clear();
@@ -147,18 +147,29 @@ public:
                             duration.seconds = stoi(tmp);
                             already_entered = -1;
 
-//                            cout << "WE GOT PARAMETER 2 WITH ' ', VALUE ' ' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
+                            cout << "WE GOT PARAMETER 2 WITH ' ', VALUE ' ' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << ", AND ENTERED IS " << short(already_entered) << endl;
                         } else if (colons == 0 and dots != 0) {
                             period.years = stoi(tmp);
                             already_entered = 1;
 
-//                            cout << "WE GOT PARAMETER 2 WITH ':', VALUE ' ' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
+                            cout << "WE GOT PARAMETER 2 WITH ':', VALUE ' ' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << ", AND ENTERED IS " << short(already_entered) << endl;
                         }
 
                         parameter = 0;
                         tmp.clear();
                     } else if (value[i] == '\0') {
-//                        cout << "WE GOT PARAMETER 2 WITH TERMINATOR, FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
+                        cout << "WE GOT PARAMETER 2 WITH TERMINATOR, FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << ", AND ENTERED IS " << short(already_entered) << endl;
+
+                        if (!already_entered) {
+                            if (count(value.begin(), value.end(), ":") != 0
+                                and count(value.begin(), value.end(), ".") == 0) {
+                                already_entered = -1;
+                            } else if (count(value.begin(), value.end(), ":") == 0
+                                       and count(value.begin(), value.end(), ".") != 0) {
+                                already_entered = 1;
+                            }
+                        }
+
                         if (firstly == -1) {
                             if (already_entered == -1) {
                                 period.years = stoi(tmp);
@@ -499,7 +510,7 @@ public:
 };
 
 int main() {
-    string input_value = "21:58:4 10.8.1957";
+    string input_value = "21:58:40";
     TimeDate obj1 {input_value};
 
     obj1.dismemberment();

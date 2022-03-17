@@ -96,6 +96,7 @@ public:
         short dots = 0;
         short colons = 0;
         char firstly = 0; // -1 - time, 1 - date
+        char already_entered = 0; // -1 - time, 1 - date
 
         string tmp;
         tmp.clear();
@@ -112,7 +113,7 @@ public:
                         if (firstly == 0) {
                             firstly = -1;
                         }
-//                        cout << "WE GOT PARAMETER 0, VALUE ':' FIRSTLY IS " << short(firstly) << endl;
+                        cout << "WE GOT PARAMETER 0, VALUE ':' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
                     } else {
                         period.days = stoi(tmp);
                         dots++;
@@ -120,7 +121,7 @@ public:
                         if (firstly == 0) {
                             firstly = 1;
                         }
-//                        cout << "WE GOT PARAMETER 0, VALUE '.' FIRSTLY IS " << short(firstly) << endl;
+                        cout << "WE GOT PARAMETER 0, VALUE '.' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
                     }
 
                     tmp.clear();
@@ -130,12 +131,12 @@ public:
                         duration.minutes = stoi(tmp);
 
                         colons++;
-//                        cout << "WE GOT PARAMETER 1, VALUE ':' FIRSTLY IS " << short(firstly) << endl;
+                        cout << "WE GOT PARAMETER 1, VALUE ':' FIRSTLY IS " << short(firstly) << short(firstly) << ", AND TMP IS " << tmp << endl;
                     } else {
                         period.months = stoi(tmp);
 
                         dots++;
-//                        cout << "WE GOT PARAMETER 1, VALUE '.' FIRSTLY IS " << short(firstly) << endl;
+                        cout << "WE GOT PARAMETER 1, VALUE '.' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
                     }
 
                     tmp.clear();
@@ -144,22 +145,32 @@ public:
                     if (value[i] == ' ') {
                         if (colons != 0 and dots == 0) {
                             duration.seconds = stoi(tmp);
+                            already_entered = -1;
 
-//                            cout << "WE GOT PARAMETER 2 WITH ' ', VALUE ' ' FIRSTLY IS " << short(firstly) << endl;
+                            cout << "WE GOT PARAMETER 2 WITH ' ', VALUE ' ' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
                         } else if (colons == 0 and dots != 0) {
                             period.years = stoi(tmp);
+                            already_entered = 1;
 
-//                            cout << "WE GOT PARAMETER 2 WITH ':', VALUE ' ' FIRSTLY IS " << short(firstly) << endl;
+                            cout << "WE GOT PARAMETER 2 WITH ':', VALUE ' ' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
                         }
 
                         parameter = 0;
                         tmp.clear();
                     } else if (value[i] == '\0') {
-//                        cout << "WE GOT PARAMETER 2 WITH TERMINATOR, FIRSTLY IS " << short(firstly) << endl;
+                        cout << "WE GOT PARAMETER 2 WITH TERMINATOR, FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
                         if (firstly == -1) {
-                            period.years = stoi(tmp);
+                            if (already_entered == -1) {
+                                period.years = stoi(tmp);
+                            } else if (already_entered == 1) {
+                                duration.seconds = stoi(tmp);
+                            }
                         } else if (firstly == 1) {
-                            duration.seconds = stoi(tmp);
+                            if (already_entered == 1) {
+                                duration.seconds = stoi(tmp);
+                            } else if (already_entered == -1) {
+                                period.years = stoi(tmp);
+                            }
                         }
 
                         parameter = 0;
@@ -174,6 +185,7 @@ public:
 
         if (time_status) {
             cout << "The time statements have been reset." << endl;
+
             duration.seconds = 0;
             duration.minutes = 0;
             duration.hours = 0;
@@ -211,7 +223,8 @@ public:
            }
 
            if (count(inputed_string.begin(), inputed_string.end(), ' ') != 1) {
-               cout << "ERR: Incorrect space number! It should be 1." << endl;
+               cout << "ERR: Incorrect space number! It should be 1, but I see " <<
+                    count(inputed_string.begin(), inputed_string.end(), ' ') << "." << endl;
            }
        } else if (count(inputed_string.begin(), inputed_string.end(), ':') != 0
                   and count(inputed_string.begin(), inputed_string.end(), '.') == 0
@@ -263,6 +276,11 @@ public:
             return -1;
         }
 
+        if (inputed_date.days == 0 and inputed_date.months == 0 and inputed_date.years == 0) {
+            cout << "I don't see any date. I will assume that you have not entered anything." << endl;
+            return false;
+        }
+
         bool err = false;
 
         if (inputed_date.months <= 0 or inputed_date.months > 12) {
@@ -278,7 +296,7 @@ public:
         }
 
         if (inputed_date.years <= 0) {
-            cout << "ERR: Incorrect year input!" << endl;
+            cout << "ERR: Incorrect year input! It can't be less then 0 inclusively, but I see " << inputed_date.years << endl;
             err = true;
         }
 
@@ -291,20 +309,25 @@ public:
             return -1;
         }
 
+        if (inputed_time.seconds == 0 and inputed_time.minutes == 0 and inputed_time.hours == 0) {
+            cout << "I don't see any time. I will assume that you have not entered anything." << endl;
+            return false;
+        }
+
         bool err = false;
 
         if (inputed_time.seconds <= 0 or inputed_time.seconds > 59) {
-            cout << "ERR: Incorrect seconds input!" << endl;
+            cout << "ERR: Incorrect seconds input! It can't be less then 0 inclusively and more then 59." << endl;
             err = true;
         }
 
         if (inputed_time.minutes <= 0 or inputed_time.minutes > 59) {
-            cout << "ERR: Incorrect minutes input!" << endl;
+            cout << "ERR: Incorrect minutes input! It can't be less then 0 inclusively and more then 59." << endl;
             err = true;
         }
 
         if (inputed_time.hours < 0 or inputed_time.hours > 23) {
-            cout << "ERR: Incorrect years input!" << endl;
+            cout << "ERR: Incorrect hours input! It can't be less then 0 and more then 23." << endl;
             err = true;
         }
 
@@ -381,19 +404,9 @@ public:
         return result;
     }
 
-    [[maybe_unused]] inline void print(bool str_status) const {
-        if (str_status) {
-            cout << "ERR: I can't handle incorrect string!" << endl;
-            return;
-        }
-
-        if (count(value.begin(), value.end(), ':') != 0
-            and count(value.begin(), value.end(), '.') == 0) {
-            cout << duration.hours << ':' << duration.minutes << ':' << duration.seconds << endl;
-        } else if (count(value.begin(), value.end(), ':') == 0
-                   and count(value.begin(), value.end(), '.') != 0) {
-            cout << period.days << '.' << period.months << '.' << period.years << endl;
-        }
+    [[maybe_unused]] inline void print() const {
+        cout << duration.hours << ':' << duration.minutes << ':' << duration.seconds << endl;
+        cout << period.days << '.' << period.months << '.' << period.years << endl;
     }
 
 
@@ -486,14 +499,11 @@ public:
 };
 
 int main() {
-    string input_value = "24.6.16 12:55:25";
+    string input_value = "21:58:16 10.8.1957";
     TimeDate obj1 {input_value};
 
     obj1.dismemberment();
-
-    cout << obj1.get_time_hour() << " " << obj1.get_time_min() << " " << obj1.get_time_sec() << endl;
-    cout << obj1.get_time_day() << " " << obj1.get_time_month() << " " << obj1.get_time_year() << endl;
+    obj1.print();
 
     return 0;
 }
-

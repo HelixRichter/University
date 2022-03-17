@@ -112,7 +112,7 @@ public:
                         if (firstly == 0) {
                             firstly--;
                         }
-                        cout << "WE GOT PARAMETER 0, VALUE ':' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
+//                        cout << "WE GOT PARAMETER 0, VALUE ':' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
                     } else if (value[i] == '.') {
                         period.days = stoi(tmp);
                         dots++;
@@ -120,7 +120,7 @@ public:
                         if (firstly == 0) {
                             firstly++;
                         }
-                        cout << "WE GOT PARAMETER 0, VALUE '.' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
+//                        cout << "WE GOT PARAMETER 0, VALUE '.' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
                     }
 
                     tmp.clear();
@@ -130,12 +130,12 @@ public:
                         duration.minutes = stoi(tmp);
 
                         colons++;
-                        cout << "WE GOT PARAMETER 1, VALUE ':' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
+//                        cout << "WE GOT PARAMETER 1, VALUE ':' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
                     } else {
                         period.months = stoi(tmp);
 
                         dots++;
-                        cout << "WE GOT PARAMETER 1, VALUE '.' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
+//                        cout << "WE GOT PARAMETER 1, VALUE '.' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
                     }
 
                     tmp.clear();
@@ -145,19 +145,19 @@ public:
                         if (colons != 0 and dots == 0) {
                             duration.seconds = stoi(tmp);
 
-                            cout << "WE GOT PARAMETER 2 WITH ' ', VALUE ' ' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
+//                            cout << "WE GOT PARAMETER 2 WITH ' ', VALUE ' ' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
                             firstly--;
                         } else if (colons == 0 and dots != 0) {
                             period.years = stoi(tmp);
 
-                            cout << "WE GOT PARAMETER 2 WITH ':', VALUE ' ' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
+//                            cout << "WE GOT PARAMETER 2 WITH ':', VALUE ' ' FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
                             firstly++;
                         }
 
                         parameter = 0;
                         tmp.clear();
                     } else if (value[i] == '\0') {
-                        cout << "WE GOT PARAMETER 2 WITH TERMINATOR, FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
+//                        cout << "WE GOT PARAMETER 2 WITH TERMINATOR, FIRSTLY IS " << short(firstly) << ", AND TMP IS " << tmp << endl;
 
                         if (firstly == -1) {
                             duration.seconds = stoi(tmp);
@@ -497,11 +497,12 @@ public:
 };
 
 int main() {
-    string input_value = "20:58:16 5.11.1954";
+    string input_value = "20:58:16";
     TimeDate obj1 {input_value};
 
     obj1.dismemberment();
     obj1.print();
+
 
     return 0;
 }

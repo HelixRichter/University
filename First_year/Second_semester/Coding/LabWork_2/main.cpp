@@ -24,7 +24,7 @@ private:
         int years;
     };
 
-    string value;
+    string value; //?
     stime duration {};
     date period {};
 
@@ -88,7 +88,7 @@ public:
         bool string_status = str_check(value);
 
         if (string_status) {
-            cout << "ERR: I will not handle incorrect input!" << endl;
+            //cout << "ERR: I will not handle incorrect input!" << endl;
             return;
         }
 
@@ -352,11 +352,11 @@ public:
 
         duration.seconds = result -> tm_sec;
         duration.minutes = result -> tm_min;
-        duration.hours = result -> tm_hour;
+        duration.hours = result   -> tm_hour;
 
-        period.days = result -> tm_mday;
-        period.months = result -> tm_mon;
-        period.years = result -> tm_year;
+        period.days = result      -> tm_mday;
+        period.months = result    -> tm_mon +  1;
+        period.years = result     -> tm_year + 1900;
     }
 
     [[maybe_unused]] [[nodiscard]] long long secs_to(bool time_status) const {
@@ -497,10 +497,14 @@ public:
 };
 
 int main() {
-    string input_value = "20:58:16";
+    cout << "Enter time like that: dd."
+    string input_value = "14.6.12 20:58:16";
     TimeDate obj1 {input_value};
 
     obj1.dismemberment();
+    obj1.print();
+
+    obj1.get_current_time_and_date();
     obj1.print();
 
     return 0;

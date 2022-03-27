@@ -1,3 +1,0 @@
-D:/CLionProjectFolder/University/First_year/Second_semester/Algorithms/LabWork_5/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-D:/CLionProjectFolder/University/First_year/Second_semester/Algorithms/LabWork_5/cmake-build-debug/CMakeFiles/LabWork_5.dir
-D:/CLionProjectFolder/University/First_year/Second_semester/Algorithms/LabWork_5/cmake-build-debug/CMakeFiles/edit_cache.dir

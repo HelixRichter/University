@@ -223,10 +223,57 @@ int check_fs_timedate(char *fs) {
 
 Time *parse_time(char *str) {
 	Time *parsed = (Time*)malloc(sizeof(Time));
-
 	int parse_entity = 0;
+    char *car_str = str;
+    char *car_fs = FS_TIME;
+    char ERR = 0;
 
+    while (car_str && car_fs) {
+        if (car_fs != '%') {
+            if (car_str != car_fs) {
+                // ERR = 1!!!
+                break;
+            }
+        } else {
+            car_fs++;
 
+            switch(*car_fs) {
+                case '%':
+                    if (car_str != car_fs) {
+                        // ERR = 1!!!
+                    }
+
+                    break;
+
+                case 'h' : {
+                    if ((car_str + 1) && (car_str + 2)) {
+                        char symbol_1 = *(car_str++) - '0';
+                        char symbol_2 = *(car_str) - '0';
+
+                        // ARE THEY NUMBERS?
+
+                        parse_entity = symbol_1 * 10 + symbol_2;
+                        parsed -> hours = parse_entity;
+                        parse_entity = 0;
+                    } else {
+                        // ERR = 1;
+                        break;
+                    }
+                }
+
+                case 'm' : {
+                    // ANALOGY
+                }
+
+                case 's' : {
+                    // ANALOGY
+                }
+            }
+        }
+
+        car_str++;
+        car_fs++;
+    }
 
 	return parsed;
 }

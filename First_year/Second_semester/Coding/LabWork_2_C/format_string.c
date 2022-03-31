@@ -1,3 +1,6 @@
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "cppcoreguidelines-narrowing-conversions"
+
 #include "format_string.h"
 #include <stdlib.h>
 #include <string.h>
@@ -13,38 +16,38 @@ void init_fs_lib(void) {
 }
 
 void set_fs_time(char *fs) {
-    FS_TIME = (char*)malloc((strlen(fs) + TERMINATOR) * sizeof(char));
+    FS_TIME = (char *)malloc((strlen(fs) + TERMINATOR) * sizeof(char));
     strcpy(FS_TIME, fs);
 }
 
 void set_fs_date(char *fs) {
-    FS_DATE = (char*)malloc((strlen(fs) + TERMINATOR) * sizeof(char));
+    FS_DATE = (char *)malloc((strlen(fs) + TERMINATOR) * sizeof(char));
     strcpy(FS_DATE, fs);
 }
 
 void set_fs_time_date(char *fs) {
-    FS_TIMEDATE = (char*)malloc((strlen(fs) + TERMINATOR) * sizeof(char));
+    FS_TIMEDATE = (char *)malloc((strlen(fs) + TERMINATOR) * sizeof(char));
     strcpy(FS_TIMEDATE, fs);
 }
 
 char *get_fs_time(void) {
-    char *newline = (char*)malloc((strlen(FS_TIME) + TERMINATOR) *
-                                  sizeof(char));
+    char *newline = (char *)malloc((strlen(FS_TIME) + TERMINATOR) * sizeof(char));
     strcpy(newline, FS_TIME);
+
     return newline;
 }
 
 char *get_fs_date(void) {
-    char *newline = (char*)malloc((strlen(FS_DATE) + TERMINATOR) *
-                                  sizeof(char));
+    char *newline = (char *)malloc((strlen(FS_DATE) + TERMINATOR) * sizeof(char));
     strcpy(newline, FS_DATE);
+
     return newline;
 }
 
 char *get_fs_timedate(void) {
-    char *newline = (char*)malloc((strlen(FS_TIMEDATE) + TERMINATOR) *
-                                  sizeof(char));
+    char *newline = (char *)malloc((strlen(FS_TIMEDATE) + TERMINATOR) * sizeof(char));
     strcpy(newline, FS_TIMEDATE);
+
     return newline;
 }
 
@@ -223,7 +226,7 @@ int check_fs_timedate(char *fs) {
 
 Time *parse_time(char *str) {
     Time *parsed = (Time *)malloc(sizeof(Time));
-    int parse_entity;
+    char parse_entity;
     char *car_str = str;
     char *car_fs = FS_TIME;
 
@@ -243,7 +246,9 @@ Time *parse_time(char *str) {
             switch(*car_fs) {
                 case '%':
                     if (car_str != car_fs) {
-                        // ERR = 1!!!
+                        parsed -> seconds = 0;
+                        parsed -> minutes = 0;
+                        parsed -> hours = 0;
                     }
 
                     break;
@@ -254,13 +259,16 @@ Time *parse_time(char *str) {
                         char symbol_2 = *(car_str) - '0';
 
                         // ARE THEY NUMBERS?
+                        if (symbol_1 < 0 || symbol_1 > 9
+                                || symbol_2 < 0 || symbol_2 > 9) {
+                            parsed -> hours = 0;
+
+                            break;
+                        }
 
                         parse_entity = symbol_1 * 10 + symbol_2;
                         parsed -> hours = parse_entity;
-                        parse_entity = 0;
                     } else {
-                        parsed -> seconds = 0;
-                        parsed -> minutes = 0;
                         parsed -> hours = 0;
 
                         break;
@@ -268,11 +276,47 @@ Time *parse_time(char *str) {
                 }
 
                 case 'm' : {
-                    // ANALOGY
+                    if ((car_str + 1) && (car_str + 2)) {
+                        char symbol_1 = *(car_str++) - '0';
+                        char symbol_2 = *(car_str) - '0';
+
+                        // ARE THEY NUMBERS?
+                        if (symbol_1 < 0 || symbol_1 > 9
+                            || symbol_2 < 0 || symbol_2 > 9) {
+                            parsed -> minutes = 0;
+
+                            break;
+                        }
+
+                        parse_entity = symbol_1 * 10 + symbol_2;
+                        parsed -> minutes = parse_entity;
+                    } else {
+                        parsed -> minutes = 0;
+
+                        break;
+                    }
                 }
 
                 case 's' : {
-                    // ANALOGY
+                    if ((car_str + 1) && (car_str + 2)) {
+                        char symbol_1 = *(car_str++) - '0';
+                        char symbol_2 = *(car_str) - '0';
+
+                        // ARE THEY NUMBERS?
+                        if (symbol_1 < 0 || symbol_1 > 9
+                            || symbol_2 < 0 || symbol_2 > 9) {
+                            parsed -> seconds = 0;
+
+                            break;
+                        }
+
+                        parse_entity = symbol_1 * 10 + symbol_2;
+                        parsed -> seconds = parse_entity;
+                    } else {
+                        parsed -> seconds = 0;
+
+                        break;
+                    }
                 }
             }
         }

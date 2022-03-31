@@ -3,10 +3,11 @@
 using namespace std;
 
 int main() {
-   int a[10] = {0};
+   char a = 1;
 
-   for (int i = 0; i < 10; i++) {
-      cout << a[i];
+   if (a == 1) {
+       cout << "True" << endl;
+       a++;
    }
 
    return 0;

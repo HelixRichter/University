@@ -3,4 +3,4 @@ project(LabWork_2_C C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(LabWork_2_C main.c)
+add_executable(LabWork_2_C main.c format_string.c format_string.h)

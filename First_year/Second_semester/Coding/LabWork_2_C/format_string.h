@@ -7,25 +7,21 @@
 #define DATE_DEFAULT "%D.%M.%Y"
 #define TIMEDATE_DEFAULT "%h:%m:%s %D.%M.%Y"
 
-struct time {
-	char hours;
-	char minutes;
-	char seconds;
-};
+typedef struct time {
+    char hours;
+    char minutes;
+    char seconds;
+} Time;
 
-typedef struct time Time;
-
-struct date {
-	int years;
-	char month;
-	char days;
-};
-
-typedef struct date Date;
+typedef struct date {
+    int years;
+    char month;
+    char days;
+} Date;
 
 struct timedate {
-	struct time;
-	struct date;
+    struct time;
+    struct date;
 };
 
 typedef struct timedate TimeDate;

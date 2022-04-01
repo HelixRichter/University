@@ -1,11 +1,15 @@
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCDFAInspection"
+
 #include <iostream>
 #include <algorithm>
 #include <cstring>
 #include <string>
 #include <ctime>
 
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "OCDFAInspection"
+extern "C" {
+    #include "format_string.h"
+}
 
 using namespace std;
 
@@ -24,7 +28,7 @@ private:
         int years;
     };
 
-    string value; //?
+    string value;
     stime duration {};
     date period {};
 
@@ -497,15 +501,39 @@ public:
 };
 
 int main() {
-    cout << "Enter time like that: dd."
-    string input_value = "14.6.12 20:58:16";
-    TimeDate obj1 {input_value};
+    string tmp, pattern;
+    timedate *returned;
+    cin >> pattern;
 
-    obj1.dismemberment();
-    obj1.print();
+    cout << "?!?" << endl;
+    init_fs_lib();
+    cout << "!?!" << endl;
 
-    obj1.get_current_time_and_date();
-    obj1.print();
+    const char *c_pattern = pattern.c_str();
+    set_fs_time_date(c_pattern);
+//    string input_value = "14.6.12 20:58:16";
+//    TimeDate obj1 {input_value};
+//
+//    obj1.dismemberment();
+//    obj1.print();
+//
+//    obj1.get_current_time_and_date();
+//    obj1.print();
+
+    cout << get_fs_timedate() << endl;
+
+    cin >> tmp;
+
+    const char *c_tmp = tmp.c_str();
+    returned = parse_timedate(c_tmp);
+
+    printf("%d\n", returned -> duration -> hours);
+    printf("%d\n", returned -> duration -> minutes);
+    printf("%d\n", returned -> duration -> seconds);
+
+    printf("%d\n", returned -> period -> days);
+    printf("%d\n", returned -> period -> month);
+    printf("%d\n", returned -> period -> years);
 
     return 0;
 }

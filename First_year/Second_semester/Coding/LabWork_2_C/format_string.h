@@ -19,12 +19,10 @@ typedef struct date {
     char days;
 } Date;
 
-struct timedate {
-    struct time;
-    struct date;
-};
-
-typedef struct timedate TimeDate;
+typedef struct timedate {
+    Time *duration;
+    Date *period;
+} TimeDate;
 
 void init_fs_lib(void);
 

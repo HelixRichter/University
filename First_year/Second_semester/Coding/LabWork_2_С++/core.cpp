@@ -4,7 +4,10 @@
 #include <ctime>
 
 #include "core.h"
-#include "format_string.h"
+
+extern "C" {
+    #include "format_string.h"
+}
 
 using namespace std;
 

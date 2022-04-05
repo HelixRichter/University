@@ -1,3 +1,0 @@
-D:/CLionProjectFolder/University/First_year/Second_semester/Coding/LabWork_2_C/cmake-build-debug/CMakeFiles/LabWork_2_C.dir
-D:/CLionProjectFolder/University/First_year/Second_semester/Coding/LabWork_2_C/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/CLionProjectFolder/University/First_year/Second_semester/Coding/LabWork_2_C/cmake-build-debug/CMakeFiles/rebuild_cache.dir

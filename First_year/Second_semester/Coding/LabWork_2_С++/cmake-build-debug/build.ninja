@@ -72,6 +72,12 @@ build CMakeFiles/LabWork_2.dir/format_string.c.obj: C_COMPILER__LabWork_2_Debug 
   OBJECT_DIR = CMakeFiles\LabWork_2.dir
   OBJECT_FILE_DIR = CMakeFiles\LabWork_2.dir
 
+build CMakeFiles/LabWork_2.dir/core.cpp.obj: CXX_COMPILER__LabWork_2_Debug D$:/CLionProjectFolder/University/First_year/Second_semester/Coding/LabWork_2_Ñ++/core.cpp || cmake_object_order_depends_target_LabWork_2
+  DEP_FILE = CMakeFiles\LabWork_2.dir\core.cpp.obj.d
+  FLAGS = -g -std=gnu++1z
+  OBJECT_DIR = CMakeFiles\LabWork_2.dir
+  OBJECT_FILE_DIR = CMakeFiles\LabWork_2.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target LabWork_2
@@ -80,7 +86,7 @@ build CMakeFiles/LabWork_2.dir/format_string.c.obj: C_COMPILER__LabWork_2_Debug 
 #############################################
 # Link the executable LabWork_2.exe
 
-build LabWork_2.exe: CXX_EXECUTABLE_LINKER__LabWork_2_Debug CMakeFiles/LabWork_2.dir/main.cpp.obj CMakeFiles/LabWork_2.dir/format_string.c.obj
+build LabWork_2.exe: CXX_EXECUTABLE_LINKER__LabWork_2_Debug CMakeFiles/LabWork_2.dir/main.cpp.obj CMakeFiles/LabWork_2.dir/format_string.c.obj CMakeFiles/LabWork_2.dir/core.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\LabWork_2.dir

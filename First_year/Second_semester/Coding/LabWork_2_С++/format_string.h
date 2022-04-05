@@ -8,7 +8,7 @@
 #define TERMINATOR 1
 #define TIME_DEFAULT "%h:%m:%s"
 #define DATE_DEFAULT "%D.%M.%Y"
-#define TIMEDATE_DEFAULT "%h:%m:%s %D.%M.%Y"
+#define TIMEDATE_DEFAULT "%h:%m:%sabc%D.%M.%Y"
 
 typedef struct libtime {
     char hours;
@@ -37,9 +37,9 @@ char *get_fs_time(void);
 char *get_fs_date(void);
 char *get_fs_timedate(void);
 
-int check_fs_time(const char *);
-int check_fs_date(const char *);
-int check_fs_timedate(const char *);
+//int check_fs_time(const char *);
+//int check_fs_date(const char *);
+//int check_fs_timedate(const char *);
 
 Time *parse_time(const char *);
 Date *parse_date(const char *);

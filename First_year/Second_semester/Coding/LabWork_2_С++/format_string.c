@@ -10,39 +10,22 @@ char *FS_DATE;
 char *FS_TIMEDATE;
 
 void init_fs_lib(void) {
-    set_fs_time("%h:%m:%s");
-    printf("1\n");
-    set_fs_date("%D.%M.%Y");
-    printf("2\n");
-    set_fs_time_date("%h:%m:%s%D.%M.%Y");
-    printf("3\n");
+    set_fs_time(TIME_DEFAULT);
+    set_fs_date(DATE_DEFAULT);
+    set_fs_time_date(TIMEDATE_DEFAULT);
 }
 
 void set_fs_time(const char *fs) {
-    if (!check_fs_time(fs)) {
-        printf("ACHTUNG!!!");
-        return;
-    }
-
     FS_TIME = (char *)malloc((strlen(fs) + TERMINATOR) * sizeof(char));
     strcpy(FS_TIME, fs);
 }
 
 void set_fs_date(const char *fs) {
-    if (!check_fs_date(fs)) {
-        return;
-    }
-
     FS_DATE = (char *)malloc((strlen(fs) + TERMINATOR) * sizeof(char));
     strcpy(FS_DATE, fs);
 }
 
 void set_fs_time_date(const char *fs) {
-    if (!check_fs_timedate(fs)) {
-        printf("ACHTUNG\n");
-        return;
-    }
-
     FS_TIMEDATE = (char *)malloc((strlen(fs) + TERMINATOR) * sizeof(char));
     strcpy(FS_TIMEDATE, fs);
 }
@@ -68,182 +51,182 @@ char *get_fs_timedate(void) {
     return newline;
 }
 
-int check_fs_time(const char *fs) {
-    char F_SEC = 0;
-    char F_MIN = 0;
-    char F_HRS = 0;
-    char F_ERR = 0;
+//int check_fs_time(const char *fs) {
+//    char F_SEC = 0;
+//    char F_MIN = 0;
+//    char F_HRS = 0;
+//    char F_ERR = 0;
+//
+//    const char *car = fs;
+//    while (car && *car != '\0') {
+//        if (*car == '%') {
+//            car++;
+//
+//            if (!car) {
+//                break;
+//            } else {
+//                switch (*car) {
+//                    case 's':
+//                        if (F_SEC) {
+//                            F_ERR = 1;
+//                        }
+//
+//                        F_SEC = 1;
+//                        break;
+//                    case 'm':
+//                        if (F_MIN) {
+//                            F_ERR = 1;
+//                        }
+//
+//                        F_MIN = 1;
+//                        break;
+//                    case 'h':
+//                        if (F_HRS) {
+//                            F_ERR = 1;
+//                        }
+//
+//                        F_HRS = 1;
+//                        break;
+//                    case '%':
+//                        break;
+//                    default:
+//                        F_ERR = 1;
+//                }
+//            }
+//        }
+//        car++;
+//    }
+//
+//    return (F_SEC & F_MIN & F_HRS & !(F_ERR));
+//}
 
-    const char *car = fs;
-    while (car && *car != '\0') {
-        if (*car == '%') {
-            car++;
+//int check_fs_date(const char *fs) {
+//    char F_YER = 0;
+//    char F_MON = 0;
+//    char F_DAY = 0;
+//    char F_ERR = 0;
+//
+//    const char *car = fs;
+//    while (car && *car != '\0') {
+//        if (*car == '%') {
+//            car++;
+//
+//            if (!car) {
+//                break;
+//            } else {
+//                switch (*car) {
+//                    case 'Y':
+//                        if (F_YER) {
+//                            F_ERR = 1;
+//                        }
+//
+//                        F_YER = 1;
+//                        break;
+//                    case 'M':
+//                        if (F_MON) {
+//                            F_ERR = 1;
+//                        }
+//
+//                        F_MON = 1;
+//                        break;
+//                    case 'D':
+//                        if (F_DAY) {
+//                            F_ERR = 1;
+//                        }
+//
+//                        F_DAY = 1;
+//                        break;
+//                    case '%':
+//                        break;
+//                    default:
+//                        F_ERR = 1;
+//                }
+//            }
+//        }
+//        car++;
+//    }
+//
+//    return (F_YER & F_MON & F_DAY & !(F_ERR));
+//}
 
-            if (!car) {
-                break;
-            } else {
-                switch (*car) {
-                    case 's':
-                        if (F_SEC) {
-                            F_ERR = 1;
-                        }
-
-                        F_SEC = 1;
-                        break;
-                    case 'm':
-                        if (F_MIN) {
-                            F_ERR = 1;
-                        }
-
-                        F_MIN = 1;
-                        break;
-                    case 'h':
-                        if (F_HRS) {
-                            F_ERR = 1;
-                        }
-
-                        F_HRS = 1;
-                        break;
-                    case '%':
-                        break;
-                    default:
-                        F_ERR = 1;
-                }
-            }
-        }
-        car++;
-    }
-
-    return (F_SEC & F_MIN & F_HRS & !(F_ERR));
-}
-
-int check_fs_date(const char *fs) {
-    char F_YER = 0;
-    char F_MON = 0;
-    char F_DAY = 0;
-    char F_ERR = 0;
-
-    const char *car = fs;
-    while (car && *car != '\0') {
-        if (*car == '%') {
-            car++;
-
-            if (!car) {
-                break;
-            } else {
-                switch (*car) {
-                    case 'Y':
-                        if (F_YER) {
-                            F_ERR = 1;
-                        }
-
-                        F_YER = 1;
-                        break;
-                    case 'M':
-                        if (F_MON) {
-                            F_ERR = 1;
-                        }
-
-                        F_MON = 1;
-                        break;
-                    case 'D':
-                        if (F_DAY) {
-                            F_ERR = 1;
-                        }
-
-                        F_DAY = 1;
-                        break;
-                    case '%':
-                        break;
-                    default:
-                        F_ERR = 1;
-                }
-            }
-        }
-        car++;
-    }
-
-    return (F_YER & F_MON & F_DAY & !(F_ERR));
-}
-
-int check_fs_timedate(const char *fs) {
-    char F_YER = 0;
-    char F_MON = 0;
-    char F_DAY = 0;
-    char F_SEC = 0;
-    char F_MIN = 0;
-    char F_HRS = 0;
-    char F_ERR = 0;
-
-    const char *car = fs;
-    while (car) {
-        if (*car == '\0') {
-            break;
-        }
-
-        if (*car == '%') {
-            car++;
-
-            if (!car || *car == '\0') {
-                F_ERR == 1;
-
-                break;
-            } else {
-                switch (*car) {
-                    case 'Y':
-                        if (F_YER) {
-                            F_ERR = 1;
-                        }
-
-                        F_YER = 1;
-                        break;
-                    case 'M':
-                        if (F_MON) {
-                            F_ERR = 1;
-                        }
-
-                        F_MON = 1;
-                        break;
-                    case 'D':
-                        if (F_DAY) {
-                            F_ERR = 1;
-                        }
-
-                        F_DAY = 1;
-                        break;
-                    case 's':
-                        if (F_SEC) {
-                            F_ERR = 1;
-                        }
-
-                        F_SEC = 1;
-                        break;
-                    case 'm':
-                        if (F_MIN) {
-                            F_ERR = 1;
-                        }
-
-                        F_MIN = 1;
-                        break;
-                    case 'h':
-                        if (F_HRS) {
-                            F_ERR = 1;
-                        }
-
-                        F_HRS = 1;
-                        break;
-                    case '%':
-                        break;
-                    default:
-                        F_ERR = 1;
-                }
-            }
-        }
-        car++;
-    }
-
-    return (F_SEC & F_MIN & F_HRS & F_YER & F_MON & F_DAY & !(F_ERR));
-}
+//int check_fs_timedate(const char *fs) {
+//    char F_YER = 0;
+//    char F_MON = 0;
+//    char F_DAY = 0;
+//    char F_SEC = 0;
+//    char F_MIN = 0;
+//    char F_HRS = 0;
+//    char F_ERR = 0;
+//
+//    const char *car = fs;
+//    while (car) {
+//        if (*car == '\0') {
+//            break;
+//        }
+//
+//        if (*car == '%') {
+//            car++;
+//
+//            if (!car || *car == '\0') {
+//                F_ERR = 1;
+//
+//                break;
+//            } else {
+//                switch (*car) {
+//                    case 'Y':
+//                        if (F_YER) {
+//                            F_ERR = 1;
+//                        }
+//
+//                        F_YER = 1;
+//                        break;
+//                    case 'M':
+//                        if (F_MON) {
+//                            F_ERR = 1;
+//                        }
+//
+//                        F_MON = 1;
+//                        break;
+//                    case 'D':
+//                        if (F_DAY) {
+//                            F_ERR = 1;
+//                        }
+//
+//                        F_DAY = 1;
+//                        break;
+//                    case 's':
+//                        if (F_SEC) {
+//                            F_ERR = 1;
+//                        }
+//
+//                        F_SEC = 1;
+//                        break;
+//                    case 'm':
+//                        if (F_MIN) {
+//                            F_ERR = 1;
+//                        }
+//
+//                        F_MIN = 1;
+//                        break;
+//                    case 'h':
+//                        if (F_HRS) {
+//                            F_ERR = 1;
+//                        }
+//
+//                        F_HRS = 1;
+//                        break;
+//                    case '%':
+//                        break;
+//                    default:
+//                        F_ERR = 1;
+//                }
+//            }
+//        }
+//        car++;
+//    }
+//
+//    return (F_SEC & F_MIN & F_HRS & F_YER & F_MON & F_DAY & !(F_ERR));
+//}
 
 Time *parse_time(const char *str) {
     Time *parsed = (Time *)malloc(sizeof(Time));
@@ -480,13 +463,14 @@ timedate *parse_timedate(const char *str) {
     const char *car_str = str;
     char *car_fs = FS_TIMEDATE;
 
-    while (car_str && car_fs) {
-        if (*car_str == '\0' && *car_fs == '\0') {
-            break;
-        }
-
+    while ((car_str && car_fs) && (*car_str != '\0' && *car_fs != '\0')) {
         if (*car_fs != '%') {
             if (*car_str != *car_fs) {
+                printf("Oh, hi! It's me, no %% car_str != car_fs...\n");
+                printf("car_str: %c -> %c <- %c\n", *car_str - 1, *car_str, *car_str + 1);
+                if (*car_fs == '\0') {
+                    printf("car_fs: TERMINATOR\n");
+                }
 
                 parsed -> duration -> seconds = 0;
                 parsed -> duration -> minutes = 0;
@@ -504,6 +488,8 @@ timedate *parse_timedate(const char *str) {
             switch(*car_fs) {
                 case '%':
                     if (*car_str != *car_fs) {
+                        printf("Oh, hi! It's me, %% car_str != car_fs...");
+
                         parsed -> duration -> seconds = 0;
                         parsed -> duration -> minutes = 0;
                         parsed -> duration -> hours = 0;
@@ -511,6 +497,7 @@ timedate *parse_timedate(const char *str) {
                         parsed -> period -> days = 0;
                         parsed -> period -> month = 0;
                         parsed -> period -> years = 0;
+
                     }
 
                     break;
@@ -520,7 +507,7 @@ timedate *parse_timedate(const char *str) {
                         char symbol_1 = *(car_str++) - '0';
                         char symbol_2 = *(car_str) - '0';
 
-                        if (symbol_1 < 0 || symbol_1 > 9 || symbol_2 < 0 || symbol_2 > 9) {
+                        if (symbol_1 < 0 || symbol_1 > 2 || symbol_2 < 0 || symbol_2 > 9) {
                             parsed -> duration -> hours = 0;
 
                             break;
@@ -542,7 +529,7 @@ timedate *parse_timedate(const char *str) {
                         char symbol_1 = *(car_str++) - '0';
                         char symbol_2 = *(car_str) - '0';
 
-                        if (symbol_1 < 0 || symbol_1 > 9 || symbol_2 < 0 || symbol_2 > 9) {
+                        if (symbol_1 < 0 || symbol_1 > 5 || symbol_2 < 0 || symbol_2 > 9) {
                             parsed -> duration -> minutes = 0;
 
                             break;
@@ -564,7 +551,7 @@ timedate *parse_timedate(const char *str) {
                         char symbol_1 = *(car_str++) - '0';
                         char symbol_2 = *(car_str) - '0';
 
-                        if (symbol_1 < 0 || symbol_1 > 9 || symbol_2 < 0 || symbol_2 > 9) {
+                        if (symbol_1 < 0 || symbol_1 > 5 || symbol_2 < 0 || symbol_2 > 9) {
                             parsed -> duration -> seconds = 0;
 
                             break;
@@ -608,7 +595,7 @@ timedate *parse_timedate(const char *str) {
                         char symbol_1 = *(car_str++) - '0';
                         char symbol_2 = *(car_str) - '0';
 
-                        if (symbol_1 < 0 || symbol_1 > 9 || symbol_2 < 0 || symbol_2 > 9) {
+                        if (symbol_1 < 0 || symbol_1 > 1 || symbol_2 < 0 || symbol_2 > 9) {
                             parsed -> period -> month = 0;
 
                             break;

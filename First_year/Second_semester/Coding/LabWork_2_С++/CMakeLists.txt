@@ -3,4 +3,4 @@ project(LabWork_2)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(LabWork_2 main.cpp format_string.c format_string.h)
+add_executable(LabWork_2 main.cpp format_string.c format_string.h core.cpp core.h)

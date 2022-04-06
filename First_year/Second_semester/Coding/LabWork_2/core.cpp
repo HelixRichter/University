@@ -178,11 +178,20 @@ TimeDate::TimeDate() {
     time_t current_sec;
 
     time(&current_sec);
-    inputed_time = (period.years - 1) * 31536000 + (period.months - 1) * 2629743
+
+    char months[12] = {31, 28, 31, 30,
+                       31, 30, 31, 31,
+                       30, 31, 30, 31};
+
+    int month_summ = 0;
+    for (int i = 0; i < period.months; i++) {
+        month_summ += int(months[i]);
+    }
+
+    inputed_time = (period.years - 1) * 31536000 + month_summ * 86400
                    + (period.days - 1) * 86400 + (duration.hours - 1) * 3600
                    + (duration.minutes - 1) * 60 + duration.seconds;    // 1 month (30.44 days) = 2629743 seconds;
     result = inputed_time - current_sec;
-
 
     if (result < 0) {
         return (result * -1);
@@ -198,10 +207,19 @@ TimeDate::TimeDate() {
     time_t current_sec;
 
     time(&current_sec);
-    inputed_days = (period.years - 1) * 365 + (period.months - 1) * 30 + period.days;
+
+    char months[12] = {31, 28, 31, 30,
+                       31, 30, 31, 31,
+                       30, 31, 30, 31};
+
+    int month_summ = 0;
+    for (int i = 0; i < period.months; i++) {
+        month_summ += int(months[i]);
+    }
+
+    inputed_days = (period.years - 1) * 365 + month_summ + period.days;
     current_days = current_sec / 86400;
     result = inputed_days - current_days;
-
 
     if (result < 0) {
         return (result * -1);

@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/LabWork_2.dir/main.cpp.o CMakeFiles/LabWork_2.dir/core.cpp.o CMakeFiles/LabWork_2.dir/format_string.c.o -o LabWork_2 

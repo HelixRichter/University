@@ -115,8 +115,8 @@ public:
 
     [[maybe_unused]] void get_current_time_and_date();
 
-    [[maybe_unused]] [[nodiscard]] long long secs_to(bool) const;
-    [[maybe_unused]] [[nodiscard]] long long days_to() const;
+    [[maybe_unused]] [[nodiscard]] long long secs_to(void) const;
+    [[maybe_unused]] [[nodiscard]] long long days_to(void) const;
 
     [[maybe_unused]] void set_time_sec(short);
     [[maybe_unused]] void set_time_min(short);

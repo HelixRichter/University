@@ -117,12 +117,7 @@ TimeDate::TimeDate() {
     }
 }
 
-[[maybe_unused]] [[maybe_unused]] [[nodiscard]] long long TimeDate::secs_to(bool time_status) const {
-    if (time_status) {
-        cout << "ERR: I can't handle incorrect input!" << endl;
-        return -1;
-    }
-
+[[maybe_unused]] [[maybe_unused]] [[nodiscard]] long long TimeDate::secs_to() const {
     long long result;
     long long inputed_time;
     time_t current_sec;

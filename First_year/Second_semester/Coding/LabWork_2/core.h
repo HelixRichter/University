@@ -18,20 +18,32 @@ private:
     };
 
     string value;
+
+    string TIME;
+    string DATE;
+    string TIMEDATE;
+
     stime duration {};
     date period {};
 
 public:
+    struct public_date {
+        int days;
+        int months;
+        int years;
+    };
+
     TimeDate();
-    explicit TimeDate(const string&);
+
+    [[maybe_unused]] explicit TimeDate(const string&);
     TimeDate(const TimeDate&);
     TimeDate(TimeDate&&) noexcept;
 
-    inline static size_t type_string_len(const string& inputed_string) {
+    [[maybe_unused]] inline static size_t type_string_len(const string& inputed_string) {
         const char *c_value = inputed_string.c_str();
         return strlen(c_value);
     }
-    static bool date_check(bool str_status, date inputed_date) {
+    [[maybe_unused]] static bool date_check(bool str_status, date inputed_date) {
         if (str_status) {
             cout << "ERR: I can't handle incorrect string!" << endl;
             return -1;
@@ -63,7 +75,7 @@ public:
 
         return err;
     }
-    static bool time_check(bool str_status, stime inputed_time) {
+    [[maybe_unused]] static bool time_check(bool str_status, stime inputed_time) {
         if (str_status) {
             cout << "ERR: I can't handle incorrect string!" << endl;
             return -1;
@@ -94,39 +106,47 @@ public:
         return err;
     }
 
-    inline bool input_type();
-    void get_current_time_and_date();
+    [[maybe_unused]] void format_str_init();
+    [[maybe_unused]] string format_str_time_get();
+    [[maybe_unused]] string format_str_date_get();
+    [[maybe_unused]] string format_str_timedate_get();
 
-    inline void print() const;
-    [[nodiscard]] long long secs_to(bool) const;
-    [[nodiscard]] long long days_to() const;
+    [[maybe_unused]] inline bool input_type();
+    [[maybe_unused]] inline void print() const;
 
-    inline void set_time_sec(short);
-    inline void set_time_min(short);
-    inline void set_time_hour(short);
+    [[maybe_unused]] void get_current_time_and_date();
 
-    inline void add_time_sec(short);
-    inline void add_time_min(short);
-    inline void add_time_hour(short);
+    [[maybe_unused]] [[nodiscard]] long long secs_to(bool) const;
+    [[maybe_unused]] [[nodiscard]] long long days_to() const;
 
-    inline void add_time_day(short);
-    inline void add_time_month(short);
-    inline void add_time_year(short);
+    [[maybe_unused]] inline void set_time_sec(short);
+    [[maybe_unused]] inline void set_time_min(short);
+    [[maybe_unused]] inline void set_time_hour(short);
 
-    inline void set_time_day(short);
-    inline void set_time_month(short);
-    inline void set_time_year(int);
+    [[maybe_unused]] public_date parsing_date(const string&);
 
-    [[nodiscard]] inline int get_time_sec() const;
-    [[nodiscard]] inline int get_time_min() const;
-    [[nodiscard]] inline int get_time_hour() const;
+    [[maybe_unused]] inline void add_time_sec(short);
+    [[maybe_unused]] inline void add_time_min(short);
+    [[maybe_unused]] inline void add_time_hour(short);
 
-    [[nodiscard]] inline int get_time_day() const;
-    [[nodiscard]] inline int get_time_month() const;
-    [[nodiscard]] inline int get_time_year() const;
+    [[maybe_unused]] inline void add_time_day(short);
+    [[maybe_unused]] inline void add_time_month(short);
+    [[maybe_unused]] inline void add_time_year(short);
 
-    inline stime get_time();
-    inline date get_date();
+    [[maybe_unused]] inline void set_time_day(short);
+    [[maybe_unused]] inline void set_time_month(short);
+    [[maybe_unused]] inline void set_time_year(int);
+
+    [[maybe_unused]] [[nodiscard]] inline int get_time_sec() const;
+    [[maybe_unused]] [[nodiscard]] inline int get_time_min() const;
+    [[maybe_unused]] [[nodiscard]] inline int get_time_hour() const;
+
+    [[maybe_unused]] [[nodiscard]] inline int get_time_day() const;
+    [[maybe_unused]] [[nodiscard]] inline int get_time_month() const;
+    [[maybe_unused]] [[nodiscard]] inline int get_time_year() const;
+
+    [[maybe_unused]] inline stime get_time();
+    [[maybe_unused]] inline date get_date();
 };
 
 #endif

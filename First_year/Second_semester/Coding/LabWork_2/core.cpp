@@ -1,6 +1,8 @@
 #include <iostream>
+#include <fstream>
 #include <algorithm>
 #include <string>
+#include <cstring>
 #include <ctime>
 
 #include "core.h"
@@ -22,7 +24,8 @@ TimeDate::TimeDate() {
 
     value.clear();
 };
-[[maybe_unused]] TimeDate::TimeDate(const string& str_value) {
+
+[[maybe_unused]] [[maybe_unused]] TimeDate::TimeDate(const string& str_value) {
     value.assign(str_value);
 };
 [[maybe_unused]] TimeDate::TimeDate(const TimeDate& object) {
@@ -58,7 +61,7 @@ TimeDate::TimeDate() {
     object.value.clear();
 }
 
-[[maybe_unused]] inline bool TimeDate::input_type() {
+[[maybe_unused]] [[maybe_unused]] inline bool TimeDate::input_type() {
     if (count(value.begin(), value.end(), '.')) {
         return false;
     } else if (count(value.begin(), value.end(), ':')) {
@@ -69,7 +72,7 @@ TimeDate::TimeDate() {
     }
 }
 
-[[maybe_unused]] void TimeDate::get_current_time_and_date() {
+[[maybe_unused]] [[maybe_unused]] void TimeDate::get_current_time_and_date() {
     struct tm *result;
     time_t current_sec;
 
@@ -85,7 +88,36 @@ TimeDate::TimeDate() {
     period.years = result     -> tm_year + 1900;
 }
 
-[[maybe_unused]] [[nodiscard]] long long TimeDate::secs_to(bool time_status) const {
+[[maybe_unused]] void TimeDate::format_str_init() {
+    ifstream cfg;
+    cfg.open ("config", ios::in);
+
+    if (!cfg) {
+        cfg.close();
+        cerr << "ERROR: Can't find or access CFG file." << endl;
+        exit(1);
+    }
+
+    string inputed;
+    while (getline(cfg, inputed)) {
+        if (!inputed.compare(0, 6, "TIME {") and inputed.back() == '}') {
+            string sub = inputed.substr(6, inputed.size() - 7);
+            TIME = sub;
+        } else if (!inputed.compare(0, 6, "DATE {") and inputed.back() == '}') {
+            string sub = inputed.substr(6, inputed.size() - 7);
+            DATE = sub;
+        } else if (!inputed.compare(0, 6, "TIDA {") and inputed.back() == '}') {
+            string sub = inputed.substr(6, inputed.size() - 7);
+            TIMEDATE = sub;
+        } else {
+            cfg.close();
+            cerr << "ERROR: CFG file is wrong." << endl;
+            exit(1);
+        }
+    }
+}
+
+[[maybe_unused]] [[maybe_unused]] [[nodiscard]] long long TimeDate::secs_to(bool time_status) const {
     if (time_status) {
         cout << "ERR: I can't handle incorrect input!" << endl;
         return -1;
@@ -109,7 +141,7 @@ TimeDate::TimeDate() {
     return result;
 }
 
-[[maybe_unused]] [[nodiscard]] long long TimeDate::days_to() const {
+[[maybe_unused]] [[maybe_unused]] [[nodiscard]] long long TimeDate::days_to() const {
     long long result;
     long long inputed_days;
     long long current_days;
@@ -128,11 +160,22 @@ TimeDate::TimeDate() {
     return result;
 }
 
-[[maybe_unused]] inline void TimeDate::print() const {
+[[maybe_unused]] [[maybe_unused]] inline void TimeDate::print() const {
     cout << duration.hours << ':' << duration.minutes << ':' << duration.seconds << endl;
     cout << period.days << '.' << period.months << '.' << period.years << endl;
 }
 
+[[maybe_unused]] TimeDate::public_date TimeDate::parsing_date(const string &inputed) {
+    Date *tmp;
+    tmp = parse_date(inputed.c_str(), DATE.c_str());
+
+    TimeDate::public_date res {};
+    res.days = (int)(unsigned char)(tmp -> days);
+    res.months = (int)(unsigned char)(tmp -> month);
+    res.years = (int)(unsigned char)(tmp -> years);
+
+    return res;
+}
 
 [[maybe_unused]] inline void TimeDate::set_time_sec(short seconds) {
     duration.seconds = seconds;
@@ -146,6 +189,17 @@ TimeDate::TimeDate() {
     duration.hours = hours;
 }
 
+[[maybe_unused]] string TimeDate::format_str_time_get() {
+    return TIME;
+}
+
+[[maybe_unused]] string TimeDate::format_str_date_get() {
+    return DATE;
+}
+
+[[maybe_unused]] string TimeDate::format_str_timedate_get() {
+    return TIMEDATE;
+}
 
 [[maybe_unused]] inline void TimeDate::add_time_sec(short seconds) {
     duration.seconds += seconds;

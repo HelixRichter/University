@@ -4,8 +4,15 @@
 using namespace std;
 
 int main() {
-    string str1;
-    cout << "Input your data: " << endl;
+    TimeDate obj;
+    obj.format_str_init();
+
+    string str;
+    cin >> str;
+
+    TimeDate::public_date date1 {};
+    date1 = obj.parsing_date(str);
+    cout << date1.days << endl;
 
     return 0;
 }

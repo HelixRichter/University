@@ -47,7 +47,7 @@ Time *parse_time(const char *str, const char *format_string) {
                     break;
 
                 case 'h' : {
-                    fl_hor++;
+                    fl_hor = 1;
 
                     if ((car_str) && (car_str + 1)) {
                         char symbol_1 = *(car_str++) - '0';
@@ -71,7 +71,7 @@ Time *parse_time(const char *str, const char *format_string) {
                 }
 
                 case 'm' : {
-                    fl_min++;
+                    fl_min = 1;
 
                     if ((car_str) && (car_str + 1)) {
                         char symbol_1 = *(car_str++) - '0';
@@ -95,7 +95,7 @@ Time *parse_time(const char *str, const char *format_string) {
                 }
 
                 case 's' : {
-                    fl_sec++;
+                    fl_sec = 1;
 
                     if ((car_str) && (car_str + 1)) {
                         char symbol_1 = *(car_str++) - '0';
@@ -181,7 +181,7 @@ Date *parse_date(const char *str, const char *format_string) {
                     break;
 
                 case 'D' : {
-                    fl_day++;
+                    fl_day = 1;
 
                     if ((car_str) && (car_str + 1)) {
                         char symbol_1 = *(car_str++) - '0';
@@ -205,7 +205,7 @@ Date *parse_date(const char *str, const char *format_string) {
                 }
 
                 case 'M' : {
-                    fl_mnh++;
+                    fl_mnh = 1;
 
                     if ((car_str) && (car_str + 1)) {
                         char symbol_1 = *(car_str++) - '0';
@@ -229,10 +229,24 @@ Date *parse_date(const char *str, const char *format_string) {
                 }
 
                 case 'Y' : {
-                    fl_yer++;
+                    fl_yer = 1;
 
                     if ((car_str) && (car_str + 1) && (car_str + 2) && (car_str + 3)) {
-                        char symbol_1 = *(car_str++) - '0';
+                        char multiplier = 1;
+                        char minus = *(car_str++);
+                        char symbol_1 = 0;
+
+                        if (minus == '-') {
+                            if (!(car_str + 4)) {
+                                exit(1);
+                            }
+
+                            multiplier = -1;
+                            symbol_1 = *(car_str++) - '0';
+                        } else {
+                            symbol_1 = minus - '0';
+                        }
+
                         char symbol_2 = *(car_str++) - '0';
                         char symbol_3 = *(car_str++) - '0';
                         char symbol_4 = *(car_str) - '0';
@@ -245,7 +259,7 @@ Date *parse_date(const char *str, const char *format_string) {
                         }
 
                         parse_entity = symbol_1 * 1000 + symbol_2 * 100 + symbol_3 * 10 + symbol_4;
-                        parsed -> years = parse_entity;
+                        parsed -> years = parse_entity * multiplier;
                     } else {
                         parsed -> years = 0;
 

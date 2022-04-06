@@ -9,8 +9,6 @@ int main() {
 
     obj.parsing_date();
     cout << obj.get_time_day() << endl;
-    cout << obj.get_time_month() << endl;
-    cout << obj.check_date() << endl;
 
     return 0;
 }

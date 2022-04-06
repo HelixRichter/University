@@ -129,16 +129,15 @@ TimeDate::TimeDate() {
 }
 
 [[maybe_unused]] bool TimeDate::check_date() const {
-    char months[12] {31, 28, 31, 30,
-                     31, 30, 31, 31,
-                     30, 31, 30, 31};
+    char months[12] = {31, 28, 31, 30,
+                       31, 30, 31, 31,
+                       30, 31, 30, 31};
 
     if (period.months > 12) {
-        cout << "DAYS: " << period.days << " MONTH: " << period.months << endl;
         return false;
     }
 
-    if (period.days > months[period.months + 1]) {
+    if (period.days > months[period.months - 1] && period.months != 0) {
         return false;
     }
 
@@ -249,7 +248,7 @@ TimeDate::TimeDate() {
 
     period.days = (int)(unsigned char)(tmp -> days);
     period.months = (int)(unsigned char)(tmp -> month);
-    period.years = (int)(unsigned char)(tmp -> years);
+    period.years = (int)(tmp -> years);
 }
 
 [[maybe_unused]] void TimeDate::parsing_timedate(const string &inputed) {

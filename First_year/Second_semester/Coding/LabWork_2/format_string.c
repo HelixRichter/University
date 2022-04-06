@@ -9,11 +9,11 @@ char *FS_TIME;
 char *FS_DATE;
 char *FS_TIMEDATE;
 
-Time *parse_time(const char *str) {
-    Time *parsed = (Time *)malloc(sizeof(Time));
+Time *parse_time(const char *str, const char *format_string) {
+    Time *parsed = (Time *) malloc(sizeof(Time));
     char parse_entity;
     const char *car_str = str;
-    char *car_fs = FS_TIME;
+    char *car_fs = format_string;
 
     while (car_str && car_fs) {
         if (*car_str == '\0' && *car_fs == '\0') {
@@ -235,23 +235,28 @@ Date *parse_date(const char *str, const char *format_string) {
     return parsed;
 }
 
-timedate *parse_timedate(const char *str) {
+timedate *parse_timedate(const char *str, const char *format_string) {
     timedate *parsed = (timedate *)malloc(sizeof(timedate));
     parsed -> duration = (Time *)malloc(sizeof(Time));
     parsed -> period = (Date *)malloc(sizeof(Date));
 
     int parse_entity;
     const char *car_str = str;
-    char *car_fs = FS_TIMEDATE;
+    char *car_fs = format_string;
 
     while ((car_str && car_fs) && (*car_str != '\0' && *car_fs != '\0')) {
+        printf("%d %d\n", *car_str, *car_fs);
+        if (*car_str == ' ' && *car_fs == ' ') {
+            car_str++;
+            car_fs++;
+
+            continue;
+        } else if (*car_str == ' ' ^ *car_fs == ' ') {
+            break;
+        }
+
         if (*car_fs != '%') {
             if (*car_str != *car_fs) {
-                printf("Oh, hi! It's me, no %% car_str != car_fs...\n");
-                printf("car_str: %c -> %c <- %c\n", *car_str - 1, *car_str, *car_str + 1);
-                if (*car_fs == '\0') {
-                    printf("car_fs: TERMINATOR\n");
-                }
 
                 parsed -> duration -> seconds = 0;
                 parsed -> duration -> minutes = 0;
@@ -269,7 +274,6 @@ timedate *parse_timedate(const char *str) {
             switch(*car_fs) {
                 case '%':
                     if (*car_str != *car_fs) {
-                        printf("Oh, hi! It's me, %% car_str != car_fs...");
 
                         parsed -> duration -> seconds = 0;
                         parsed -> duration -> minutes = 0;

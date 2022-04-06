@@ -1,4 +1,4 @@
 TIME {%h:%m:%s}
 DATE {%D.%M.%Y}
-TIDA {%h:%m:%s %D.%M.%Y}
+TIDA {%h:%m %D.%M}
 DATE {%D}

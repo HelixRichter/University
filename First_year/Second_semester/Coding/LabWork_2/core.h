@@ -32,6 +32,20 @@ public:
         int months;
         int years;
     };
+    struct public_time {
+        int seconds;
+        int minutes;
+        int hours;
+    };
+    struct public_timedate {
+        int seconds;
+        int minutes;
+        int hours;
+
+        int days;
+        int months;
+        int years;
+    };
 
     TimeDate();
 
@@ -111,6 +125,10 @@ public:
     [[maybe_unused]] string format_str_date_get();
     [[maybe_unused]] string format_str_timedate_get();
 
+    [[maybe_unused]] public_time parsing_time(const string&);
+    [[maybe_unused]] public_date parsing_date(const string&);
+    [[maybe_unused]] public_timedate parsing_timedate(const string&);
+
     [[maybe_unused]] inline bool input_type();
     [[maybe_unused]] inline void print() const;
 
@@ -122,8 +140,6 @@ public:
     [[maybe_unused]] inline void set_time_sec(short);
     [[maybe_unused]] inline void set_time_min(short);
     [[maybe_unused]] inline void set_time_hour(short);
-
-    [[maybe_unused]] public_date parsing_date(const string&);
 
     [[maybe_unused]] inline void add_time_sec(short);
     [[maybe_unused]] inline void add_time_min(short);

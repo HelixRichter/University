@@ -165,6 +165,18 @@ TimeDate::TimeDate() {
     cout << period.days << '.' << period.months << '.' << period.years << endl;
 }
 
+[[maybe_unused]] TimeDate::public_time TimeDate::parsing_time(const string &inputed) {
+    Time *tmp;
+    tmp = parse_time(inputed.c_str(), TIME.c_str());
+
+    TimeDate::public_time res {};
+    res.seconds = (int)(unsigned char)(tmp -> seconds);
+    res.minutes = (int)(unsigned char)(tmp -> minutes);
+    res.hours = (int)(unsigned char)(tmp -> hours);
+
+    return res;
+}
+
 [[maybe_unused]] TimeDate::public_date TimeDate::parsing_date(const string &inputed) {
     Date *tmp;
     tmp = parse_date(inputed.c_str(), DATE.c_str());
@@ -173,6 +185,23 @@ TimeDate::TimeDate() {
     res.days = (int)(unsigned char)(tmp -> days);
     res.months = (int)(unsigned char)(tmp -> month);
     res.years = (int)(unsigned char)(tmp -> years);
+
+    return res;
+}
+
+[[maybe_unused]] TimeDate::public_timedate TimeDate::parsing_timedate(const string &inputed) {
+    timedate *tmp;
+    tmp = parse_timedate(inputed.c_str(), TIMEDATE.c_str());
+
+    TimeDate::public_timedate res {};
+
+    res.seconds = (int)(unsigned char)(tmp -> duration -> seconds);
+    res.minutes = (int)(unsigned char)(tmp -> duration -> minutes);
+    res.hours = (int)(unsigned char)(tmp -> duration -> hours);
+
+    res.days = (int)(unsigned char)(tmp -> period -> days);
+    res.months = (int)(unsigned char)(tmp -> period -> month);
+    res.years = (int)(unsigned char)(tmp -> period -> years);
 
     return res;
 }

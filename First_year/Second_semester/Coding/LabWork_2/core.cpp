@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <algorithm>
 #include <string>
 #include <cstring>
 #include <ctime>
@@ -23,12 +22,11 @@ TimeDate::TimeDate() {
     period.years = 0;
 
     value.clear();
-};
-
-[[maybe_unused]] [[maybe_unused]] TimeDate::TimeDate(const string& str_value) {
+}
+[[maybe_unused]] [[maybe_unused]] TimeDate::TimeDate(const string &str_value) {
     value.assign(str_value);
-};
-[[maybe_unused]] TimeDate::TimeDate(const TimeDate& object) {
+}
+[[maybe_unused]] TimeDate::TimeDate(const TimeDate &object) {
     duration.seconds = object.duration.seconds;
     duration.minutes = object.duration.minutes;
     duration.hours = object.duration.hours;
@@ -38,8 +36,8 @@ TimeDate::TimeDate() {
     period.years = object.period.years;
 
     value.assign(object.value);
-};
-[[maybe_unused]] TimeDate::TimeDate(TimeDate&& object) noexcept {
+}
+[[maybe_unused]] TimeDate::TimeDate(TimeDate &&object) noexcept {
     duration.seconds = object.duration.seconds;
     duration.minutes = object.duration.minutes;
     duration.hours = object.duration.hours;
@@ -59,17 +57,6 @@ TimeDate::TimeDate() {
     object.period.years = 0;
 
     object.value.clear();
-}
-
-[[maybe_unused]] [[maybe_unused]] inline bool TimeDate::input_type() {
-    if (count(value.begin(), value.end(), '.')) {
-        return false;
-    } else if (count(value.begin(), value.end(), ':')) {
-        return true;
-    } else {
-        cout << "ERR: Unreadable input!" << endl;
-        return -1;
-    }
 }
 
 [[maybe_unused]] [[maybe_unused]] void TimeDate::get_current_time_and_date() {
@@ -117,7 +104,67 @@ TimeDate::TimeDate() {
     }
 }
 
-[[maybe_unused]] [[maybe_unused]] [[nodiscard]] long long TimeDate::secs_to() const {
+[[maybe_unused]] bool TimeDate::check_time() const {
+    if (duration.seconds > 59) {
+        return false;
+    }
+
+    if (duration.minutes > 59) {
+        return false;
+    }
+
+    if (duration.hours > 23) {
+        return false;
+    }
+
+    return true;
+}
+
+[[maybe_unused]] bool TimeDate::check_date() const {
+    char months[12] {31, 28, 31, 30,
+                     31, 30, 31, 31,
+                     30, 31, 30, 31};
+
+    if (period.months > 12) {
+        return false;
+    }
+
+    if (period.days > months[period.months + 1]) {
+        return false;
+    }
+
+    return true;
+}
+
+[[maybe_unused]] bool TimeDate::check_tida() const {
+    if (duration.seconds > 59) {
+        return false;
+    }
+
+    if (duration.minutes > 59) {
+        return false;
+    }
+
+    if (duration.hours > 23) {
+        return false;
+    }
+
+    char months[12] {31, 28, 31, 30,
+                     31, 30, 31, 31,
+                     30, 31, 30, 31};
+
+    if (period.months > 12) {
+        return false;
+    }
+
+    if (period.days > months[period.months + 1]) {
+        return false;
+    }
+
+    return true;
+}
+
+[[maybe_unused]] [[nodiscard]] long long TimeDate::secs_to() const {
     long long result;
     long long inputed_time;
     time_t current_sec;
@@ -136,7 +183,7 @@ TimeDate::TimeDate() {
     return result;
 }
 
-[[maybe_unused]] [[maybe_unused]] [[nodiscard]] long long TimeDate::days_to() const {
+[[maybe_unused]] [[nodiscard]] long long TimeDate::days_to() const {
     long long result;
     long long inputed_days;
     long long current_days;
@@ -155,7 +202,7 @@ TimeDate::TimeDate() {
     return result;
 }
 
-[[maybe_unused]] [[maybe_unused]] inline void TimeDate::print() const {
+[[maybe_unused]] inline void TimeDate::print() const {
     cout << duration.hours << ':' << duration.minutes << ':' << duration.seconds << endl;
     cout << period.days << '.' << period.months << '.' << period.years << endl;
 }
@@ -163,6 +210,15 @@ TimeDate::TimeDate() {
 [[maybe_unused]] void TimeDate::parsing_time(const string &inputed) {
     Time *tmp;
     tmp = parse_time(inputed.c_str(), TIME.c_str());
+
+    duration.seconds = (int)(unsigned char)(tmp -> seconds);
+    duration.minutes = (int)(unsigned char)(tmp -> minutes);
+    duration.hours = (int)(unsigned char)(tmp -> hours);
+}
+
+[[maybe_unused]] void TimeDate::parsing_time() {
+    Time *tmp;
+    tmp = parse_time(value.c_str(), TIME.c_str());
 
     duration.seconds = (int)(unsigned char)(tmp -> seconds);
     duration.minutes = (int)(unsigned char)(tmp -> minutes);
@@ -178,9 +234,31 @@ TimeDate::TimeDate() {
     period.years = (int)(unsigned char)(tmp -> years);
 }
 
+[[maybe_unused]] void TimeDate::parsing_date() {
+    Date *tmp;
+    tmp = parse_date(value.c_str(), DATE.c_str());
+
+    period.days = (int)(unsigned char)(tmp -> days);
+    period.months = (int)(unsigned char)(tmp -> month);
+    period.years = (int)(unsigned char)(tmp -> years);
+}
+
 [[maybe_unused]] void TimeDate::parsing_timedate(const string &inputed) {
     timedate *tmp;
     tmp = parse_timedate(inputed.c_str(), TIMEDATE.c_str());
+
+    duration.seconds = (int)(unsigned char)(tmp -> duration -> seconds);
+    duration.minutes = (int)(unsigned char)(tmp -> duration -> minutes);
+    duration.hours = (int)(unsigned char)(tmp -> duration -> hours);
+
+    period.days = (int)(unsigned char)(tmp -> period -> days);
+    period.months = (int)(unsigned char)(tmp -> period -> month);
+    period.years = (int)(unsigned char)(tmp -> period -> years);
+}
+
+[[maybe_unused]] void TimeDate::parsing_timedate() {
+    timedate *tmp;
+    tmp = parse_timedate(value.c_str(), TIMEDATE.c_str());
 
     duration.seconds = (int)(unsigned char)(tmp -> duration -> seconds);
     duration.minutes = (int)(unsigned char)(tmp -> duration -> minutes);

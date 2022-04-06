@@ -23,8 +23,16 @@ TimeDate::TimeDate() {
 
     value.clear();
 }
-[[maybe_unused]] [[maybe_unused]] TimeDate::TimeDate(const string &str_value) {
+[[maybe_unused]] TimeDate::TimeDate(const string &str_value) {
     value.assign(str_value);
+
+    duration.seconds = 0;
+    duration.minutes = 0;
+    duration.hours = 0;
+
+    period.days = 0;
+    period.months = 0;
+    period.years = 0;
 }
 [[maybe_unused]] TimeDate::TimeDate(const TimeDate &object) {
     duration.seconds = object.duration.seconds;
@@ -126,6 +134,7 @@ TimeDate::TimeDate() {
                      30, 31, 30, 31};
 
     if (period.months > 12) {
+        cout << "DAYS: " << period.days << " MONTH: " << period.months << endl;
         return false;
     }
 

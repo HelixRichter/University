@@ -15,6 +15,10 @@ Time *parse_time(const char *str, const char *format_string) {
     const char *car_str = str;
     char *car_fs = format_string;
 
+    char fl_sec = 0;
+    char fl_min = 0;
+    char fl_hor = 0;
+
     while (car_str && car_fs) {
         if (*car_str == '\0' && *car_fs == '\0') {
             break;
@@ -43,6 +47,8 @@ Time *parse_time(const char *str, const char *format_string) {
                     break;
 
                 case 'h' : {
+                    fl_hor++;
+
                     if ((car_str) && (car_str + 1)) {
                         char symbol_1 = *(car_str++) - '0';
                         char symbol_2 = *(car_str) - '0';
@@ -65,6 +71,8 @@ Time *parse_time(const char *str, const char *format_string) {
                 }
 
                 case 'm' : {
+                    fl_min++;
+
                     if ((car_str) && (car_str + 1)) {
                         char symbol_1 = *(car_str++) - '0';
                         char symbol_2 = *(car_str) - '0';
@@ -87,6 +95,8 @@ Time *parse_time(const char *str, const char *format_string) {
                 }
 
                 case 's' : {
+                    fl_sec++;
+
                     if ((car_str) && (car_str + 1)) {
                         char symbol_1 = *(car_str++) - '0';
                         char symbol_2 = *(car_str) - '0';
@@ -117,6 +127,18 @@ Time *parse_time(const char *str, const char *format_string) {
         car_fs++;
     }
 
+    if (!fl_sec) {
+        parsed -> seconds = 0;
+    }
+
+    if (!fl_min) {
+        parsed -> minutes = 0;
+    }
+
+    if (!fl_hor) {
+        parsed -> hours = 0;
+    }
+
     return parsed;
 }
 
@@ -125,6 +147,10 @@ Date *parse_date(const char *str, const char *format_string) {
     int parse_entity;
     const char *car_str = str;
     char *car_fs = format_string;
+
+    char fl_day = 0;
+    char fl_mnh = 0;
+    char fl_yer = 0;
 
     while (car_str && car_fs) {
         if (*car_str == '\0' && *car_fs == '\0') {
@@ -155,6 +181,8 @@ Date *parse_date(const char *str, const char *format_string) {
                     break;
 
                 case 'D' : {
+                    fl_day++;
+
                     if ((car_str) && (car_str + 1)) {
                         char symbol_1 = *(car_str++) - '0';
                         char symbol_2 = *(car_str) - '0';
@@ -177,6 +205,8 @@ Date *parse_date(const char *str, const char *format_string) {
                 }
 
                 case 'M' : {
+                    fl_mnh++;
+
                     if ((car_str) && (car_str + 1)) {
                         char symbol_1 = *(car_str++) - '0';
                         char symbol_2 = *(car_str) - '0';
@@ -199,6 +229,8 @@ Date *parse_date(const char *str, const char *format_string) {
                 }
 
                 case 'Y' : {
+                    fl_yer++;
+
                     if ((car_str) && (car_str + 1) && (car_str + 2) && (car_str + 3)) {
                         char symbol_1 = *(car_str++) - '0';
                         char symbol_2 = *(car_str++) - '0';
@@ -232,6 +264,18 @@ Date *parse_date(const char *str, const char *format_string) {
         car_fs++;
     }
 
+    if (!fl_day) {
+        parsed -> days = 0;
+    }
+
+    if (!fl_mnh) {
+        parsed -> month = 0;
+    }
+
+    if (!fl_yer) {
+        parsed -> years = 0;
+    }
+
     return parsed;
 }
 
@@ -243,6 +287,14 @@ timedate *parse_timedate(const char *str, const char *format_string) {
     int parse_entity;
     const char *car_str = str;
     char *car_fs = format_string;
+
+    char fl_sec = 0;
+    char fl_min = 0;
+    char fl_hor = 0;
+
+    char fl_day = 0;
+    char fl_mnh = 0;
+    char fl_yer = 0;
 
     while ((car_str && car_fs) && (*car_str != '\0' && *car_fs != '\0')) {
         if (*car_str == ' ' && *car_fs == ' ') {
@@ -287,6 +339,8 @@ timedate *parse_timedate(const char *str, const char *format_string) {
                     break;
 
                 case 'h' : {
+                    fl_hor++;
+
                     if ((car_str) && (car_str + 1)) {
                         char symbol_1 = *(car_str++) - '0';
                         char symbol_2 = *(car_str) - '0';
@@ -309,6 +363,8 @@ timedate *parse_timedate(const char *str, const char *format_string) {
                 }
 
                 case 'm' : {
+                    fl_min++;
+
                     if ((car_str) && (car_str + 1)) {
                         char symbol_1 = *(car_str++) - '0';
                         char symbol_2 = *(car_str) - '0';
@@ -331,6 +387,8 @@ timedate *parse_timedate(const char *str, const char *format_string) {
                 }
 
                 case 's' : {
+                    fl_sec++;
+
                     if ((car_str) && (car_str + 1)) {
                         char symbol_1 = *(car_str++) - '0';
                         char symbol_2 = *(car_str) - '0';
@@ -353,6 +411,8 @@ timedate *parse_timedate(const char *str, const char *format_string) {
                 }
 
                 case 'D' : {
+                    fl_day++;
+
                     if ((car_str) && (car_str + 1)) {
                         char symbol_1 = *(car_str++) - '0';
                         char symbol_2 = *(car_str) - '0';
@@ -375,6 +435,8 @@ timedate *parse_timedate(const char *str, const char *format_string) {
                 }
 
                 case 'M' : {
+                    fl_mnh++;
+
                     if ((car_str) && (car_str + 1)) {
                         char symbol_1 = *(car_str++) - '0';
                         char symbol_2 = *(car_str) - '0';
@@ -397,6 +459,8 @@ timedate *parse_timedate(const char *str, const char *format_string) {
                 }
 
                 case 'Y' : {
+                    fl_yer++;
+
                     if ((car_str) && (car_str + 1) && (car_str + 2) && (car_str + 3)) {
                         char symbol_1 = *(car_str++) - '0';
                         char symbol_2 = *(car_str++) - '0';
@@ -425,6 +489,30 @@ timedate *parse_timedate(const char *str, const char *format_string) {
 
         car_str++;
         car_fs++;
+    }
+
+    if (!fl_sec) {
+        parsed -> duration -> seconds = 0;
+    }
+
+    if (!fl_min) {
+        parsed -> duration -> minutes = 0;
+    }
+
+    if (!fl_hor) {
+        parsed -> duration -> hours = 0;
+    }
+
+    if (!fl_day) {
+        parsed -> period -> days = 0;
+    }
+
+    if (!fl_mnh) {
+        parsed -> period -> month = 0;
+    }
+
+    if (!fl_yer) {
+        parsed -> period -> years = 0;
     }
 
     return parsed;

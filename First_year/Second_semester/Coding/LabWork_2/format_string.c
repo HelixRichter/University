@@ -476,20 +476,34 @@ timedate *parse_timedate(const char *str, const char *format_string) {
                     fl_yer++;
 
                     if ((car_str) && (car_str + 1) && (car_str + 2) && (car_str + 3)) {
-                        char symbol_1 = *(car_str++) - '0';
-                        char symbol_2 = *(car_str++) - '0';
-                        char symbol_3 = *(car_str++) - '0';
-                        char symbol_4 = *(car_str) - '0';
+                       char multiplier = 1;
+                       char minus = *(car_str++);
+                       char symbol_1 = 0;
 
-                        if (symbol_1 < 0 || symbol_1 > 9 || symbol_2 < 0 || symbol_2 > 9 ||
-                            symbol_3 < 0 || symbol_3 > 9 || symbol_4 < 0 || symbol_4 > 9) {
-                            parsed -> period -> years = 0;
+                       if (minus == '-') {
+                           if (!(car_str + 4)) {
+                              exit(1);
+                           }
 
-                            break;
-                        }
+                           multiplier = -1;
+                           symbol_1 = *(car_str++) - '0';
+                       } else {
+                           symbol_1 = minus - '0';
+                       }
 
-                        parse_entity = symbol_1 * 1000 + symbol_2 * 100 + symbol_3 * 10 + symbol_4;
-                        parsed -> period -> years = parse_entity;
+                       char symbol_2 = *(car_str++) - '0';
+                       char symbol_3 = *(car_str++) - '0';
+                       char symbol_4 = *(car_str) - '0';
+
+                       if (symbol_1 < 0 || symbol_1 > 9 || symbol_2 < 0 || symbol_2 > 9 ||
+                           symbol_3 < 0 || symbol_3 > 9 || symbol_4 < 0 || symbol_4 > 9) {
+                           parsed -> period -> years = 0;
+
+                           break;
+                       }
+
+                       parse_entity = symbol_1 * 1000 + symbol_2 * 100 + symbol_3 * 10 + symbol_4;
+                       parsed -> period -> years = parse_entity * multiplier;
                     } else {
                         parsed -> period -> years = 0;
 

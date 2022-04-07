@@ -4,17 +4,11 @@
 using namespace std;
 
 int main() {
-    TimeDate obj;
+    TimeDate obj("11:16:23 12.18.-1875");
     obj.format_str_init();
 
-    string str;
-    getline(cin, str);
-
-    obj.parsing_timedate(str);
-    cout << obj.get_time_hour() << endl;
-    cout << obj.get_time_min() << endl;
-    cout << obj.get_time_day() << endl;
-    cout << obj.get_time_month() << endl;
+    obj.parsing_timedate();
+    obj.print();
 
     return 0;
 }

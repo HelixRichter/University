@@ -228,7 +228,7 @@ TimeDate::TimeDate() {
     return result;
 }
 
-[[maybe_unused]] inline void TimeDate::print() const {
+[[maybe_unused]] void TimeDate::print() const {
     cout << duration.hours << ':' << duration.minutes << ':' << duration.seconds << endl;
     cout << period.days << '.' << period.months << '.' << period.years << endl;
 }
@@ -257,7 +257,7 @@ TimeDate::TimeDate() {
 
     period.days = (int)(unsigned char)(tmp -> days);
     period.months = (int)(unsigned char)(tmp -> month);
-    period.years = (int)(unsigned char)(tmp -> years);
+    period.years = (int)(tmp -> years);
 }
 
 [[maybe_unused]] void TimeDate::parsing_date() {
@@ -279,7 +279,7 @@ TimeDate::TimeDate() {
 
     period.days = (int)(unsigned char)(tmp -> period -> days);
     period.months = (int)(unsigned char)(tmp -> period -> month);
-    period.years = (int)(unsigned char)(tmp -> period -> years);
+    period.years = (int)(tmp -> period -> years);
 }
 
 [[maybe_unused]] void TimeDate::parsing_timedate() {
@@ -292,7 +292,7 @@ TimeDate::TimeDate() {
 
     period.days = (int)(unsigned char)(tmp -> period -> days);
     period.months = (int)(unsigned char)(tmp -> period -> month);
-    period.years = (int)(unsigned char)(tmp -> period -> years);
+    period.years = (int)(tmp -> period -> years);
 }
 
 [[maybe_unused]] void TimeDate::set_time_sec(short seconds) {

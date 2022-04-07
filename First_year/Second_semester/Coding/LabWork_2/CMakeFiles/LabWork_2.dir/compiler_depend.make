@@ -186,35 +186,6 @@ CMakeFiles/LabWork_2.dir/core.cpp.o: core.cpp \
   /usr/include/c++/11.2.0/x86_64-pc-linux-gnu/bits/basic_file.h \
   /usr/include/c++/11.2.0/x86_64-pc-linux-gnu/bits/c++io.h \
   /usr/include/c++/11.2.0/bits/fstream.tcc \
-  /usr/include/c++/11.2.0/algorithm \
-  /usr/include/c++/11.2.0/utility \
-  /usr/include/c++/11.2.0/bits/stl_relops.h \
-  /usr/include/c++/11.2.0/bits/stl_algo.h \
-  /usr/include/c++/11.2.0/bits/algorithmfwd.h \
-  /usr/include/c++/11.2.0/bits/stl_heap.h \
-  /usr/include/c++/11.2.0/bits/stl_tempbuf.h \
-  /usr/include/c++/11.2.0/bits/uniform_int_dist.h \
-  /usr/include/c++/11.2.0/pstl/glue_algorithm_defs.h \
-  /usr/include/c++/11.2.0/functional \
-  /usr/include/c++/11.2.0/tuple \
-  /usr/include/c++/11.2.0/array \
-  /usr/include/c++/11.2.0/bits/uses_allocator.h \
-  /usr/include/c++/11.2.0/bits/invoke.h \
-  /usr/include/c++/11.2.0/bits/refwrap.h \
-  /usr/include/c++/11.2.0/bits/std_function.h \
-  /usr/include/c++/11.2.0/unordered_map \
-  /usr/include/c++/11.2.0/ext/aligned_buffer.h \
-  /usr/include/c++/11.2.0/bits/hashtable.h \
-  /usr/include/c++/11.2.0/bits/hashtable_policy.h \
-  /usr/include/c++/11.2.0/bits/node_handle.h \
-  /usr/include/c++/11.2.0/bits/unordered_map.h \
-  /usr/include/c++/11.2.0/bits/erase_if.h \
-  /usr/include/c++/11.2.0/vector \
-  /usr/include/c++/11.2.0/bits/stl_uninitialized.h \
-  /usr/include/c++/11.2.0/bits/stl_vector.h \
-  /usr/include/c++/11.2.0/bits/stl_bvector.h \
-  /usr/include/c++/11.2.0/bits/vector.tcc \
-  /usr/include/c++/11.2.0/pstl/execution_defs.h \
   /usr/include/c++/11.2.0/cstring \
   /usr/include/string.h \
   /usr/include/strings.h \
@@ -477,41 +448,9 @@ core.h:
 
 /usr/include/string.h:
 
-/usr/include/c++/11.2.0/bits/vector.tcc:
-
-/usr/include/c++/11.2.0/bits/stl_bvector.h:
-
-/usr/include/c++/11.2.0/bits/stl_vector.h:
-
-/usr/include/c++/11.2.0/bits/stl_uninitialized.h:
-
-/usr/include/c++/11.2.0/vector:
-
-/usr/include/c++/11.2.0/bits/unordered_map.h:
-
-/usr/include/c++/11.2.0/bits/hashtable_policy.h:
-
-/usr/include/c++/11.2.0/ext/aligned_buffer.h:
-
-/usr/include/c++/11.2.0/bits/invoke.h:
-
-/usr/include/c++/11.2.0/bits/uses_allocator.h:
-
-/usr/include/c++/11.2.0/array:
-
-/usr/include/c++/11.2.0/tuple:
-
-/usr/include/c++/11.2.0/bits/uniform_int_dist.h:
-
-/usr/include/c++/11.2.0/bits/stl_tempbuf.h:
-
-/usr/include/c++/11.2.0/bits/stl_heap.h:
-
 /usr/include/c++/11.2.0/x86_64-pc-linux-gnu/bits/c++io.h:
 
 /usr/include/c++/11.2.0/bits/codecvt.h:
-
-/usr/include/c++/11.2.0/bits/stl_relops.h:
 
 /usr/include/c++/11.2.0/fstream:
 
@@ -531,8 +470,6 @@ core.h:
 
 /usr/include/c++/11.2.0/bits/basic_ios.h:
 
-/usr/include/c++/11.2.0/bits/std_function.h:
-
 /usr/include/c++/11.2.0/streambuf:
 
 /usr/include/c++/11.2.0/bits/locale_classes.tcc:
@@ -550,8 +487,6 @@ core.h:
 /usr/include/errno.h:
 
 /usr/include/c++/11.2.0/cerrno:
-
-/usr/include/c++/11.2.0/bits/algorithmfwd.h:
 
 /usr/include/bits/types/struct_FILE.h:
 
@@ -594,8 +529,6 @@ format_string.c:
 /usr/include/c++/11.2.0/bits/cpp_type_traits.h:
 
 /usr/include/c++/11.2.0/bits/char_traits.h:
-
-/usr/include/c++/11.2.0/bits/hashtable.h:
 
 /usr/include/bits/waitstatus.h:
 
@@ -699,19 +632,13 @@ format_string.c:
 
 core.cpp:
 
-/usr/include/c++/11.2.0/pstl/glue_algorithm_defs.h:
-
 /usr/include/bits/pthread_stack_min-dynamic.h:
 
 /usr/include/c++/11.2.0/bits/move.h:
 
 /usr/include/c++/11.2.0/cctype:
 
-/usr/include/c++/11.2.0/bits/erase_if.h:
-
 /usr/include/bits/libc-header-start.h:
-
-/usr/include/c++/11.2.0/functional:
 
 /usr/include/c++/11.2.0/x86_64-pc-linux-gnu/bits/cpu_defines.h:
 
@@ -720,8 +647,6 @@ core.cpp:
 /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include/stdarg.h:
 
 /usr/include/c++/11.2.0/bits/ios_base.h:
-
-/usr/include/c++/11.2.0/bits/refwrap.h:
 
 /usr/include/c++/11.2.0/x86_64-pc-linux-gnu/bits/gthr.h:
 
@@ -733,11 +658,7 @@ core.cpp:
 
 /usr/include/c++/11.2.0/pstl/pstl_config.h:
 
-/usr/include/c++/11.2.0/bits/node_handle.h:
-
 /usr/include/c++/11.2.0/bits/memoryfwd.h:
-
-/usr/include/c++/11.2.0/unordered_map:
 
 /usr/include/c++/11.2.0/bits/basic_ios.tcc:
 
@@ -746,8 +667,6 @@ core.cpp:
 /usr/include/bits/types/__FILE.h:
 
 /usr/include/bits/wchar.h:
-
-/usr/include/c++/11.2.0/algorithm:
 
 /usr/include/c++/11.2.0/cwchar:
 
@@ -763,13 +682,9 @@ core.cpp:
 
 /usr/include/bits/types/time_t.h:
 
-/usr/include/c++/11.2.0/utility:
-
 /usr/include/c++/11.2.0/debug/debug.h:
 
 /usr/include/c++/11.2.0/bits/predefined_ops.h:
-
-/usr/include/c++/11.2.0/pstl/execution_defs.h:
 
 /usr/include/c++/11.2.0/type_traits:
 
@@ -866,8 +781,6 @@ core.cpp:
 /usr/include/bits/types/struct_itimerspec.h:
 
 /usr/include/bits/pthreadtypes.h:
-
-/usr/include/c++/11.2.0/bits/stl_algo.h:
 
 /usr/include/c++/11.2.0/clocale:
 

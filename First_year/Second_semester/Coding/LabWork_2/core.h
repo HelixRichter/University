@@ -38,68 +38,6 @@ public:
         const char *c_value = inputed_string.c_str();
         return strlen(c_value);
     }
-    [[maybe_unused]] static bool date_check(bool str_status, date inputed_date) {
-        if (str_status) {
-            cout << "ERR: I can't handle incorrect string!" << endl;
-            return -1;
-        }
-
-        if (inputed_date.days == 0 and inputed_date.months == 0 and inputed_date.years == 0) {
-            cout << "I don't see any date. I will assume that you have not entered anything." << endl;
-            return false;
-        }
-
-        bool err = false;
-
-        if (inputed_date.months <= 0 or inputed_date.months > 12) {
-            cout << "ERR: Incorrect month input!" << endl;
-            err = true;
-        } else {
-            char month[12] = {31, 28, 31, 30, 31, 30, 31,
-                              31, 30, 31, 30,31};
-            if (short(month[inputed_date.months - 1]) < inputed_date.days) {
-                cout << "ERR: Incorrect maximum days in inputed month!" << endl;
-                err = true;
-            }
-        }
-
-        if (inputed_date.years <= 0) {
-            cout << "ERR: Incorrect year input! It can't be less then 0 inclusively, but I see " << inputed_date.years << endl;
-            err = true;
-        }
-
-        return err;
-    }
-    [[maybe_unused]] static bool time_check(bool str_status, stime inputed_time) {
-        if (str_status) {
-            cout << "ERR: I can't handle incorrect string!" << endl;
-            return -1;
-        }
-
-        if (inputed_time.seconds == 0 and inputed_time.minutes == 0 and inputed_time.hours == 0) {
-            cout << "I don't see any time. I will assume that you have not entered anything." << endl;
-            return false;
-        }
-
-        bool err = false;
-
-        if (inputed_time.seconds <= 0 or inputed_time.seconds > 59) {
-            cout << "ERR: Incorrect seconds input! It can't be less then 0 inclusively and more then 59." << endl;
-            err = true;
-        }
-
-        if (inputed_time.minutes <= 0 or inputed_time.minutes > 59) {
-            cout << "ERR: Incorrect minutes input! It can't be less then 0 inclusively and more then 59." << endl;
-            err = true;
-        }
-
-        if (inputed_time.hours < 0 or inputed_time.hours > 23) {
-            cout << "ERR: Incorrect hours input! It can't be less then 0 and more then 23." << endl;
-            err = true;
-        }
-
-        return err;
-    }
 
     [[maybe_unused]] void format_str_init();
     [[maybe_unused]] string format_str_time_get();

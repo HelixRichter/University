@@ -4,11 +4,10 @@
 using namespace std;
 
 int main() {
-    TimeDate obj("11:16:23 12.18.-1875");
+    TimeDate obj("12:17:24");
     obj.format_str_init();
+    obj.parsing_time();
 
-    obj.parsing_timedate();
     obj.print();
-
     return 0;
 }

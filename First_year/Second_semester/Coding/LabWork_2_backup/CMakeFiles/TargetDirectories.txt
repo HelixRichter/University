@@ -1,0 +1,3 @@
+/home/adam/Documents/University/First_year/Second_semester/Coding/LabWork_2/CMakeFiles/LabWork_2.dir
+/home/adam/Documents/University/First_year/Second_semester/Coding/LabWork_2/CMakeFiles/edit_cache.dir
+/home/adam/Documents/University/First_year/Second_semester/Coding/LabWork_2/CMakeFiles/rebuild_cache.dir

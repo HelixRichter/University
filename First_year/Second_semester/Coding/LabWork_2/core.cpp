@@ -7,7 +7,7 @@
 #include "core.h"
 
 extern "C" {
-    #include "format_string.h"
+#include "format_string.h"
 }
 
 using namespace std;

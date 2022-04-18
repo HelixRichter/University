@@ -1,4 +1,0 @@
-Cannot generate into /home/adam/CLionProjects/University/First_year/Second_semester/Coding/LabWork_2
-It is already used for project /home/adam/Documents/University/First_year/Second_semester/Coding/LabWork_2
-
-Please either delete it manually or select another generation directory

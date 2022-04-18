@@ -1,17 +1,21 @@
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
-
 #include "dict.h"
 
 int main(void) {
-    Dictelem *dict = dict_new_dict("123", "123");
-    dict = dict_add_elem(dict, "124", "123");
+    Dictelem *test = dict_new("kag", NULL, 0);
+
+    Dictelem *dict = dict_new("123", test, sizeof(*test));
+    dict = dict_add_elem(dict, "124", "123", strlen("123") + 1);
+
+    keyvalue_cpy(dict -> keyvalue, dict -> next -> keyvalue);
 
     dict_print(dict);
-    printf("%s == %s\n", dict->keyvalue->value, dict->next->keyvalue->value);
+    printf("%s == %s? %d\n", dict -> keyvalue -> key, dict -> next -> keyvalue -> key,
+                                    keyvalue_cmp_by_value(dict -> keyvalue, dict -> next -> keyvalue));
 
-    printf("%d\n", keyvalue_cmp_by_value(dict->keyvalue, dict->next->keyvalue));
+    dict = dict_del_with_key(dict, "124");
+    dict_print(dict);
 
     return 0;
 }

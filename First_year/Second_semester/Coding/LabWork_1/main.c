@@ -7,6 +7,7 @@ int main(void) {
 
     Dictelem *dict = dict_new("123", test, sizeof(*test));
     dict = dict_add_elem(dict, "124", "123", strlen("123") + 1);
+    // dict_print(dict);
 
     keyvalue_cpy(dict -> keyvalue, dict -> next -> keyvalue);
 

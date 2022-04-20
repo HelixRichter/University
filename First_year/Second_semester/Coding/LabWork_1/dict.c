@@ -6,17 +6,16 @@
 
 Keyvalue *keyvalue_new(char *key, void *value, size_t size) {
     if (!key || !strcmp(key, "\0")) {
-        fprintf(stderr, "Invalid or empty key!"); // all fputs -> fprintf.
+        fprintf(stderr, "Invalid or empty key!");
         return NULL;
     }
 
     Keyvalue *keyvalue = (Keyvalue *) malloc(sizeof(Keyvalue));
-    keyvalue->key = malloc((strlen(key) + 1) * sizeof(char));
-    strncpy(keyvalue -> key, key, strlen(key) + 1);
 
+    keyvalue -> key = malloc((strlen(key) + 1) * sizeof(char));
+    strncpy(keyvalue -> key, key, strlen(key) + 1);
     keyvalue -> value = malloc(size);
     memcpy(keyvalue -> value, value, size);
-
     keyvalue -> value_size = size;
 
     return keyvalue;
@@ -39,16 +38,9 @@ int keyvalue_cpy(Keyvalue *kv_cpy_to, Keyvalue *kv_cpy_from) {
         return 0;
     }
 
-//    if (!kv_cpy_from->value) {
-//        kv_cpy_to->value_size = 0;
-//        kv_cpy_to->value = NULL;
-//
-//        return 0;
-//    }
-
     kv_cpy_to -> value = realloc(kv_cpy_to->value, kv_cpy_from->value_size);
 
-    if (!kv_cpy_to -> value && kv_cpy_from->value_size) {
+    if (!kv_cpy_to -> value && kv_cpy_from -> value_size) {
         fprintf(stderr, "Can't reallocate value!");
         exit(1);
     }
@@ -77,7 +69,7 @@ int keyvalue_cmp_by_value(Keyvalue *kv1, Keyvalue *kv2) {
 
 int keyvalue_cmp_by_key(Keyvalue *kv1, Keyvalue *kv2) {
     if (!kv1 || !kv2) {
-        fputs("Can't compare non-existent elements!", stderr);
+        fprintf(stderr, "Can't compare non-existent elements!");
         exit(1);
     }
 
@@ -90,7 +82,7 @@ int keyvalue_cmp_by_key(Keyvalue *kv1, Keyvalue *kv2) {
 
 int keyvalue_cmp_with_key(Keyvalue *kv1, char *key) {
     if (!kv1 || !key) {
-        fputs("Can't compare non-existent elements!", stderr);
+        fprintf(stderr, "Can't compare non-existent elements!");
         exit(1);
     }
 
@@ -118,7 +110,7 @@ Dictelem *dict_add_elem(Dictelem *head, char *key, void *value, size_t size) {
     if (head) {
         Dictelem *duplikey = dict_srch_elem(head, key);
         if (duplikey) {
-            fputs("Can't add element: key exists in dict!", stderr);
+            fprintf(stderr, "Can't add element: key exists in dict!");
             exit(1);
         }
     }

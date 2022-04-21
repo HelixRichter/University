@@ -6,6 +6,7 @@
 typedef struct keyvalue {
     char *key;
     void *value;
+    int type;
     size_t value_size;
 } Keyvalue;
 

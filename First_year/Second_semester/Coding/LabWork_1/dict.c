@@ -14,8 +14,10 @@ Keyvalue *keyvalue_new(char *key, void *value, size_t size) {
 
     keyvalue -> key = malloc((strlen(key) + 1) * sizeof(char));
     strncpy(keyvalue -> key, key, strlen(key) + 1);
+
     keyvalue -> value = malloc(size);
     memcpy(keyvalue -> value, value, size);
+
     keyvalue -> value_size = size;
 
     return keyvalue;

@@ -1,4 +1,6 @@
 #include "fraction.h"
+#include <string>
+#include <algorithm>
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "NullDereference"
@@ -259,6 +261,31 @@ istream & operator >> (istream &in, fraction &tmp) {
     return in;
 }
 
+fraction operator "" _fraction(const char *tmp) {
+    string local_string_tmp = string(tmp);
+    string local_numerator;
+    string local_denominator;
+
+    bool slash_status = false;
+    for (int i = 0; i < local_string_tmp.length(); i++) {
+        if (local_string_tmp[i] == '/') {
+            slash_status = true;
+        } else if (isdigit(local_string_tmp[i])) {
+            if (!slash_status) {
+                local_numerator += local_string_tmp[i];
+            } else {
+                local_denominator += local_string_tmp[i];
+            }
+        }
+    }
+
+    fraction result;
+    *(result.numerator) = stoi(local_numerator);
+    *(result.denominator) = stoi(local_denominator);
+
+    return result;
+}
+
 bool operator == (const fraction &tmp1, const fraction &tmp2) {
     return (tmp1.numerator == tmp2.numerator &&
             tmp1.denominator == tmp2.denominator);
@@ -287,6 +314,27 @@ bool operator < (const fraction &tmp1, const fraction &tmp2) {
 bool operator <= (const fraction &tmp1, const fraction &tmp2) {
     return (tmp1.numerator <= tmp2.numerator &&
             tmp1.denominator <= tmp2.denominator);
+}
+
+fraction::operator float() const {
+    float local_numerator = (float) *(this->numerator);
+    float local_denominator = (float) *(this->denominator);
+
+    return (local_numerator / local_denominator);
+}
+
+fraction::operator double() const {
+    double local_numerator = (double) *(this->numerator);
+    double local_denominator = (double) *(this->denominator);
+
+    return (local_numerator / local_denominator);
+}
+
+fraction::operator string() const {
+    string local_numerator = to_string(*(this->numerator));
+    string local_denominator = to_string(*(this->denominator));
+
+    return (local_numerator + "/" + local_denominator);
 }
 
 fraction::~fraction() {

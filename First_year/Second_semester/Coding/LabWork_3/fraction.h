@@ -34,11 +34,13 @@ public:
 
     [[maybe_unused]] fraction & operator ++ ();
     [[maybe_unused]] fraction & operator + (const fraction &);
+
     [[maybe_unused]] fraction & operator + (int);
     [[maybe_unused]] fraction operator ++ (int);
 
     [[maybe_unused]] fraction & operator -- ();
     [[maybe_unused]] fraction & operator - (const fraction &);
+
     [[maybe_unused]] fraction & operator - (int);
     [[maybe_unused]] fraction operator -- (int);
 
@@ -59,6 +61,12 @@ public:
 
     friend bool operator < (const fraction &, const fraction &);
     friend bool operator <= (const fraction &, const fraction &);
+
+    friend fraction operator "" _fraction(const char *);
+
+    [[maybe_unused]] operator float() const;
+    [[maybe_unused]] operator double() const;
+    [[maybe_unused]] operator string() const;
 
     [[nodiscard]] int get_numerator() const;
     [[nodiscard]] int get_denominator() const;

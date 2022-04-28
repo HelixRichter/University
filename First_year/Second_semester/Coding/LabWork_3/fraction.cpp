@@ -54,8 +54,135 @@ fraction & fraction::operator = (const fraction &tmp) {
     return *this;
 }
 
-ostream & operator << (ostream & out, const fraction & tmp) {
+fraction & fraction::operator += (const fraction &tmp) {
+    if (*(this->denominator) == *(tmp.denominator)) {
+        *(this->numerator) = *(this->numerator) + *(tmp.numerator);
+
+        return *this;
+    }
+
+    *(this->numerator) = (*(this->numerator) * *(tmp.denominator)) +
+                         (*(tmp.numerator) * *(this->denominator));
+    *(this->denominator) = *(this->denominator) * *(tmp.denominator);
+
+    return *this;
+}
+
+fraction & fraction::operator -= (const fraction &tmp) {
+    if (*(this->denominator) == *(tmp.denominator)) {
+        *(this->numerator) = *(this->numerator) - *(tmp.numerator);
+
+        return *this;
+    }
+
+    *(this->numerator) = (*(this->numerator) * *(tmp.denominator)) -
+                         (*(tmp.numerator) * *(this->denominator));
+    *(this->denominator) = *(this->denominator) * *(tmp.denominator);
+
+    return *this;
+}
+
+fraction & fraction::operator *= (const fraction &tmp) {
+    *(this->numerator) = *(this->numerator) * *(tmp.numerator);
+    *(this->denominator) = *(this->denominator) * *(tmp.denominator);
+
+    return *this;
+}
+
+fraction & fraction::operator /= (const fraction &tmp) {
+    *(this->numerator) = *(this->numerator) * *(tmp.denominator);
+    *(this->denominator) = *(this->denominator) * *(tmp.numerator);
+
+    return *this;
+}
+
+fraction & fraction::operator + (const fraction &tmp) {
+    if (*(this->denominator) == *(tmp.denominator)) {
+        *(this->numerator) = *(this->numerator) + *(tmp.numerator);
+
+        return *this;
+    }
+
+    *(this->numerator) = (*(this->numerator) * *(tmp.denominator)) +
+                         (*(tmp.numerator) * *(this->denominator));
+    *(this->denominator) = *(this->denominator) * *(tmp.denominator);
+
+    return *this;
+}
+
+fraction & fraction::operator ++ () {
+    *(this->numerator) = *(this->numerator) + *(this->denominator);
+
+    return *this;
+}
+
+fraction fraction::operator ++ (int) {
+    fraction tmp = *this;
+    ++*this;
+
+    return tmp;
+}
+
+fraction & fraction::operator - (const fraction &tmp) {
+    if (*(this->denominator) == *(tmp.denominator)) {
+        *(this->numerator) = *(this->numerator) - *(tmp.numerator);
+
+        return *this;
+    }
+
+    *(this->numerator) = (*(this->numerator) * *(tmp.denominator)) -
+                         (*(tmp.numerator) * *(this->denominator));
+    *(this->denominator) = *(this->denominator) * *(tmp.denominator);
+
+    return *this;
+}
+
+fraction & fraction::operator -- () {
+    *(this->numerator) = *(this->numerator) - *(this->denominator);
+
+    return *this;
+}
+
+fraction fraction::operator -- (int) {
+    fraction tmp = *this;
+    --*this;
+
+    return tmp;
+}
+
+fraction & fraction::operator * (const fraction &tmp) {
+    *(this->numerator) = *(this->numerator) * *(tmp.numerator);
+    *(this->denominator) = *(this->denominator) * *(tmp.denominator);
+
+    return *this;
+}
+
+fraction & fraction::operator / (const fraction &tmp) {
+    *(this->numerator) = *(this->numerator) * *(tmp.denominator);
+    *(this->denominator) = *(this->denominator) * *(tmp.numerator);
+
+    return *this;
+}
+
+ostream & operator << (ostream &out, const fraction &tmp) {
     return out << tmp.get_numerator() << '/' << tmp.get_denominator() << endl;
+}
+
+istream & operator >> (istream &in, fraction &tmp) {
+    char slash = 0;
+
+    in >> *(tmp.numerator) >> slash >> *(tmp.denominator);
+    return in;
+}
+
+bool operator == (const fraction &tmp1, const fraction &tmp2) {
+    return (tmp1.numerator == tmp2.numerator &&
+            tmp1.denominator == tmp2.denominator);
+}
+
+bool operator != (const fraction &tmp1, const fraction &tmp2) {
+    return !(tmp1.numerator == tmp2.numerator &&
+            tmp1.denominator == tmp2.denominator);
 }
 
 fraction::~fraction() {

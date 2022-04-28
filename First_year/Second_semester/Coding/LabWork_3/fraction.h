@@ -54,6 +54,12 @@ public:
     friend bool operator == (const fraction &, const fraction &);
     friend bool operator != (const fraction &, const fraction &);
 
+    friend bool operator > (const fraction &, const fraction &);
+    friend bool operator >= (const fraction &, const fraction &);
+
+    friend bool operator < (const fraction &, const fraction &);
+    friend bool operator <= (const fraction &, const fraction &);
+
     [[nodiscard]] int get_numerator() const;
     [[nodiscard]] int get_denominator() const;
 };

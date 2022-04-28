@@ -68,6 +68,16 @@ fraction & fraction::operator += (const fraction &tmp) {
     return *this;
 }
 
+fraction & fraction::operator += (int tmp) {
+    fraction upgraded_tmp;
+    *(upgraded_tmp.denominator) = *(this->denominator);
+    *(upgraded_tmp.numerator) = *(upgraded_tmp.denominator) * tmp;
+
+    *(this->numerator) = *(this->numerator) + *(upgraded_tmp.numerator);
+
+    return *this;
+}
+
 fraction & fraction::operator -= (const fraction &tmp) {
     if (*(this->denominator) == *(tmp.denominator)) {
         *(this->numerator) = *(this->numerator) - *(tmp.numerator);
@@ -82,6 +92,16 @@ fraction & fraction::operator -= (const fraction &tmp) {
     return *this;
 }
 
+fraction & fraction::operator -= (int tmp) {
+    fraction upgraded_tmp;
+    *(upgraded_tmp.denominator) = *(this->denominator);
+    *(upgraded_tmp.numerator) = *(upgraded_tmp.denominator) * tmp;
+
+    *(this->numerator) = *(this->numerator) - *(upgraded_tmp.numerator);
+
+    return *this;
+}
+
 fraction & fraction::operator *= (const fraction &tmp) {
     *(this->numerator) = *(this->numerator) * *(tmp.numerator);
     *(this->denominator) = *(this->denominator) * *(tmp.denominator);
@@ -89,9 +109,31 @@ fraction & fraction::operator *= (const fraction &tmp) {
     return *this;
 }
 
+fraction & fraction::operator *= (int tmp) {
+    fraction upgraded_tmp;
+    *(upgraded_tmp.denominator) = *(this->denominator);
+    *(upgraded_tmp.numerator) = *(upgraded_tmp.denominator) * tmp;
+
+    *(this->numerator) = *(this->numerator) * *(upgraded_tmp.numerator);
+    *(this->denominator) = *(this->denominator) * *(upgraded_tmp.denominator);
+
+    return *this;
+}
+
 fraction & fraction::operator /= (const fraction &tmp) {
     *(this->numerator) = *(this->numerator) * *(tmp.denominator);
     *(this->denominator) = *(this->denominator) * *(tmp.numerator);
+
+    return *this;
+}
+
+fraction & fraction::operator /= (int tmp) {
+    fraction upgraded_tmp;
+    *(upgraded_tmp.denominator) = *(this->denominator);
+    *(upgraded_tmp.numerator) = *(upgraded_tmp.denominator) * tmp;
+
+    *(this->numerator) = *(this->numerator) * *(upgraded_tmp.denominator);
+    *(this->denominator) = *(this->denominator) * *(upgraded_tmp.numerator);
 
     return *this;
 }
@@ -106,6 +148,16 @@ fraction & fraction::operator + (const fraction &tmp) {
     *(this->numerator) = (*(this->numerator) * *(tmp.denominator)) +
                          (*(tmp.numerator) * *(this->denominator));
     *(this->denominator) = *(this->denominator) * *(tmp.denominator);
+
+    return *this;
+}
+
+fraction & fraction::operator + (int tmp) {
+    fraction upgraded_tmp;
+    *(upgraded_tmp.denominator) = *(this->denominator);
+    *(upgraded_tmp.numerator) = *(upgraded_tmp.denominator) * tmp;
+
+    *(this->numerator) = *(this->numerator) + *(upgraded_tmp.numerator);
 
     return *this;
 }
@@ -137,6 +189,16 @@ fraction & fraction::operator - (const fraction &tmp) {
     return *this;
 }
 
+fraction & fraction::operator - (int tmp) {
+    fraction upgraded_tmp;
+    *(upgraded_tmp.denominator) = *(this->denominator);
+    *(upgraded_tmp.numerator) = *(upgraded_tmp.denominator) * tmp;
+
+    *(this->numerator) = *(this->numerator) - *(upgraded_tmp.numerator);
+
+    return *this;
+}
+
 fraction & fraction::operator -- () {
     *(this->numerator) = *(this->numerator) - *(this->denominator);
 
@@ -157,9 +219,31 @@ fraction & fraction::operator * (const fraction &tmp) {
     return *this;
 }
 
+fraction & fraction::operator * (int tmp) {
+    fraction upgraded_tmp;
+    *(upgraded_tmp.denominator) = *(this->denominator);
+    *(upgraded_tmp.numerator) = *(upgraded_tmp.denominator) * tmp;
+
+    *(this->numerator) = *(this->numerator) * *(upgraded_tmp.numerator);
+    *(this->denominator) = *(this->denominator) * *(upgraded_tmp.denominator);
+
+    return *this;
+}
+
 fraction & fraction::operator / (const fraction &tmp) {
     *(this->numerator) = *(this->numerator) * *(tmp.denominator);
     *(this->denominator) = *(this->denominator) * *(tmp.numerator);
+
+    return *this;
+}
+
+fraction & fraction::operator / (int tmp) {
+    fraction upgraded_tmp;
+    *(upgraded_tmp.denominator) = *(this->denominator);
+    *(upgraded_tmp.numerator) = *(upgraded_tmp.denominator) * tmp;
+
+    *(this->numerator) = *(this->numerator) * *(upgraded_tmp.denominator);
+    *(this->denominator) = *(this->denominator) * *(upgraded_tmp.numerator);
 
     return *this;
 }
@@ -183,6 +267,26 @@ bool operator == (const fraction &tmp1, const fraction &tmp2) {
 bool operator != (const fraction &tmp1, const fraction &tmp2) {
     return !(tmp1.numerator == tmp2.numerator &&
             tmp1.denominator == tmp2.denominator);
+}
+
+bool operator > (const fraction &tmp1, const fraction &tmp2) {
+    return (tmp1.numerator > tmp2.numerator &&
+            tmp1.denominator > tmp2.denominator);
+}
+
+bool operator >= (const fraction &tmp1, const fraction &tmp2) {
+    return (tmp1.numerator >= tmp2.numerator &&
+            tmp1.denominator >= tmp2.denominator);
+}
+
+bool operator < (const fraction &tmp1, const fraction &tmp2) {
+    return (tmp1.numerator < tmp2.numerator &&
+            tmp1.denominator < tmp2.denominator);
+}
+
+bool operator <= (const fraction &tmp1, const fraction &tmp2) {
+    return (tmp1.numerator <= tmp2.numerator &&
+            tmp1.denominator <= tmp2.denominator);
 }
 
 fraction::~fraction() {

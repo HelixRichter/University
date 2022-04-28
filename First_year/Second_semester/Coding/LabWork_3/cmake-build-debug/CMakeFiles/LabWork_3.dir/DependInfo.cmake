@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "C:/Users/Sigmund/Documents/University/First_year/Second_semester/Coding/LabWork_3/fraction.cpp" "CMakeFiles/LabWork_3.dir/fraction.cpp.obj" "gcc" "CMakeFiles/LabWork_3.dir/fraction.cpp.obj.d"
-  "C:/Users/Sigmund/Documents/University/First_year/Second_semester/Coding/LabWork_3/main.cpp" "CMakeFiles/LabWork_3.dir/main.cpp.obj" "gcc" "CMakeFiles/LabWork_3.dir/main.cpp.obj.d"
+  "C:/Users/aleks/Documents/University/First_year/Second_semester/Coding/LabWork_3/fraction.cpp" "CMakeFiles/LabWork_3.dir/fraction.cpp.obj" "gcc" "CMakeFiles/LabWork_3.dir/fraction.cpp.obj.d"
+  "C:/Users/aleks/Documents/University/First_year/Second_semester/Coding/LabWork_3/main.cpp" "CMakeFiles/LabWork_3.dir/main.cpp.obj" "gcc" "CMakeFiles/LabWork_3.dir/main.cpp.obj.d"
   )
 
 # Targets to which this target links.

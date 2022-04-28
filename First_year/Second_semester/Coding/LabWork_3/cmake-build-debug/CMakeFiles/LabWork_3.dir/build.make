@@ -43,19 +43,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = C:\Users\Sigmund\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\221.5080.224\bin\cmake\win\bin\cmake.exe
+CMAKE_COMMAND = C:\Users\aleks\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\221.5080.224\bin\cmake\win\bin\cmake.exe
 
 # The command to remove a file.
-RM = C:\Users\Sigmund\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\221.5080.224\bin\cmake\win\bin\cmake.exe -E rm -f
+RM = C:\Users\aleks\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\221.5080.224\bin\cmake\win\bin\cmake.exe -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Sigmund\Documents\University\First_year\Second_semester\Coding\LabWork_3
+CMAKE_SOURCE_DIR = C:\Users\aleks\Documents\University\First_year\Second_semester\Coding\LabWork_3
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Sigmund\Documents\University\First_year\Second_semester\Coding\LabWork_3\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\aleks\Documents\University\First_year\Second_semester\Coding\LabWork_3\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/LabWork_3.dir/depend.make
@@ -71,30 +71,30 @@ include CMakeFiles/LabWork_3.dir/flags.make
 CMakeFiles/LabWork_3.dir/main.cpp.obj: CMakeFiles/LabWork_3.dir/flags.make
 CMakeFiles/LabWork_3.dir/main.cpp.obj: ../main.cpp
 CMakeFiles/LabWork_3.dir/main.cpp.obj: CMakeFiles/LabWork_3.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Sigmund\Documents\University\First_year\Second_semester\Coding\LabWork_3\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/LabWork_3.dir/main.cpp.obj"
-	C:\Users\Sigmund\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\221.5080.224\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/LabWork_3.dir/main.cpp.obj -MF CMakeFiles\LabWork_3.dir\main.cpp.obj.d -o CMakeFiles\LabWork_3.dir\main.cpp.obj -c C:\Users\Sigmund\Documents\University\First_year\Second_semester\Coding\LabWork_3\main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\aleks\Documents\University\First_year\Second_semester\Coding\LabWork_3\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/LabWork_3.dir/main.cpp.obj"
+	C:\Users\aleks\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\221.5080.224\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/LabWork_3.dir/main.cpp.obj -MF CMakeFiles\LabWork_3.dir\main.cpp.obj.d -o CMakeFiles\LabWork_3.dir\main.cpp.obj -c C:\Users\aleks\Documents\University\First_year\Second_semester\Coding\LabWork_3\main.cpp
 
 CMakeFiles/LabWork_3.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LabWork_3.dir/main.cpp.i"
-	C:\Users\Sigmund\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\221.5080.224\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Sigmund\Documents\University\First_year\Second_semester\Coding\LabWork_3\main.cpp > CMakeFiles\LabWork_3.dir\main.cpp.i
+	C:\Users\aleks\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\221.5080.224\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\aleks\Documents\University\First_year\Second_semester\Coding\LabWork_3\main.cpp > CMakeFiles\LabWork_3.dir\main.cpp.i
 
 CMakeFiles/LabWork_3.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LabWork_3.dir/main.cpp.s"
-	C:\Users\Sigmund\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\221.5080.224\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Sigmund\Documents\University\First_year\Second_semester\Coding\LabWork_3\main.cpp -o CMakeFiles\LabWork_3.dir\main.cpp.s
+	C:\Users\aleks\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\221.5080.224\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\aleks\Documents\University\First_year\Second_semester\Coding\LabWork_3\main.cpp -o CMakeFiles\LabWork_3.dir\main.cpp.s
 
 CMakeFiles/LabWork_3.dir/fraction.cpp.obj: CMakeFiles/LabWork_3.dir/flags.make
 CMakeFiles/LabWork_3.dir/fraction.cpp.obj: ../fraction.cpp
 CMakeFiles/LabWork_3.dir/fraction.cpp.obj: CMakeFiles/LabWork_3.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Sigmund\Documents\University\First_year\Second_semester\Coding\LabWork_3\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/LabWork_3.dir/fraction.cpp.obj"
-	C:\Users\Sigmund\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\221.5080.224\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/LabWork_3.dir/fraction.cpp.obj -MF CMakeFiles\LabWork_3.dir\fraction.cpp.obj.d -o CMakeFiles\LabWork_3.dir\fraction.cpp.obj -c C:\Users\Sigmund\Documents\University\First_year\Second_semester\Coding\LabWork_3\fraction.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\aleks\Documents\University\First_year\Second_semester\Coding\LabWork_3\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/LabWork_3.dir/fraction.cpp.obj"
+	C:\Users\aleks\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\221.5080.224\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/LabWork_3.dir/fraction.cpp.obj -MF CMakeFiles\LabWork_3.dir\fraction.cpp.obj.d -o CMakeFiles\LabWork_3.dir\fraction.cpp.obj -c C:\Users\aleks\Documents\University\First_year\Second_semester\Coding\LabWork_3\fraction.cpp
 
 CMakeFiles/LabWork_3.dir/fraction.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LabWork_3.dir/fraction.cpp.i"
-	C:\Users\Sigmund\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\221.5080.224\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Sigmund\Documents\University\First_year\Second_semester\Coding\LabWork_3\fraction.cpp > CMakeFiles\LabWork_3.dir\fraction.cpp.i
+	C:\Users\aleks\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\221.5080.224\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\aleks\Documents\University\First_year\Second_semester\Coding\LabWork_3\fraction.cpp > CMakeFiles\LabWork_3.dir\fraction.cpp.i
 
 CMakeFiles/LabWork_3.dir/fraction.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LabWork_3.dir/fraction.cpp.s"
-	C:\Users\Sigmund\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\221.5080.224\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Sigmund\Documents\University\First_year\Second_semester\Coding\LabWork_3\fraction.cpp -o CMakeFiles\LabWork_3.dir\fraction.cpp.s
+	C:\Users\aleks\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\221.5080.224\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\aleks\Documents\University\First_year\Second_semester\Coding\LabWork_3\fraction.cpp -o CMakeFiles\LabWork_3.dir\fraction.cpp.s
 
 # Object files for target LabWork_3
 LabWork_3_OBJECTS = \
@@ -110,7 +110,7 @@ LabWork_3.exe: CMakeFiles/LabWork_3.dir/build.make
 LabWork_3.exe: CMakeFiles/LabWork_3.dir/linklibs.rsp
 LabWork_3.exe: CMakeFiles/LabWork_3.dir/objects1.rsp
 LabWork_3.exe: CMakeFiles/LabWork_3.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Sigmund\Documents\University\First_year\Second_semester\Coding\LabWork_3\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable LabWork_3.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\aleks\Documents\University\First_year\Second_semester\Coding\LabWork_3\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable LabWork_3.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\LabWork_3.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -122,6 +122,6 @@ CMakeFiles/LabWork_3.dir/clean:
 .PHONY : CMakeFiles/LabWork_3.dir/clean
 
 CMakeFiles/LabWork_3.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Sigmund\Documents\University\First_year\Second_semester\Coding\LabWork_3 C:\Users\Sigmund\Documents\University\First_year\Second_semester\Coding\LabWork_3 C:\Users\Sigmund\Documents\University\First_year\Second_semester\Coding\LabWork_3\cmake-build-debug C:\Users\Sigmund\Documents\University\First_year\Second_semester\Coding\LabWork_3\cmake-build-debug C:\Users\Sigmund\Documents\University\First_year\Second_semester\Coding\LabWork_3\cmake-build-debug\CMakeFiles\LabWork_3.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\aleks\Documents\University\First_year\Second_semester\Coding\LabWork_3 C:\Users\aleks\Documents\University\First_year\Second_semester\Coding\LabWork_3 C:\Users\aleks\Documents\University\First_year\Second_semester\Coding\LabWork_3\cmake-build-debug C:\Users\aleks\Documents\University\First_year\Second_semester\Coding\LabWork_3\cmake-build-debug C:\Users\aleks\Documents\University\First_year\Second_semester\Coding\LabWork_3\cmake-build-debug\CMakeFiles\LabWork_3.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/LabWork_3.dir/depend
 

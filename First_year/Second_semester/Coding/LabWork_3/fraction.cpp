@@ -46,11 +46,11 @@ fraction & fraction::operator = (const fraction &tmp) {
         return *this;
     }
 
-    delete this->numerator;
-    delete this->denominator;
+    //delete this->numerator;
+    //delete this->denominator;
 
-    this->numerator = new int;
-    this->denominator = new int;
+    //this->numerator = new int;
+    //this->denominator = new int;
 
     *(this->numerator) = *(tmp.numerator);
     *(this->denominator) = *(tmp.denominator);

@@ -18,7 +18,6 @@ public:
 
     ~fraction();
 
-    [[maybe_unused]] void simplify(const fraction &);
     [[maybe_unused]] void simplify();
 
     [[maybe_unused]] fraction & operator = (const fraction &);

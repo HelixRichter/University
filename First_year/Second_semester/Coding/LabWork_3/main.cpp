@@ -5,13 +5,14 @@ using namespace std;
 
 
 int main() {
-    fraction tmp1;
-    cout << "Enter first fraction: ";
-    cin >> tmp1;
+    fraction tmp1, tmp2;
+    cout << "[DEBUG] ENTER FRACTIONS: ";
+    cin >> tmp1 >> tmp2;
 
-    tmp1.simplify();
-    cout << "[DEBUG] SIMPLIFIED FRACTION: " << tmp1 << endl;
-//    cout << "[DEBUG] FLOATED FRACTION: " << (float) tmp1 << endl;
+    cout << "[DEBUG] FRACTION ADDING: " << tmp1 + tmp2 << endl;
+    cout << "[DEBUG] FRACTION SUBTRACTING: " << tmp1 - tmp2 << endl;
+    cout << "[DEBUG] FRACTION MULTIPLICATION: " << tmp1 * tmp2 << endl;
+    cout << "[DEBUG] FRACTION DIVIDING: " << tmp1 / tmp2 << endl;
 
     return 0;
 }

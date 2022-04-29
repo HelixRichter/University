@@ -18,6 +18,8 @@ fraction::fraction() noexcept {
 
     *(this->numerator) = num;
     *(this->denominator) = denom;
+
+    simplify();
 }
 
 [[maybe_unused]] fraction::fraction(const fraction & tmp) {
@@ -67,6 +69,8 @@ fraction & fraction::operator += (const fraction &tmp) {
                          (*(tmp.numerator) * *(this->denominator));
     *(this->denominator) = *(this->denominator) * *(tmp.denominator);
 
+    simplify();
+
     return *this;
 }
 
@@ -76,6 +80,8 @@ fraction & fraction::operator += (int tmp) {
     *(upgraded_tmp.numerator) = *(upgraded_tmp.denominator) * tmp;
 
     *(this->numerator) = *(this->numerator) + *(upgraded_tmp.numerator);
+
+    simplify();
 
     return *this;
 }
@@ -91,6 +97,8 @@ fraction & fraction::operator -= (const fraction &tmp) {
                          (*(tmp.numerator) * *(this->denominator));
     *(this->denominator) = *(this->denominator) * *(tmp.denominator);
 
+    simplify();
+
     return *this;
 }
 
@@ -100,6 +108,8 @@ fraction & fraction::operator -= (int tmp) {
     *(upgraded_tmp.numerator) = *(upgraded_tmp.denominator) * tmp;
 
     *(this->numerator) = *(this->numerator) - *(upgraded_tmp.numerator);
+
+    simplify();
 
     return *this;
 }
@@ -348,6 +358,31 @@ int fraction::get_numerator() const {
 
 int fraction::get_denominator() const {
     return *(this->denominator);
+}
+
+void fraction::simplify() {
+    if (*(this->numerator) / *(this->denominator) != 0) {
+        if (!(*(this->numerator) % *(this->denominator))) {
+            *(this->numerator) /= *(this->denominator);
+            *(this->denominator) = 1;
+        }
+    } else if (*(this->denominator) / *(this->numerator) != 0) {
+        if (!(*(this->denominator) % *(this->numerator))) {
+            *(this->denominator) /= *(this->numerator);
+            *(this->numerator) = 1;
+        }
+    } else {
+        int dividers[4] = {2, 3, 5, 7};
+
+        for (int divider : dividers) {
+            if (!(*(this->numerator) % divider) and !(*(this->denominator) % divider)) {
+                *(this->numerator) /= divider;
+                *(this->denominator) /= divider;
+
+                simplify();
+            }
+        }
+    }
 }
 
 #pragma clang diagnostic pop

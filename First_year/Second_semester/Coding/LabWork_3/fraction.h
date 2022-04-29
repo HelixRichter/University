@@ -70,6 +70,7 @@ public:
 
     [[nodiscard]] int get_numerator() const;
     [[nodiscard]] int get_denominator() const;
+    void simplify();
 };
 
 

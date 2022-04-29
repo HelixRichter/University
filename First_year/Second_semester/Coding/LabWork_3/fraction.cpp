@@ -361,43 +361,18 @@ int fraction::get_denominator() const {
 }
 
 void fraction::simplify() {
-    cout << "[DEBUG] I NEED TO FIND LOCAL DIVIDER FOR NUMERATOR AND DENOMINATOR: " << *(this->numerator) << '/' << *(this->denominator) << endl;
+//    cout << "[DEBUG] I NEED TO FIND LOCAL DIVIDER FOR NUMERATOR AND DENOMINATOR: " << *(this->numerator) << '/' << *(this->denominator) << endl;
     int dividers[4] = {2, 3, 5, 7};
 
     for (int divider : dividers) {
         if (!(*(this->numerator) % divider) and !(*(this->denominator) % divider)) {
-            cout << "[DEBUG] I FOUND IT: " << divider << endl;
+//            cout << "[DEBUG] I FOUND IT: " << divider << endl;
             *(this->numerator) /= divider;
             *(this->denominator) /= divider;
 
-            cout << "[DEBUG] FRACTION AFTER DIVIDING BY " << divider << " IS: " << *(this->numerator) << '/' << *(this->denominator) << endl;
+//            cout << "[DEBUG] FRACTION AFTER DIVIDING BY " << divider << " IS: " << *(this->numerator) << '/' << *(this->denominator) << endl;
 
             simplify();
-        }
-    }
-}
-
-[[maybe_unused]] void fraction::simplify(const fraction &tmp) {
-    if (*(tmp.numerator) / *(tmp.denominator) != 0) {
-        if (!(*(tmp.numerator) % *(tmp.denominator))) {
-            *(tmp.numerator) /= *(tmp.denominator);
-            *(tmp.denominator) = 1;
-        }
-    } else if (*(tmp.denominator) / *(tmp.numerator) != 0) {
-        if (!(*(tmp.denominator) % *(tmp.numerator))) {
-            *(tmp.denominator) /= *(tmp.numerator);
-            *(tmp.numerator) = 1;
-        }
-    } else {
-        int dividers[4] = {2, 3, 5, 7};
-
-        for (int divider : dividers) {
-            if (!(*(tmp.numerator) % divider) and !(*(tmp.denominator) % divider)) {
-                *(tmp.numerator) /= divider;
-                *(tmp.denominator) /= divider;
-
-                simplify();
-            }
         }
     }
 }

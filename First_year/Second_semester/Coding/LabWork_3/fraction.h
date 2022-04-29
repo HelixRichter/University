@@ -18,6 +18,9 @@ public:
 
     ~fraction();
 
+    [[maybe_unused]] void simplify(const fraction &);
+    [[maybe_unused]] void simplify();
+
     [[maybe_unused]] fraction & operator = (const fraction &);
 
     [[maybe_unused]] fraction & operator += (const fraction &);
@@ -64,13 +67,12 @@ public:
 
     friend fraction operator "" _fraction(const char *);
 
-    [[maybe_unused]] operator float() const;
-    [[maybe_unused]] operator double() const;
-    [[maybe_unused]] operator string() const;
+    [[maybe_unused]] explicit operator float() const;
+    [[maybe_unused]] explicit operator double() const;
+    [[maybe_unused]] explicit operator string() const;
 
     [[nodiscard]] int get_numerator() const;
     [[nodiscard]] int get_denominator() const;
-    void simplify();
 };
 
 

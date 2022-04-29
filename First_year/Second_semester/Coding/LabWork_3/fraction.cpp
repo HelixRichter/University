@@ -385,4 +385,29 @@ void fraction::simplify() {
     }
 }
 
+[[maybe_unused]] void fraction::simplify(const fraction &tmp) {
+    if (*(tmp.numerator) / *(tmp.denominator) != 0) {
+        if (!(*(tmp.numerator) % *(tmp.denominator))) {
+            *(tmp.numerator) /= *(tmp.denominator);
+            *(tmp.denominator) = 1;
+        }
+    } else if (*(tmp.denominator) / *(tmp.numerator) != 0) {
+        if (!(*(tmp.denominator) % *(tmp.numerator))) {
+            *(tmp.denominator) /= *(tmp.numerator);
+            *(tmp.numerator) = 1;
+        }
+    } else {
+        int dividers[4] = {2, 3, 5, 7};
+
+        for (int divider : dividers) {
+            if (!(*(tmp.numerator) % divider) and !(*(tmp.denominator) % divider)) {
+                *(tmp.numerator) /= divider;
+                *(tmp.denominator) /= divider;
+
+                simplify();
+            }
+        }
+    }
+}
+
 #pragma clang diagnostic pop

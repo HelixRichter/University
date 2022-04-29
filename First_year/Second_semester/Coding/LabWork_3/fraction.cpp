@@ -361,30 +361,18 @@ int fraction::get_denominator() const {
 }
 
 void fraction::simplify() {
-//    cout << "[DEBUG] STARTED SIMPLIFYING: " << *(this->numerator) << '/' << *(this->denominator) << endl;
+    cout << "[DEBUG] I NEED TO FIND LOCAL DIVIDER FOR NUMERATOR AND DENOMINATOR: " << *(this->numerator) << '/' << *(this->denominator) << endl;
+    int dividers[4] = {2, 3, 5, 7};
 
-    if (*(this->numerator) / *(this->denominator) != 0 and !(*(this->numerator) % *(this->denominator))) {
-//        cout << "[DEBUG] NUMERATOR CAN BE DIVIDED BY DENOMINATOR: " << *(this->numerator) << endl;
-        *(this->numerator) /= *(this->denominator);
-        *(this->denominator) = 1;
-    } else if (*(this->denominator) / *(this->numerator) != 0 and !(*(this->denominator) % *(this->numerator))) {
-//        cout << "[DEBUG] DENOMINATOR CAN BE DIVIDED BY NUMERATOR: " << *(this->numerator) << endl;
-        *(this->denominator) /= *(this->numerator);
-        *(this->numerator) = 1;
-    } else {
-//        cout << "[DEBUG] I NEED TO FIND LOCAL DIVIDER FOR NUMERATOR AND DENOMINATOR: " << *(this->numerator) << '/' << *(this->denominator) << endl;
-        int dividers[4] = {2, 3, 5, 7};
+    for (int divider : dividers) {
+        if (!(*(this->numerator) % divider) and !(*(this->denominator) % divider)) {
+            cout << "[DEBUG] I FOUND IT: " << divider << endl;
+            *(this->numerator) /= divider;
+            *(this->denominator) /= divider;
 
-        for (int divider : dividers) {
-            if (!(*(this->numerator) % divider) and !(*(this->denominator) % divider)) {
-//                cout << "[DEBUG] I FOUND IT: " << divider << endl;
-                *(this->numerator) /= divider;
-                *(this->denominator) /= divider;
+            cout << "[DEBUG] FRACTION AFTER DIVIDING BY " << divider << " IS: " << *(this->numerator) << '/' << *(this->denominator) << endl;
 
-//                cout << "[DEBUG] FRACTION AFTER DIVIDING BY " << divider << " IS: " << *(this->numerator) << '/' << *(this->denominator) << endl;
-
-                simplify();
-            }
+            simplify();
         }
     }
 }

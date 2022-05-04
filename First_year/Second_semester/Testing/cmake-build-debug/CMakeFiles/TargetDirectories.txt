@@ -1,3 +1,0 @@
-D:/CLionProjectFolder/University/First_year/Second_semester/Testing/cmake-build-debug/CMakeFiles/Testing.dir
-D:/CLionProjectFolder/University/First_year/Second_semester/Testing/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/CLionProjectFolder/University/First_year/Second_semester/Testing/cmake-build-debug/CMakeFiles/rebuild_cache.dir

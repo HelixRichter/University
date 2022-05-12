@@ -22,38 +22,44 @@ public:
 
     [[maybe_unused]] fraction & operator = (const fraction &);
 
-    [[maybe_unused]] const fraction & operator += (const fraction &);
-    [[maybe_unused]] const fraction & operator += (int);
+    [[maybe_unused]] fraction & operator += (const fraction &);
+    [[maybe_unused]] fraction & operator += (int);
 
-    [[maybe_unused]] const fraction & operator -= (const fraction &);
-    [[maybe_unused]] const fraction & operator -= (int);
+    [[maybe_unused]] fraction & operator -= (const fraction &);
+    [[maybe_unused]] fraction & operator -= (int);
 
-    [[maybe_unused]] const fraction & operator *= (const fraction &);
-    [[maybe_unused]] const fraction & operator *= (int);
+    [[maybe_unused]] fraction & operator *= (const fraction &);
+    [[maybe_unused]] fraction & operator *= (int);
 
-    [[maybe_unused]] const fraction & operator /= (const fraction &);
-    [[maybe_unused]] const fraction & operator /= (int);
+    [[maybe_unused]] fraction & operator /= (const fraction &);
+    [[maybe_unused]] fraction & operator /= (int);
 
-    [[maybe_unused]] const fraction & operator ++ ();
-    [[maybe_unused]] const fraction & operator + (const fraction &);
+    [[maybe_unused]] fraction & operator ++ ();
+    [[maybe_unused]] fraction & operator + ();
+    [[maybe_unused]] fraction & operator + (const fraction &);
 
-    [[maybe_unused]] const fraction & operator + (int);
+    [[maybe_unused]] fraction & operator + (int);
     [[maybe_unused]] const fraction operator ++ (int);
+    friend fraction & operator + (int, fraction);
 
-    [[maybe_unused]] const fraction & operator -- ();
-    [[maybe_unused]] const fraction & operator - (const fraction &);
+    [[maybe_unused]] fraction & operator -- ();
+    [[maybe_unused]] fraction & operator - ();
+    [[maybe_unused]] fraction & operator - (const fraction &);
 
-    [[maybe_unused]] const fraction & operator - (int);
+    [[maybe_unused]] fraction & operator - (int);
     [[maybe_unused]] const fraction operator -- (int);
+    friend fraction & operator - (int, fraction);
 
-    [[maybe_unused]] const fraction & operator * (const fraction &);
-    [[maybe_unused]] const fraction & operator * (int);
+    [[maybe_unused]] fraction & operator * (const fraction &);
+    [[maybe_unused]] fraction & operator * (int);
+    friend fraction & operator * (int, fraction &);
 
-    [[maybe_unused]] const fraction & operator / (const fraction &);
-    [[maybe_unused]] const fraction & operator / (int);
+    [[maybe_unused]] fraction & operator / (const fraction &);
+    [[maybe_unused]] fraction & operator / (int);
+    friend fraction & operator / (int, fraction &);
 
     friend ostream & operator << (ostream &, const fraction &);
-    friend istream & operator >> (istream &, fraction &);
+    friend istream & operator >> (istream &, const fraction &);
 
     friend bool operator == (const fraction &, const fraction &);
     friend bool operator != (const fraction &, const fraction &);

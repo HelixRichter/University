@@ -45,11 +45,11 @@ void Input_to_List(pList& p) {
 
             Input_to_List(p->next);
         } else if (c == ')') {
-            p = NULL;
+            p = nullptr;
         }
 
     } else {
-        p = NULL;
+        p = nullptr;
     }
 
 }
@@ -69,7 +69,7 @@ Tree* construct(Tree* p1, Inf i, Tree* p2) {
 pList Head(pList p) {
     pList head = p->level;
     p->level = head->next;
-    head->next = NULL;
+    head->next = nullptr;
 
     return head;
 }
@@ -79,7 +79,7 @@ pTree input_ltt(pList p) {
     pTree q;
 
     if (p->R == 1) {
-        q = construct(NULL, p->atom, NULL);
+        q = construct(nullptr, p->atom, nullptr);
     } else {
         q = construct(input_ltt(Head(p)), Head(p)->atom, input_ltt(Head(p)));
     }
@@ -99,8 +99,8 @@ pTree input_ctt() {
 
 
 void lkp(pTree p) {
-    if (p != NULL) {
-        if (p->left != NULL) {
+    if (p != nullptr) {
+        if (p->left != nullptr) {
             cout << '(';
         }
 
@@ -108,7 +108,7 @@ void lkp(pTree p) {
         cout << (p->root);
 
         lkp(p->right);
-        if (p->right != NULL) {
+        if (p->right != nullptr) {
             cout << ')';
         }
     }
@@ -116,7 +116,7 @@ void lkp(pTree p) {
 
 
 void lpk(pTree p) {
-    if (p != NULL) {
+    if (p != nullptr) {
         lpk(p->left);
         lpk(p->right);
 

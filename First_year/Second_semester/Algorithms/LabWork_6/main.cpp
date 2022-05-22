@@ -1,190 +1,143 @@
 #include <iostream>
-#include <vector>
-#include <sstream>
-
 using namespace std;
 
+char* str = new char[100];
 
-char *str = new char[100];
 struct List;
-struct Tree;
-
-List *headl;
-Tree *headr;
-
+typedef List* pList;
 struct List {
-    List *next;
+    pList next;
     int R;
     union {
-        List* level;
+        pList level;
         char atom;
     };
 };
 
+typedef char Inf;
+struct Tree;
+typedef Tree* pTree;
 struct Tree {
-    char root;
-    Tree* left;
-    Tree* right;
+    Inf root;
+    pTree left;
+    pTree right;
 };
 
 
-void Input_to_List(List*& p) {
-    char symbol;
-    symbol = str[0];
-    str = str + 1;
+void Input_to_List(pList& p) {
 
-    if (symbol != 0) {
-        if (symbol == '(') {
+    char c;
+    c = str[0];
+    str += 1;
+    if (c != 0) {
+
+        if (c == '(') {
             p = new List;
             p->R = 0;
+
             Input_to_List(p->level);
             Input_to_List(p->next);
-        } else if ((symbol >= '0' && symbol <= '9') || (symbol == '+') || (symbol == '-') || (symbol == '*') || (symbol == '/')) {
+        } else if ((('a' <= c) && (c <= 'z')) || (c == '+') || (c == '-') || (c == '*') || (c == '/')) {
             p = new List;
+
             p->R = 1;
-            p->atom = symbol;
+            p->atom = c;
+
             Input_to_List(p->next);
-        } else if (symbol == ')') {
-            p = nullptr;
+        } else if (c == ')') {
+            p = NULL;
         }
+
     } else {
-        p = nullptr;
-    }
-}
-
-
-void Print_of_List(List *p) {
-    List* q;
-    if (p != nullptr) {
-        if (p->R == 1) {
-            cout << p->atom;
-        } else {
-            cout << '(';
-
-            q = p->level;
-            while (q != nullptr) {
-                Print_of_List(q);
-                q = q->next;
-            }
-
-            cout << ')';
-        }
-    }
-}
-
-
-void binary_tree(Tree *t) {
-    if (t != NULL) {
-        if (t->left != NULL) {
-            cout << '(';
-        }
-
-        binary_tree(t->left);
-        cout << t->root;
-        binary_tree(t->right);
-
-        if (t->right != NULL) {
-            cout << ')';
-        }
-    }
-}
-
-
-string str3, tmp;
-string reverse_polish_entry(Tree *t) {
-    if (t != NULL) {
-        reverse_polish_entry(t->left);
-        reverse_polish_entry(t->right);
-        stringstream strstream;
-        strstream << t->root;
-        strstream >> tmp;
-        str3 += tmp;
+        p = NULL;
     }
 
-    return str3;
 }
 
 
-Tree* constructionTree(Tree *t1, char x, Tree *t2) {
-    Tree *t = new Tree;
-    t->root = x;
-    t->left = t1;
-    t->right = t2;
+Tree* construct(Tree* p1, Inf i, Tree* p2) {
+    Tree* p = new Tree;
 
-    return t;
+    p->root = i;
+    p->left = p2;
+    p->right = p1;
+
+    return p;
 }
 
 
-Tree* list_to_tree(List *p) {
-    Tree *t = NULL;
+pList Head(pList p) {
+    pList head = p->level;
+    p->level = head->next;
+    head->next = NULL;
 
+    return head;
+}
+
+
+pTree input_ltt(pList p) {
+    pTree q;
+
+    if (p->R == 1) {
+        q = construct(NULL, p->atom, NULL);
+    } else {
+        q = construct(input_ltt(Head(p)), Head(p)->atom, input_ltt(Head(p)));
+    }
+
+    return q;
+}
+
+
+pTree input_ctt() {
+    pList a;
+
+    Input_to_List(a);
+    pTree b = input_ltt(a);
+
+    return b;
+}
+
+
+void lkp(pTree p) {
     if (p != NULL) {
-        if (p->R == 0) {
-            t = constructionTree(list_to_tree(p->level), p->level->next->atom, list_to_tree(p->level->next->next));
-        } else {
-            t = constructionTree(NULL, p->atom, NULL);
+        if (p->left != NULL) {
+            cout << '(';
+        }
+
+        lkp(p->left);
+        cout << (p->root);
+
+        lkp(p->right);
+        if (p->right != NULL) {
+            cout << ')';
         }
     }
-
-    return t;
 }
 
 
-int calculate(string s_str) {
-    vector<int> val_vect;
+void lpk(pTree p) {
+    if (p != NULL) {
+        lpk(p->left);
+        lpk(p->right);
 
-    for (int i = 0; i < s_str.size(); i++) {
-        if (isdigit(s_str[i])) {
-            val_vect.push_back((int) (s_str[i] - '0'));
-        } else {
-            int el = val_vect[val_vect.size() - 1];
-            val_vect.pop_back();
-
-            switch (s_str[i]) {
-                case '+':
-                    val_vect[val_vect.size() - 1] += el;
-                    break;
-                case '-':
-                    val_vect[val_vect.size() - 1] -= el;
-                    break;
-                case '*':
-                    val_vect[val_vect.size() - 1] *= el;
-                    break;
-                case '/':
-                    val_vect[val_vect.size() - 1] /= el;
-                    break;
-                default:
-                    cout << "Error" << endl;
-            }
-        }
+        cout << (p->root);
     }
-
-    return val_vect[0];
 }
 
 
 int main() {
-    List* p;
-    string str1;
-    Tree* p1;
+    pList f;
+    scanf("%s", str);
+    pTree a = input_ctt();
 
-    scanf("%s", &str);
-
-    Input_to_List(p);
+    cout << "LPK, keyboard to tree: ";
+    lpk(a);
     cout << endl;
 
-    cout << "list: ";
-    Print_of_List(p);
+    cout << "LKP, keyboard to tree: ";
+    lkp(a);
     cout << endl;
-
-    Tree* t2 = list_to_tree(p);
-    cout << "Binary tree: ";
-    binary_tree(t2);
-    cout << endl;
-
-    cout << "Reverse polish entry: " << reverse_polish_entry(t2) << endl;
-
-    cout << "Result: " << calculate(str3) << endl;
 
     return 0;
+
 }

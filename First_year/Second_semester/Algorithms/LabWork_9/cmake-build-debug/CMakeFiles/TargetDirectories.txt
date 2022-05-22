@@ -1,3 +1,0 @@
-C:/Users/aleks/Documents/University/First_year/Second_semester/Algorithms/LabWork_9/cmake-build-debug/CMakeFiles/LabWork_9.dir
-C:/Users/aleks/Documents/University/First_year/Second_semester/Algorithms/LabWork_9/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/aleks/Documents/University/First_year/Second_semester/Algorithms/LabWork_9/cmake-build-debug/CMakeFiles/rebuild_cache.dir

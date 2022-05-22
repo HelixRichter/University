@@ -1,7 +1,0 @@
-*
-*/
-!*.cpp
-!*.c
-!*.h
-!cmake-build-debug/config
-!.gitignore

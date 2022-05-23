@@ -18,21 +18,21 @@ public:
      * [ПРИНИМАЕТ] 2-ой элемент: указатель на конец массива.
     */
 
-    [[maybe_unused]] polynomial(int *expression_start, int *expression_end);
+    [[maybe_unused]] polynomial(int *expression_start, const int *expression_end);
 
     /* Конструктор с параметром в виде float-С-массива.
      * [ПРИНИМАЕТ] 1-ый элемент: указатель на начало массива;
      * [ПРИНИМАЕТ] 2-ой элемент: указатель на конец массива.
     */
 
-    [[maybe_unused]] polynomial(float *expression_start, float *expression_end);
+    [[maybe_unused]] polynomial(float *expression_start, const float *expression_end);
 
     /* Конструктор с параметром в виде double-С-массива.
      * [ПРИНИМАЕТ] 1-ый элемент: указатель на начало массива;
      * [ПРИНИМАЕТ] 2-ой элемент: указатель на конец массива.
     */
 
-    [[maybe_unused]] polynomial(double *expression_start, double *expression_end);
+    [[maybe_unused]] polynomial(double *expression_start, const double *expression_end);
 
     // Конструктор с параметром в виде double-массива со списком инициализаторов initializer_list.
     [[maybe_unused]] polynomial(const std::initializer_list <double> & expression);
@@ -41,7 +41,7 @@ public:
     [[maybe_unused]] polynomial(const polynomial &expression_temp);
 
     // Конструктор перемещения значения объекта-многочлена.
-    [[maybe_unused]] polynomial(const polynomial &&expression_temp);
+    [[maybe_unused]] polynomial(const polynomial &&expression_temp) noexcept ;
 
     ~polynomial();
 
@@ -51,10 +51,10 @@ public:
      * [ВОЗВРАЩАЕТ]: значение элемента double-массива.
     */
 
-    double & operator [] (const int index);
+    double & operator [] (int index);
 
     // Перегруженный оператор получения значения элемента {vector} массива - объекта-многочлена.
-    [[maybe_unused]] double at(int index) const;
+    [[maybe_unused]] [[nodiscard]] double at(int index) const;
 
     /* Перегруженный оператор вывода.
      * [ПРИНИМАЕТ] 1-ый элемент: ссылка на объект {cout};
@@ -69,7 +69,7 @@ public:
      * [ВОЗВРАЩАЕТ]: {STRING} арифметическое выражение.
     */
 
-    operator std::string() const;
+    explicit operator std::string() const;
 
     /* Решение многочлена по примеру: 10x^(3) - 5x^(2) + 17x - 21
      * Множитель {x} - значение элемента vector-массива;
@@ -79,7 +79,7 @@ public:
      * [ВОЗВРАЩАЕТ]: значение типа double, являющееся ответом выражения.
     */
 
-    [[maybe_unused]] double polynomial_solution(double x) const;
+    [[maybe_unused]] [[nodiscard]] double polynomial_solution(double x) const;
 
     /* Перегруженный оператор присваивания.
      * [ПРИНИМАЕТ]: объект-многочлен, чьё значение присваивается;

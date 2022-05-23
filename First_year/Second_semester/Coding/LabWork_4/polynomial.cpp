@@ -6,19 +6,19 @@ polynomial::polynomial() {
     Polynomial.push_back(0);
 }
 
-[[maybe_unused]] polynomial::polynomial(int *expression_start, int *expression_end) {
+[[maybe_unused]] polynomial::polynomial(int *expression_start, const int *expression_end) {
     for (int *i {expression_start}; i != expression_end; i++) {
         Polynomial.push_back(*(i));
     }
 }
 
-[[maybe_unused]] polynomial::polynomial(float *expression_start, float *expression_end) {
+[[maybe_unused]] polynomial::polynomial(float *expression_start, const float *expression_end) {
     for (float *i {expression_start}; i != expression_end; i++) {
         Polynomial.push_back(*(i));
     }
 }
 
-[[maybe_unused]] polynomial::polynomial(double *expression_start, double *expression_end) {
+[[maybe_unused]] polynomial::polynomial(double *expression_start, const double *expression_end) {
     for (double *i {expression_start}; i != expression_end; i++) {
         Polynomial.push_back(*(i));
     }
@@ -34,8 +34,8 @@ polynomial::polynomial() {
     Polynomial = expression_temp.Polynomial;
 }
 
-[[maybe_unused]] polynomial::polynomial(const polynomial &&expression_temp) {
-    Polynomial = std::move(expression_temp.Polynomial);
+[[maybe_unused]] polynomial::polynomial(const polynomial &&expression_temp) noexcept {
+    Polynomial = expression_temp.Polynomial;
 }
 
 polynomial::~polynomial() {
@@ -65,11 +65,7 @@ double & polynomial::operator [] (int index) {
     return Polynomial.at(index);
 }
 
-polynomial & polynomial::operator = (const polynomial &expression_temp) {
-    Polynomial = expression_temp.Polynomial;
-
-    return *this;
-}
+polynomial & polynomial::operator = (const polynomial &expression_temp) = default;
 
 bool operator == (const polynomial &expression_temp_1, const polynomial &expression_temp_2) {
     if (expression_temp_1.Polynomial.size() == expression_temp_2.Polynomial.size()) {
@@ -210,8 +206,8 @@ polynomial & polynomial::operator - () {
     static polynomial static_negative_result;
     static_negative_result.Polynomial = Polynomial;
 
-    for (int i = 0; i < static_negative_result.Polynomial.size(); i++) {
-        static_negative_result.Polynomial.at(i) *= -1;
+    for (double & i : static_negative_result.Polynomial) {
+        i *= -1;
     }
 
     return static_negative_result;

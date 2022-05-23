@@ -41,7 +41,7 @@ public:
     [[maybe_unused]] polynomial(const polynomial &expression_temp);
 
     // Конструктор перемещения значения объекта-многочлена.
-    [[maybe_unused]] polynomial(const polynomial &&expression_temp) noexcept ;
+    [[maybe_unused]] polynomial(polynomial &&expression_temp) noexcept ;
 
     ~polynomial();
 
@@ -52,6 +52,7 @@ public:
     */
 
     double & operator [] (int index);
+    double operator [] (int index) const;
 
     // Перегруженный оператор получения значения элемента {vector} массива - объекта-многочлена.
     [[maybe_unused]] [[nodiscard]] double at(int index) const;
@@ -140,7 +141,7 @@ public:
     polynomial & operator %= (const polynomial &expression_temp);
 
     // Перегруженный оператор унарного минуса для объекта-многочлена.
-    polynomial & operator - ();
+    polynomial & operator - () const;
 
 
     // Перегруженный оператор унарного плюса для объекта-многочлена.

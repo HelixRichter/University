@@ -34,7 +34,7 @@ polynomial::polynomial() {
     Polynomial = expression_temp.Polynomial;
 }
 
-[[maybe_unused]] polynomial::polynomial(const polynomial &&expression_temp) noexcept {
+[[maybe_unused]] polynomial::polynomial(polynomial &&expression_temp) noexcept {
     Polynomial = expression_temp.Polynomial;
 }
 
@@ -59,6 +59,10 @@ double & polynomial::operator [] (int index) {
     } else {
         return Polynomial.at(index);
     }
+}
+
+double polynomial::operator [] (int index) const{
+    return Polynomial[index];
 }
 
 [[maybe_unused]] double polynomial::at(int index) const {
@@ -202,7 +206,7 @@ polynomial operator - (const polynomial &expression_temp_1, const polynomial &ex
     return result;
 }
 
-polynomial & polynomial::operator - () {
+polynomial & polynomial::operator - () const {
     static polynomial static_negative_result;
     static_negative_result.Polynomial = Polynomial;
 

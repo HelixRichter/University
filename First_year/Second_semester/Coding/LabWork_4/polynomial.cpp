@@ -392,9 +392,11 @@ polynomial::operator std::string() const {
         }
 
     }
+
     if (number_null) {
         string_expression.append("0 = 0");
     }
+
     else {
         string_expression.append(" = 0");
     }

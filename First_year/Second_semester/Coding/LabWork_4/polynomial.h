@@ -63,6 +63,9 @@ public:
 
     friend std::ostream & operator << (std::ostream &out, const polynomial &expression_temp);
 
+    // Перегруженный оператор приведения vector-массива в string.
+    operator std::string() const;
+
     /* Решение многочлена по примеру: 10x^(3) - 5x^(2) + 17x - 21
      * Множитель {x} - значение элемента vector-массива;
      * Степень {x} - индекс элемента vector-массива.

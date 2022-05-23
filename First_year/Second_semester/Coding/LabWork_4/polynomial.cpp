@@ -65,11 +65,6 @@ double & polynomial::operator [] (int index) {
     return Polynomial.at(index);
 }
 
-//std::ostream & operator << (std::ostream & out, const polynomial & expression_temp) {
-//    std::string string_polynomial = std::string(expression_temp.Polynomial);
-//    return out << string_polynomial;
-//}
-
 polynomial & polynomial::operator = (const polynomial &expression_temp) {
     Polynomial = expression_temp.Polynomial;
 
@@ -134,8 +129,8 @@ polynomial operator + (const polynomial &expression_temp_1, const polynomial &ex
         result = expression_temp_1;
 
         for (int i = 0; i < expression_temp_1.Polynomial.size(); i++) {
-            std::cout << "[DEBUG] WORK WITH " << expression_temp_1.Polynomial.at(i) << " AND "
-                      << expression_temp_2.Polynomial.at(i) << ". ARRAY SIZE: " << result.Polynomial.size() << std::endl;
+//            std::cout << "[DEBUG] WORK WITH " << expression_temp_1.Polynomial.at(i) << " AND "
+//                      << expression_temp_2.Polynomial.at(i) << ". ARRAY SIZE: " << result.Polynomial.size() << std::endl;
             result.Polynomial.at(i) = expression_temp_1.Polynomial.at(i) + expression_temp_2.Polynomial.at(i);
         }
 
@@ -348,9 +343,61 @@ polynomial operator % (const polynomial &expression_temp_1, const polynomial &ex
 }
 
 std::ostream & operator << (std::ostream &out, const polynomial &expression_temp) {
-    for (int i = 0; i < expression_temp.Polynomial.size(); i++) {
-        std::cout << expression_temp.Polynomial.at(i) << " ";
+    std::string string_expression = (std::string) expression_temp;
+
+    return out << string_expression;
+}
+
+polynomial::operator std::string() const {
+    std::string string_expression;
+    std::string string_number;
+    bool number_null = true;
+
+    for(int i = Polynomial.size() - 1; i >= 0; i--) {
+
+        string_number = std::to_string(abs(Polynomial[i]));
+        if (string_number[string_number.size() - 1] == '0') {
+
+            for (size_t j = string_number.size() - 1; string_number[j] == '0'; j--) {
+                string_number.erase(j, 1);
+            }
+
+            if (string_number[string_number.size() - 1] == '.')
+                string_number.erase(string_number.size()-1, 1);
+
+        }
+
+        if (string_number != "0") {
+
+            if ((Polynomial[i] > 0) && (!number_null)) {
+                string_expression.append(" + ");
+            }
+
+            if (Polynomial[i] < 0) {
+                string_expression.append(" - ");
+            }
+
+            string_expression.append(string_number);
+            if(i != 0) {
+                if (i == 1) {
+                    string_expression.append("x");
+                } else {
+                    string_expression.append("x^");
+                    string_expression.append(std::to_string(i));
+                }
+            }
+
+            number_null = false;
+
+        }
+
+    }
+    if (number_null) {
+        string_expression.append("0 = 0");
+    }
+    else {
+        string_expression.append(" = 0");
     }
 
-    return out;
+    return string_expression;
 }

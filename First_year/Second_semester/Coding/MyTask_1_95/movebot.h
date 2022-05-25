@@ -1,20 +1,24 @@
-#ifndef MYTASK_1_95_MOVEBOT_H
-#define MYTASK_1_95_MOVEBOT_H
+#ifndef NEWZADACHA1_ROBOT_H
+#define NEWZADACHA1_ROBOT_H
 
 
-class bot {
+class bot{
 private:
-    char x_position;
-    char y_position;
-public:
-    bot();
-    bot(char, char);
-    bot(bot &);
-    bot(bot &&);
+    int x_position {};
+    int y_position {};
 
-    void switch_to();
-    void turn_left();
-    void turn_right();
+    char orientation {};
+    char steps {};
+
+public:
+    bot() noexcept;
+    bot(int, int, char);
+    bot(const bot &);
+    bot(bot &&) noexcept;
+
+    void move();
+    void right();
+    void left();
 };
 
 

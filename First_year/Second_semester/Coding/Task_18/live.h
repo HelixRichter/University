@@ -7,9 +7,16 @@
 class live {
 
 private:
-    bool alive;
-    int rows, columns;
-    std::vector < std::vector <bool> > universe;
+    char phase;
+
+    struct entity {
+        bool alive;
+        bool visible;
+    };
+
+    entity right;
+    int rows, columns, generation;
+    std::vector < std::vector <entity> > universe;
 
 public:
     live();
@@ -21,8 +28,11 @@ public:
     [[maybe_unused]] live(live &&);
 
 
+    [[maybe_unused]] void birth();
 
+    [[maybe_unused]] void death();
 
+    int * circulation();
 
     friend std::ostream & operator << (std::ostream &out, const live &temporary_out);
 

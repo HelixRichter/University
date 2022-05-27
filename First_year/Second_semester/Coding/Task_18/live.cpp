@@ -7,6 +7,7 @@ live::live() {
 
     rows = rand();
     columns = rand();
+    generation = 0;
 
     for (int i = 0; i < rows; i++) {
 
@@ -26,6 +27,8 @@ live::live() {
 }
 
 [[maybe_unused]] live::live(int rows_temp, int columns_temp) : rows {rows_temp}, columns {columns_temp} {
+
+    generation = 0;
 
     for (int i = 0; i < rows; i++) {
 
@@ -49,69 +52,423 @@ live::live() {
 [[maybe_unused]] live::live(live &&) = default;
 
 
-void live::birth() {
+[[maybe_unused]] void live::cycle() {
 
-//    for (int i = 0; i < rows; i++) {
-//
-//        for (int j = 0; j < columns; j++) {
-//
-//            if ()
-//
-//        }
-//
-//    }
+    cout << "[DEBUG] BIRTH:" << endl;
+    birth();
+    cout << "--------------" << endl;
+
+    cout << "[DEBUG] DEATH:" << endl;
+    death();
+    cout << "--------------" << endl;
+
+    cout << "[DEBUG] RESULT" << endl;
+
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < columns; j++) {
+            universe[i][j].visible = true;
+        }
+    }
+
+    generation++;
 
 }
 
-int * live::circulation() {
-
-    int result[2];
-    int current_row = 0;
-    int current_column = 0;
+[[maybe_unused]] void live::birth() {
 
     for (int i = 0; i < rows; i++) {
 
-        if (!current_row) {
+        for (int j = 0; j < columns; j++) {
 
-            for (int j = 0; j < columns; j++) {
+            if ( !universe[i][j].alive ) {
 
-                if (!current_column) {
-
-                    if (!universe[i][j].alive) {
-
-                        if (universe[i][j + 1].alive && universe[i + 1][j].alive && universe[i + 1][j + 1].alive) {
-
-                            universe[i][j].alive = true;
-                            universe[i][j].visible = false;
-
-                        }
-
-                    }
-
-                } else if (current_column != (columns - 1)) {
-
-                    if (!universe[i][j].alive) {
-
-                        if (universe[i][j + 1].alive && universe[i + 1][j].alive && universe[i + 1][j + 1].alive) {
-
-                            universe[i][j].alive = true;
-                            universe[i][j].visible = false;
-
-                        }
-
-                    }
-
+                int *temp = analysis(i, j);
+                if ( temp[0] == 3 ) {
+                    universe[i][j].alive = true;
+                    universe[i][j].visible = false;
                 }
-
-                current_column++;
 
             }
 
         }
 
-        current_row++;
+    }
+
+}
+
+void live::death() {
+
+    for (int i = 0; i < rows; i++) {
+
+        for (int j = 0; j < columns; j++) {
+
+            if (universe[i][j].alive) {
+
+                int *temp = analysis(i, j);
+                if (temp[0] == 2 or temp[0] == 3) {
+                    continue;
+                } else {
+                    universe[i][j].alive = false;
+                }
+
+            }
+
+        }
 
     }
+
+}
+
+[[maybe_unused]] int * live::analysis(int row_index, int column_index) {
+
+    /*  Счётчик живых и мёртвых клеток в виде int-массива.
+     *  [ЭЛЕМЕНТ ПО ИНДЕКСУ 0] - количество живых клеток вокруг изучаемой;
+     *  [ЭЛЕМЕНТ ПО ИНДЕКСУ 1] - количество мёртвых клеток вокруг изучаемой.
+     */
+
+    static int count[2] {0, 0};
+
+    if (!row_index && !column_index) {
+
+        if ( universe[row_index + 1][column_index].alive ) {
+            if ( universe[row_index + 1][column_index].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index][column_index + 1].alive ) {
+            if ( universe[row_index][column_index + 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index + 1][column_index + 1].alive ) {
+            if ( universe[row_index + 1][column_index + 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+    } else if ( !row_index && column_index == (columns - 1) ) {
+
+        if ( universe[row_index][column_index - 1].alive ) {
+            if ( universe[row_index][column_index - 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index + 1][column_index].alive ) {
+            if ( universe[row_index + 1][column_index].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index + 1][column_index - 1].alive ) {
+            if ( universe[row_index + 1][column_index - 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+    } else if ( row_index == (rows - 1) && !column_index ) {
+
+        if ( universe[row_index - 1][column_index].alive ) {
+            if ( universe[row_index - 1][column_index].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index][column_index + 1].alive ) {
+            if ( universe[row_index][column_index + 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index - 1][column_index + 1].alive ) {
+            if ( universe[row_index - 1][column_index + 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+    } else if ( row_index == (rows - 1) && column_index == (columns - 1) ) {
+
+        if ( universe[row_index][column_index - 1].alive ) {
+            if ( universe[row_index][column_index - 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index - 1][column_index].alive ) {
+            if ( universe[row_index - 1][column_index].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index - 1][column_index - 1].alive ) {
+            if ( universe[row_index - 1][column_index - 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+    } else if ( !row_index ) {
+
+        if ( universe[row_index][column_index - 1].alive ) {
+            if ( universe[row_index][column_index - 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index][column_index + 1].alive ) {
+            if ( universe[row_index][column_index + 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index + 1][column_index - 1].alive ) {
+            if ( universe[row_index][column_index + 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index + 1][column_index].alive ) {
+            if ( universe[row_index + 1][column_index].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index + 1][column_index + 1].alive ) {
+            if ( universe[row_index + 1][column_index + 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+    } else if ( !column_index ) {
+
+        if ( universe[row_index - 1][column_index].alive ) {
+            if ( universe[row_index - 1][column_index].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index + 1][column_index].alive ) {
+            if ( universe[row_index + 1][column_index].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if (  universe[row_index][column_index + 1].alive ) {
+            if ( universe[row_index][column_index + 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index - 1][column_index + 1].alive ) {
+            if ( universe[row_index - 1][column_index + 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index + 1][column_index + 1].alive ) {
+            if ( universe[row_index + 1][column_index + 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+    } else if ( row_index == (rows - 1) ) {
+
+        if ( universe[row_index][column_index - 1].alive ) {
+            if ( universe[row_index][column_index - 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index][column_index + 1].alive ) {
+            if ( universe[row_index][column_index + 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index - 1][column_index].alive ) {
+            if ( universe[row_index - 1][column_index].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index - 1][column_index - 1].alive ) {
+            if ( universe[row_index - 1][column_index - 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index - 1][column_index + 1].alive ) {
+            if ( universe[row_index - 1][column_index + 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+    } else if ( column_index == (columns - 1) ) {
+
+        if ( universe[row_index - 1][column_index].alive ) {
+            if ( universe[row_index - 1][column_index].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index + 1][column_index].alive ) {
+            if ( universe[row_index + 1][column_index].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index - 1][column_index - 1].alive ) {
+            if ( universe[row_index - 1][column_index - 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index][column_index - 1].alive ) {
+            if ( universe[row_index][column_index - 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index + 1][column_index - 1].alive ) {
+            if ( universe[row_index + 1][column_index - 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+    } else {
+
+        if ( universe[row_index - 1][column_index - 1].alive ) {
+            if ( universe[row_index - 1][column_index - 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index - 1][column_index].alive ) {
+            if ( universe[row_index - 1][column_index].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index - 1][column_index + 1].alive ) {
+            if ( universe[row_index - 1][column_index + 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index][column_index + 1].alive ) {
+            if ( universe[row_index][column_index + 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index + 1][column_index + 1].alive ) {
+            if ( universe[row_index + 1][column_index + 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index + 1][column_index].alive ) {
+            if ( universe[row_index + 1][column_index].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index + 1][column_index - 1].alive ) {
+            if ( universe[row_index + 1][column_index - 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+        if ( universe[row_index][column_index - 1].alive ) {
+            if ( universe[row_index][column_index - 1].visible ) {
+                count[0]++;
+            }
+        } else {
+            count[1]++;
+        }
+
+    }
+
+    return count;
 
 }
 

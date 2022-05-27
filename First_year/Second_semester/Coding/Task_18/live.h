@@ -7,15 +7,13 @@
 class live {
 
 private:
-    char phase;
-
     struct entity {
         bool alive;
         bool visible;
     };
 
-    entity right;
-    int rows, columns, generation;
+    entity right {};
+    int rows {}, columns {}, generation {};
     std::vector < std::vector <entity> > universe;
 
 public:
@@ -28,11 +26,13 @@ public:
     [[maybe_unused]] live(live &&);
 
 
+    [[maybe_unused]] void cycle();
+
     [[maybe_unused]] void birth();
 
     [[maybe_unused]] void death();
 
-    int * circulation();
+    [[maybe_unused]] int * analysis(int row_index, int column_index);
 
     friend std::ostream & operator << (std::ostream &out, const live &temporary_out);
 

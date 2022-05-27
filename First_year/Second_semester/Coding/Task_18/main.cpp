@@ -3,13 +3,14 @@
 
 int main() {
 
-    live example {6, 4};
+    live example {6, 6};
     std::cout << example << std::endl << std::endl;
 
-    live test = example;
-    std::cout << test << std::endl;
+    example.cycle();
+    std::cout << example << std::endl << std::endl;
 
-
+    example.cycle();
+    std::cout << example << std::endl << std::endl;
 
     return 0;
 

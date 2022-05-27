@@ -15,21 +15,14 @@ bot::bot(bot &&tmp) noexcept = default;
 
 void bot::move() {
 
-    switch (orientation) {
-
-        case 'N':
-            y_position++;
-            break;
-        case 'E':
-            x_position++;
-            break;
-        case 'S':
-            y_position--;
-            break;
-        case 'W':
-            x_position--;
-            break;
-
+    if (orientation == 'N') {
+        y_position++;
+    } else if (orientation == 'E') {
+        x_position++;
+    } else if (orientation == 'S') {
+        y_position--;
+    } else {
+        x_position--;
     }
 
     steps++;
@@ -49,21 +42,14 @@ void bot::move() {
 
 void bot::right() {
 
-    switch (orientation) {
-
-        case 'N':
-            orientation = 'E';
-            break;
-        case 'E':
-            orientation = 'S';
-            break;
-        case 'S':
-            orientation = 'W';
-            break;
-        case 'W':
-            orientation = 'N';
-            break;
-
+    if (orientation == 'N') {
+        orientation = 'E';
+    } else if (orientation == 'E') {
+        orientation = 'S';
+    } else if (orientation == 'S') {
+        orientation = 'W';
+    } else if (orientation == 'W') {
+        orientation = 'N';
     }
 
 //    std::cout << "[DEBUG] [RIGHT] POSITION: " << x_position << ", " << y_position << ", " << orientation << std::endl
@@ -74,21 +60,14 @@ void bot::right() {
 
 void bot::left() {
 
-    switch (orientation) {
-
-        case 'N':
-            orientation = 'W';
-            break;
-        case 'E':
-            orientation = 'N';
-            break;
-        case 'S':
-            orientation = 'E';
-            break;
-        case 'W':
-            orientation = 'S';
-            break;
-
+    if (orientation == 'N') {
+        orientation = 'W';
+    } else if (orientation == 'E') {
+        orientation = 'N';
+    } else if (orientation == 'S') {
+        orientation = 'E';
+    } else if (orientation == 'W') {
+        orientation = 'S';
     }
 
 //    std::cout << "[DEBUG] [LEFT] POSITION: " << x_position << ", " << y_position << ", " << orientation << std::endl

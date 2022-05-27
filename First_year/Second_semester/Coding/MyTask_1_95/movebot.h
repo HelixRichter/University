@@ -1,8 +1,8 @@
-#ifndef NEWZADACHA1_ROBOT_H
-#define NEWZADACHA1_ROBOT_H
+#ifndef BOT_H
+#define BOT_H
 
 
-class bot{
+class bot {
 private:
     int x_position {};
     int y_position {};

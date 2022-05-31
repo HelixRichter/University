@@ -54,15 +54,8 @@ live::live() {
 
 [[maybe_unused]] void live::cycle() {
 
-    cout << "[DEBUG] BIRTH:" << endl;
     birth();
-    cout << "--------------" << endl;
-
-    cout << "[DEBUG] DEATH:" << endl;
     death();
-    cout << "--------------" << endl;
-
-    cout << "[DEBUG] RESULT" << endl;
 
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < columns; j++) {
@@ -82,8 +75,8 @@ live::live() {
 
             if ( !universe[i][j].alive ) {
 
-                int *temp = analysis(i, j);
-                if ( temp[0] == 3 ) {
+                int temp = analysis(i, j);
+                if ( temp == 3 ) {
                     universe[i][j].alive = true;
                     universe[i][j].visible = false;
                 }
@@ -104,8 +97,8 @@ void live::death() {
 
             if (universe[i][j].alive) {
 
-                int *temp = analysis(i, j);
-                if (temp[0] == 2 or temp[0] == 3) {
+                int temp = analysis(i, j);
+                if (temp == 2 or temp == 3) {
                     continue;
                 } else {
                     universe[i][j].alive = false;
@@ -119,14 +112,14 @@ void live::death() {
 
 }
 
-[[maybe_unused]] int * live::analysis(int row_index, int column_index) {
+[[maybe_unused]] int live::analysis(int row_index, int column_index) {
 
     /*  Счётчик живых и мёртвых клеток в виде int-массива.
      *  [ЭЛЕМЕНТ ПО ИНДЕКСУ 0] - количество живых клеток вокруг изучаемой;
      *  [ЭЛЕМЕНТ ПО ИНДЕКСУ 1] - количество мёртвых клеток вокруг изучаемой.
      */
 
-    static int count[2] {0, 0};
+    int count[2] {0, 0};
 
     if (!row_index && !column_index) {
 
@@ -468,7 +461,7 @@ void live::death() {
 
     }
 
-    return count;
+    return count[0];
 
 }
 

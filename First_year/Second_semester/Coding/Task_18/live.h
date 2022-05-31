@@ -32,7 +32,7 @@ public:
 
     [[maybe_unused]] void death();
 
-    [[maybe_unused]] int * analysis(int row_index, int column_index);
+    [[maybe_unused]] int analysis(int row_index, int column_index);
 
     friend std::ostream & operator << (std::ostream &out, const live &temporary_out);
 

@@ -3,10 +3,7 @@
 
 int main() {
 
-    live example {6, 6};
-    std::cout << example << std::endl << std::endl;
-
-    example.cycle();
+    live example {4, 4};
     std::cout << example << std::endl << std::endl;
 
     example.cycle();

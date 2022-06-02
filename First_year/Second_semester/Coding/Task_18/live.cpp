@@ -51,6 +51,10 @@ live::live() {
 
 [[maybe_unused]] live::live(live &&) = default;
 
+live::~live() {
+    universe.clear();
+}
+
 
 [[maybe_unused]] void live::cycle() {
 
@@ -111,6 +115,75 @@ void live::death() {
     }
 
 }
+
+
+[[maybe_unused]] int live::get_rows() {
+    return rows;
+}
+
+[[maybe_unused]] void live::set_rows(int temp) {
+    rows = temp;
+
+    for (int i = 0; i < rows; i++) {
+
+        std::vector <entity> vector_temp;
+        for (int j = 0; j < columns; j++) {
+
+            right.alive = rand() % 2;
+            right.visible = true;
+            vector_temp.push_back(right);
+
+        }
+
+        universe.push_back(vector_temp);
+
+    }
+
+}
+
+
+[[maybe_unused]] int live::get_columns() {
+    return columns;
+}
+
+[[maybe_unused]] void live::set_columns(int temp) {
+    columns = temp;
+
+    for (int i = 0; i < rows; i++) {
+
+        std::vector <entity> vector_temp;
+        for (int j = 0; j < columns; j++) {
+
+            right.alive = rand() % 2;
+            right.visible = true;
+            vector_temp.push_back(right);
+
+        }
+
+        universe.push_back(vector_temp);
+
+    }
+
+}
+
+
+[[maybe_unused]] int live::get_generation() {
+    return generation;
+}
+
+
+[[maybe_unused]] vector < vector <live::entity> > live::get_universe() {
+    return universe;
+}
+
+[[maybe_unused]] void live::set_universe( std::vector < std::vector <entity> > temp ) {
+
+    universe = temp;
+    rows = temp.size();
+    columns = temp[0].size();
+
+}
+
 
 [[maybe_unused]] int live::analysis(int row_index, int column_index) {
 

@@ -12,13 +12,23 @@ private:
 
 public:
     bot() noexcept;
-    bot(int, int, char);
-    bot(const bot &);
-    bot(bot &&) noexcept;
+    [[maybe_unused]] bot(int, int, char);
+    [[maybe_unused]] bot(const bot &);
+    [[maybe_unused]] bot(bot &&) noexcept;
 
-    void move();
-    void right();
-    void left();
+    [[maybe_unused]] int get_x_position() const;
+    [[maybe_unused]] int get_y_position() const;
+    [[maybe_unused]] int get_orientation() const;
+    [[maybe_unused]] int get_steps() const;
+
+    [[maybe_unused]] void set_x_position(int temp);
+    [[maybe_unused]] void set_y_position(int temp);
+    [[maybe_unused]] void set_orientation(char temp);
+    [[maybe_unused]] void set_steps(char temp);
+
+    [[maybe_unused]] void move();
+    [[maybe_unused]] void right();
+    [[maybe_unused]] void left();
 };
 
 

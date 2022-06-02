@@ -12,6 +12,37 @@ bot::bot(const bot &tmp) = default;
 
 bot::bot(bot &&tmp) noexcept = default;
 
+[[maybe_unused]] int bot::get_x_position() const {
+    return x_position;
+}
+
+[[maybe_unused]] int bot::get_y_position() const {
+    return y_position;
+}
+
+[[maybe_unused]] int bot::get_orientation() const {
+    return (int) orientation;
+}
+
+[[maybe_unused]] int bot::get_steps() const {
+    return (int) steps;
+}
+
+[[maybe_unused]] void bot::set_x_position(int temp) {
+    x_position = temp;
+}
+
+[[maybe_unused]] void bot::set_y_position(int temp) {
+    y_position = temp;
+}
+
+[[maybe_unused]] void bot::set_orientation(char temp) {
+    orientation = temp;
+}
+
+[[maybe_unused]] void bot::set_steps(char temp) {
+    steps = temp;
+}
 
 void bot::move() {
 

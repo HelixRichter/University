@@ -1,3 +1,0 @@
-/home/sigmund/Документы/University/First_year/Second_semester/Coding/MyTask_1_95/cmake-build-debug/CMakeFiles/MyTask_1_95.dir
-/home/sigmund/Документы/University/First_year/Second_semester/Coding/MyTask_1_95/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/sigmund/Документы/University/First_year/Second_semester/Coding/MyTask_1_95/cmake-build-debug/CMakeFiles/rebuild_cache.dir

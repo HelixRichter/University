@@ -19,12 +19,12 @@ private:
 
     [[maybe_unused]] void birth();
     [[maybe_unused]] void death();
-    [[maybe_unused]] int analysis(int row_index, int column_index);
+    [[maybe_unused]] int analysis(int row_index, int column_index) const;
 
 public:
     live();
 
-    [[maybe_unused]] live(int rows, int columns);
+    [[maybe_unused]] live(const int rows, const int columns);
     [[maybe_unused]] live(const live &temp);
     [[maybe_unused]] live(live &&);
 
@@ -33,10 +33,10 @@ public:
 
     [[maybe_unused]] void cycle();
 
-    [[maybe_unused]] int get_rows();
-    [[maybe_unused]] int get_columns();
-    [[maybe_unused]] int get_generation();
-    [[maybe_unused]] std::vector < std::vector <entity> > get_universe();
+    [[maybe_unused]] int get_rows() const;
+    [[maybe_unused]] int get_columns() const;
+    [[maybe_unused]] int get_generation() const;
+    [[maybe_unused]] std::vector < std::vector <entity> > get_universe() const;
 
     [[maybe_unused]] void set_rows(int temp);
     [[maybe_unused]] void set_columns(int temp);

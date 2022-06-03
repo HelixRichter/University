@@ -26,7 +26,7 @@ live::live() {
 
 }
 
-[[maybe_unused]] live::live(int rows_temp, int columns_temp) : rows {rows_temp}, columns {columns_temp} {
+[[maybe_unused]] live::live(const int rows_temp, const int columns_temp) : rows {rows_temp}, columns {columns_temp} {
 
     generation = 0;
 
@@ -117,7 +117,7 @@ void live::death() {
 }
 
 
-[[maybe_unused]] int live::get_rows() {
+[[maybe_unused]] int live::get_rows() const {
     return rows;
 }
 
@@ -142,7 +142,7 @@ void live::death() {
 }
 
 
-[[maybe_unused]] int live::get_columns() {
+[[maybe_unused]] int live::get_columns() const {
     return columns;
 }
 
@@ -167,12 +167,12 @@ void live::death() {
 }
 
 
-[[maybe_unused]] int live::get_generation() {
+[[maybe_unused]] int live::get_generation() const {
     return generation;
 }
 
 
-[[maybe_unused]] vector < vector <live::entity> > live::get_universe() {
+[[maybe_unused]] vector < vector <live::entity> > live::get_universe() const {
     return universe;
 }
 
@@ -185,7 +185,7 @@ void live::death() {
 }
 
 
-[[maybe_unused]] int live::analysis(int row_index, int column_index) {
+[[maybe_unused]] int live::analysis(int row_index, int column_index) const {
 
     /*  Счётчик живых и мёртвых клеток в виде int-массива.
      *  [ЭЛЕМЕНТ ПО ИНДЕКСУ 0] - количество живых клеток вокруг изучаемой;

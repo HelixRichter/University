@@ -2,7 +2,8 @@
 #include "target.h"
 
 int main() {
-    target {1, 2, 3};
+    target test {10, 8, 6, 4, 2, 0};
+    test.shot(3, 4);
 
     return 0;
 }

@@ -16,7 +16,7 @@ target::target() {
 
 }
 
-target::target(initializer_list <int> temp) {
+[[maybe_unused]] target::target(initializer_list <int> temp) {
 
     for (auto i : temp) {
         circle.push_back(i);
@@ -26,15 +26,16 @@ target::target(initializer_list <int> temp) {
 
 }
 
-target::target(const target &temp) = default;
-target::target(target &&temp) = default;
+[[maybe_unused]] target::target(const target &temp) = default;
+
+[[maybe_unused]] target::target(target &&temp) = default;
 
 target::~target() {
     circle.clear();
 }
 
 
-int target::aim() {
+[[maybe_unused]] int target::aim() {
 
     int shot_position = rand();
     for (int i = 0; i < circle.size() - 1; i++) {
@@ -53,7 +54,7 @@ int target::aim() {
 
 }
 
-int target::aim(int x_position, int y_position) {
+[[maybe_unused]] int target::aim(int x_position, int y_position) {
 
     int max_position;
     if (x_position > y_position) {
@@ -86,7 +87,7 @@ int target::aim(int x_position, int y_position) {
     return -1;
 }
 
-void target::shot() {
+[[maybe_unused]] void target::shot() {
 
     int result = aim();
     if (result == circle.size()) {
@@ -102,7 +103,7 @@ void target::shot() {
 
 }
 
-void target::shot(int x_position, int y_position) {
+[[maybe_unused]] void target::shot(int x_position, int y_position) {
 
     int result = aim(x_position, y_position);
     if (result == circle.size()) {

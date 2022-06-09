@@ -8,18 +8,20 @@ class target {
 private:
     std::vector <int> circle;
 
-    int aim();
-    int aim(int x_position, int y_position);
+    [[maybe_unused]] int aim();
+    [[maybe_unused]] int aim(int x_position, int y_position);
 
 public:
     target();
-    target(std::initializer_list <int> temp);
-    target(const target &);
-    target (target &&);
+    [[maybe_unused]] target(std::initializer_list <int> temp);
+
+    [[maybe_unused]] target(const target &);
+
+    [[maybe_unused]] target (target &&);
     ~target();
 
-    void shot();
-    void shot(int x_position, int y_position);
+    [[maybe_unused]] void shot();
+    [[maybe_unused]] void shot(int x_position, int y_position);
 
 };
 

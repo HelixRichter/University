@@ -9,7 +9,7 @@ target::target() {
 
     int temp_quantity = rand();
     for (int i = 0; i < temp_quantity; i++) {
-        circle.push_back(i);
+        circle.push_back(abs(i));
     }
 
     reverse(circle.begin(), circle.end());
@@ -19,7 +19,7 @@ target::target() {
 [[maybe_unused]] target::target(initializer_list <int> temp) {
 
     for (auto i : temp) {
-        circle.push_back(i);
+        circle.push_back(abs(i));
     }
 
     reverse(circle.begin(), circle.end());

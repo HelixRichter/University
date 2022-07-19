@@ -1,16 +1,38 @@
-# This is a sample Python script.
+from PyQt6 import QtWidgets
+from PyQt6.QtWidgets import QApplication, QMainWindow
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+import sys
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+class Window(QMainWindow):
+    def __init__(self):
+        super().__init__()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+        self.setWindowTitle('FactumBreeze')
+        self.setGeometry(300, 250, 350, 200)
+
+        self.new_text = QtWidgets.QLabel(self)
+
+        self.test_text = QtWidgets.QLabel(self)
+        self.test_text.setText('Weather checker by Heine Inc.')
+        self.test_text.move(100, 10)
+        self.test_text.adjustSize()
+
+        self.button = QtWidgets.QPushButton(self)
+        self.button.move(80, 100)
+        self.button.setText('Select JSON log file')
+        self.button.setFixedWidth(200)
+        self.button.clicked.connect(self.add_label)
+
+    def add_label(self):
+        self.new_text.setText('File selected. Analyzing...')
+        self.new_text.move(115, 50)
+        self.new_text.adjustSize()
+
+
+app = QApplication(sys.argv)
+window = Window()
+
+window.show()
+
+sys.exit(app.exec())

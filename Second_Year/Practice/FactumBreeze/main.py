@@ -1,5 +1,6 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QFileDialog
+from pyqtgraph import AxisItem
 from pyqtgraph.Qt import QtCore, QtGui
 import pyqtgraph
 
@@ -13,17 +14,45 @@ class Ui_MainWindow(object):
 
     def json_select_from_pc(self):
         import json
+        import datetime
         res = QFileDialog.getOpenFileName(None, 'Select .json file', './', 'JSON File (*.json)')
 
         if (res[0]) != '':
             global json_path
             json_path = res[0]
 
-            global data
+            global received_data
             with open(json_path, 'r') as json_file:
-                data = json.load(json_file)
+                received_data = json.load(json_file)
 
-            json_path = f"SELECTED: [{json_path.split('/')[-1]}]"
+            global POCA_time, STUDIO_time, POCA_sns, STUDIO_sns
+            POCA_time = []
+            STUDIO_time = []
+            POCA_sns = [[], [], [], [], []]
+            STUDIO_sns = [[], [], [], [], [], [], [], [], [], [], []]
+
+            for current_element in received_data:
+                if received_data[current_element]['serial'] == '01':
+                    POCA_time.append(datetime.datetime.strptime(received_data[current_element]['Date'], '%Y-%m-%d %H:%M:%S'))
+                    POCA_sns[0].append(received_data[current_element]['data']['light_lux'])
+                    POCA_sns[1].append(received_data[current_element]['data']['color_tempCT'])
+                    POCA_sns[2].append(received_data[current_element]['data']['weather_temp'])
+                    POCA_sns[3].append(received_data[current_element]['data']['weather_pressure'])
+                    POCA_sns[4].append(received_data[current_element]['data']['weather_humidity'])
+
+                elif received_data[current_element]['serial'] == 'schHome':
+                    STUDIO_time.append(datetime.datetime.strptime(received_data[current_element]['Date'], '%Y-%m-%d %H:%M:%S'))
+                    STUDIO_sns[0].append(received_data[current_element]['data']['TCS34725_lux'])
+                    STUDIO_sns[1].append(received_data[current_element]['data']['BMP280_temp'])
+                    STUDIO_sns[2].append(received_data[current_element]['data']['BME280_temp'])
+                    STUDIO_sns[3].append(received_data[current_element]['data']['DS18B20_temp'])
+                    STUDIO_sns[4].append(received_data[current_element]['data']['AM2321_temp'])
+                    STUDIO_sns[5].append(received_data[current_element]['data']['TCS34725_colorTemp'])
+                    STUDIO_sns[6].append(received_data[current_element]['data']['TCS34725_colorTempCT'])
+                    STUDIO_sns[7].append(received_data[current_element]['data']['BMP280_pressure'])
+                    STUDIO_sns[8].append(received_data[current_element]['data']['BME280_pressure'])
+                    STUDIO_sns[9].append(received_data[current_element]['data']['BME280_humidity'])
+                    STUDIO_sns[10].append(received_data[current_element]['data']['AM2321_humidity'])
 
             self.open_graph_viewer()
             MainWindow.close()
@@ -108,27 +137,25 @@ class Ui_GraphViewWindow(object):
         self.main_graph = pyqtgraph.plot()
 
         global x, y, graph_pen, graph_x_label, graph_y_label, graph_bg_color, style_of_label_sides
-        y = [5, 5, 7, 10, 3, 8, 9, 1, 6, 2]
-        x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-        # --- This is bar graph parameters ---
-        # self.main_graph_bar = pyqtgraph.BarGraphItem(x=x, height=y, width=0.2, brush='g')
-        # self.main_graph.addItem(self.main_graph_bar)
-        # --- This is bar graph parameters
+        # --- TROUBLE WITH TIME AXIS ---
+        y = POCA_sns[0]
+        x = POCA_time
+        # --- TROUBLE WITH TIME AXIS ---
 
         graph_y_label = 'NaN'
         graph_x_label = 'NaN'
         graph_bg_color = 'w'
-        style_of_label_sides = {"color": "black", "font-size": "10px"}
+        style_of_label_sides = {"color": "black", "size": "20px"}
         graph_pen = pyqtgraph.mkPen(color='k', width=5, style=QtCore.Qt.PenStyle.SolidLine)
 
         self.main_graph.setBackground(graph_bg_color)
-        self.main_graph.setLabel('left', graph_y_label, **style_of_label_sides)
-        self.main_graph.setLabel('bottom', graph_x_label, **style_of_label_sides)
+        self.main_graph.setLabel('left', graph_y_label, color='k', size=20)
+        self.main_graph.setLabel('bottom', graph_x_label, color='k', size=20)
         self.main_graph.showGrid(x=True, y=True)
 
         # --- This is graph time limiter ---
-        # self.main_graph.setXRange(selected_time_begin, selected_time_end, padding=0)
+        # self.main_graph.setXRange()
         # --- This is graph time limiter ---
 
         self.main_graph.plot(x, y, pen=graph_pen)
@@ -261,20 +288,16 @@ class Ui_GraphViewWindow(object):
 
         current_type_by_index = self.graph_type_btn.currentIndex()
         if current_type_by_index == 0:
-            self.main_graph.setBackground(graph_bg_color)
-            self.main_graph.setLabel('left', graph_y_label, **style_of_label_sides)
-            self.main_graph.setLabel('bottom', graph_x_label, **style_of_label_sides)
-            self.main_graph.showGrid(x=True, y=True)
             self.main_graph.plot(x, y, pen=graph_pen)
         elif current_type_by_index == 1:
-            self.main_graph_bar = pyqtgraph.BarGraphItem(x=x, height=y, width=0.2, brush='k')
+            self.main_graph_bar = pyqtgraph.BarGraphItem(x=x, height=y, width=0.5, brush='k')
             self.main_graph.addItem(self.main_graph_bar)
 
     def retranslateUi(self, GraphViewWindow):
         _translate = QtCore.QCoreApplication.translate
         GraphViewWindow.setWindowTitle(_translate("GraphViewWindow", "FactumBreeze: Graph viewer"))
 
-        self.build_graph_btn.setText(_translate("GraphViewWindow", "Сменить JSON файл"))
+        self.change_file_button.setText(_translate("GraphViewWindow", "Сменить JSON файл"))
 
         self.time_limiter_begin.setDisplayFormat(_translate("GraphViewWindow", "dd.MM.yyyy H:mm:ss"))
         self.time_limiter_end.setDisplayFormat(_translate("GraphViewWindow", "dd.MM.yyyy H:mm:ss"))
